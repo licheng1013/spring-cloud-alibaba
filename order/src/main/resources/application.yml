@@ -1,0 +1,15 @@
+server:
+  port: 8100
+  shutdown: graceful
+spring:
+  application:
+    name: alibaba-order
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848 #本次单机
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

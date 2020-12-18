@@ -1,8 +1,9 @@
 server:
-  port: 8080
+  port: 9000
+  shutdown: graceful
 spring:
   application:
-    name: nacos-api
+    name: alibaba-gateway
   cloud:
     nacos:
       discovery:
@@ -21,3 +22,8 @@ spring:
           uri: lb://nacos-shop
           predicates:
             - Path=/shop/**
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

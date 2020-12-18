@@ -10,6 +10,8 @@
     <modules>
         <module>user</module>
         <module>gateway</module>
+        <module>order</module>
+        <module>common</module>
     </modules>
     <packaging>pom</packaging>
     <dependencyManagement>
