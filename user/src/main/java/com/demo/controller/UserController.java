@@ -35,4 +35,15 @@ public class UserController {
         return orderFeign.test();
     }
 
+    @GetMapping("exception")
+    public JsonResult<String> exception(){
+        int i = 1/0;
+        return JsonResult.okMsg("Hello exception");
+    }
+
+    @GetMapping("feign/exception")
+    public JsonResult<String> feignException(){
+        return orderFeign.exception();
+    }
+
 }

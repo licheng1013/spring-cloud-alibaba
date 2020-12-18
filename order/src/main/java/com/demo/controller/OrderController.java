@@ -23,4 +23,11 @@ public class OrderController implements OrderFeign {
     public JsonResult<String> test() {
         return JsonResult.okMsg("Hello Order "+port);
     }
+
+    @Override
+    @RequestMapping("exception")
+    public JsonResult<String> exception() {
+        int i = 1 / 0;
+        return JsonResult.okMsg("Hello Order Exception");
+    }
 }
