@@ -1,0 +1,23 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: nacos-api
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848 #本次单机
+    gateway:
+      routes:
+        - id: order-route
+          uri: lb://nacos-order
+          predicates:
+            - Path=/order/**
+        - id: user-route
+          uri: lb://nacos-user
+          predicates:
+            - Path=/user/**
+        - id: shop-route
+          uri: lb://nacos-shop
+          predicates:
+            - Path=/shop/**
