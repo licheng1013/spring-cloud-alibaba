@@ -11,17 +11,13 @@ spring:
     gateway:
       routes:
         - id: order-route
-          uri: lb://nacos-order
+          uri: lb://alibaba-order
           predicates:
             - Path=/order/**
         - id: user-route
-          uri: lb://nacos-user
+          uri: lb://alibaba-user
           predicates:
             - Path=/user/**
-        - id: shop-route
-          uri: lb://nacos-shop
-          predicates:
-            - Path=/shop/**
 management:
   endpoints:
     web:

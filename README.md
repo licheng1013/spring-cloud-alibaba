@@ -13,3 +13,10 @@
 ### openfeign调用
 - openfeign
 - https://spring.io/projects/spring-cloud-openfeign
+
+### 使用结果
+- api网关转发成功
+- api网关+openfeign转发调用成功
+
+### 使用常见问题
+- 使用openfeign的接口的启动类上需要加上 @EnableFeignClients 注解
