@@ -7,29 +7,31 @@
 - 根目录的resource下
 - nacos-server-1.4.0.zip
 
-### 技术栈
-- spring-boot
-- spring-cloud
-- spring-cloud-alibaba
-- spring-cloud-gateway
-- spring-cloud-openfeign
-- hutool
-- nacos
-- jwt
-
-### api网关
-- gateway
+## 技术栈
+### springboot
+- 微服务的地砖
+- https://spring.io/projects/spring-boot
+### springCloudAlibaba
+- 阿里巴巴的微服务框架
+- https://spring.io/projects/spring-cloud-alibaba
+### springCloud
+- springCloud系列
+- https://spring.io/projects/spring-cloud
+### gateway
+- 网关
 - https://spring.io/projects/spring-cloud-gateway
-### openfeign调用
-- openfeign
+### openfeign
+- 服务调用
 - https://spring.io/projects/spring-cloud-openfeign
-
-### 使用结果
-- api网关转发成功
-- api网关+openfeign转发调用成功
-- 全局异常处理成功
-- jwt全局拦截成功
-- openFeign全局token成功
+### jwt
+- 用户认证
+- https://github.com/auth0/java-jwt
+### nacos
+- 注册中心
+- https://nacos.io/zh-cn/
+### hutool
+- 工具类
+- https://www.hutool.cn/docs/#/
 
 ### 使用常见问题
 - 使用openfeign的接口的启动类上需要加上 @EnableFeignClients 注解
