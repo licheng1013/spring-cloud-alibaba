@@ -6,7 +6,9 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * @date 2020/4/21
+ * @author lc
+ * @date 2020/12/19
+ * @description 拦截处理器
  */
 @Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
