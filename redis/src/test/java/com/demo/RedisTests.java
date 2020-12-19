@@ -1,9 +1,9 @@
 package com.demo;
 
+import com.demo.util.RedisString;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.StringRedisTemplate;
 
 /**
  * @author root
@@ -14,12 +14,12 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 public class RedisTests {
 
     @Autowired
-    private StringRedisTemplate redisTemplate;
+    private RedisString redisString;
 
     @Test
     public void test1(){
         //RedisClusterConnection connection = factory.getClusterConnection();
-        redisTemplate.opsForValue().set("c", "Hello World hi c");
-        System.out.println(redisTemplate.opsForValue().get("a"));
+        redisString.set("c", "Hello World hi c");
+        System.out.println(redisString.get("a"));
     }
 }
