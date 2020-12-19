@@ -1,5 +1,6 @@
 package com.demo.authentication;
 
+import com.demo.util.TokenUtil;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -32,8 +33,9 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             return true;
         }
         //解密token
-        String token = request.getHeader("Authorization"); //获取请求头里面的token
-
+        String token = request.getHeader("UserToken"); //获取请求头里面的token
+        String userId = TokenUtil.getUserId(token);
+        System.out.println(userId);
         return true;
     }
     
