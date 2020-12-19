@@ -32,7 +32,7 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
-
+        <!--公共依赖-->
         <dependency>
             <groupId>org.example</groupId>
             <artifactId>common</artifactId>
