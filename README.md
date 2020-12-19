@@ -27,8 +27,10 @@
 - 用户认证
 - https://github.com/auth0/java-jwt
 ### nacos
-- 注册中心
+- 注册中心(单机)
 - https://nacos.io/zh-cn/
+- 注册中心(集群)
+- https://gitee.com/licheng1013/nacos-cluster
 ### hutool
 - 工具类
 - https://www.hutool.cn/docs/#/
