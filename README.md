@@ -7,6 +7,16 @@
 - 根目录的resource下
 - nacos-server-1.4.0.zip
 
+### 技术栈
+- spring-boot
+- spring-cloud
+- spring-cloud-alibaba
+- spring-cloud-gateway
+- spring-cloud-openfeign
+- hutool
+- nacos
+- jwt
+
 ### api网关
 - gateway
 - https://spring.io/projects/spring-cloud-gateway
