@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author root
- * @description TODO
+ * @description 被其他模块依赖使用时需要注释掉 @SpringBootApplication 注解 并且需要配置其他模块的 application.yml
  * @date 2020/12/19 14:20
  */
 

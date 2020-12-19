@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="tests" />
         <module name="common" />
         <module name="user" />
         <module name="gateway" />
@@ -13,5 +14,8 @@
         <module name="order" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="tests" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
