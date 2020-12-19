@@ -14,7 +14,4 @@ public class Assert {
         }
     }
 
-    public static void exception(String msg){
-        throw new ServiceException(msg);
-    }
 }
