@@ -9,6 +9,7 @@
         <module name="common" />
         <module name="user" />
         <module name="gateway" />
+        <module name="redis" />
         <module name="order" />
       </profile>
     </annotationProcessing>

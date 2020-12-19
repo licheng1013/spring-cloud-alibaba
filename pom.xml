@@ -12,6 +12,7 @@
         <module>gateway</module>
         <module>order</module>
         <module>common</module>
+        <module>redis</module>
     </modules>
     <packaging>pom</packaging>
     <dependencyManagement>

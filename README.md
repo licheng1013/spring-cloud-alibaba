@@ -32,6 +32,8 @@
 ### hutool
 - 工具类
 - https://www.hutool.cn/docs/#/
-
+### redis
+- redis集群
+- https://spring.io/projects/spring-data-redis
 ### 使用常见问题
 - 使用openfeign的接口的启动类上需要加上 @EnableFeignClients 注解
