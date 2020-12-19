@@ -5,6 +5,7 @@ import cn.hutool.captcha.ShearCaptcha;
 import cn.hutool.captcha.generator.RandomGenerator;
 import cn.hutool.core.img.ImgUtil;
 import cn.hutool.extra.qrcode.QrCodeUtil;
+import com.demo.annotation.ParamLog;
 import com.demo.annotation.PassToken;
 import com.demo.feign.OrderFeign;
 import com.demo.util.JsonResult;
@@ -36,6 +37,7 @@ public class UserController {
     /** 接口测试 **/
     @GetMapping("test")
     @PassToken
+    @ParamLog
     public JsonResult<String> test() {
         return JsonResult.okMsg("Hello World " + port);
     }
