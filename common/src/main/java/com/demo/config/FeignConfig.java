@@ -1,4 +1,4 @@
-package com.demo.authentication;
+package com.demo.config;
 
 import com.demo.util.Assert;
 import feign.RequestInterceptor;
