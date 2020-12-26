@@ -38,6 +38,11 @@
 - redis集群
 - https://spring.io/projects/spring-data-redis
 ### seata
-
+- 分布式事务(未完成)
+### sharding-jdbc
+- 数据库分库分表(未完成)
+### rabbitmq
+- 消息队列(单机)(未完成)
+- 消息队列(集群)(未完成)
 ### 使用常见问题
 - 使用openfeign的接口的启动类上需要加上 @EnableFeignClients 注解
