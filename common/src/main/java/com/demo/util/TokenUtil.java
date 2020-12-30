@@ -3,8 +3,6 @@ package com.demo.util;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.JWTCreationException;
-import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
 import java.io.Serializable;
@@ -29,7 +27,7 @@ public class TokenUtil  {
             return JWT.create().withKeyId(userId.toString())
                     .withIssuer("auth0")
                     .sign(algorithm);
-        } catch (JWTCreationException exception){
+        } catch (Exception exception){
             throw new RuntimeException("token生成失败");
         }
     }
@@ -46,7 +44,7 @@ public class TokenUtil  {
                     .build(); //Reusable verifier instance
             DecodedJWT jwt = verifier.verify(token);
             return jwt.getKeyId();
-        } catch (JWTVerificationException exception){
+        } catch (Exception exception){
             throw new RuntimeException("token解密失败");
         }
     }
