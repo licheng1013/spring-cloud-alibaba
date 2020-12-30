@@ -2,7 +2,6 @@ package com.demo.authentication;
 
 import cn.hutool.extra.servlet.ServletUtil;
 import com.demo.annotation.ParamLog;
-import com.demo.annotation.PassToken;
 import com.demo.util.TokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;

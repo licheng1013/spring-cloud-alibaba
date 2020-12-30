@@ -1,4 +1,4 @@
-package com.demo.config;
+package com.demo.feign;
 
 import com.demo.util.Assert;
 import feign.RequestInterceptor;
