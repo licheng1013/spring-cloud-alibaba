@@ -15,7 +15,7 @@ import java.util.Date;
  */
 @Setter
 @Getter
-public class    User extends Model<User> {
+public class  User extends Model<User> {
     /**
      * 用户id
      */
@@ -47,4 +47,8 @@ public class    User extends Model<User> {
      */
     @Version
     private Integer version;
+    /**
+     * 金额
+     */
+    private Integer money;
 }
