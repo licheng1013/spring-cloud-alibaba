@@ -7,15 +7,19 @@ import cn.hutool.core.img.ImgUtil;
 import cn.hutool.extra.qrcode.QrCodeUtil;
 import com.demo.annotation.ParamLog;
 import com.demo.authentication.PassToken;
+import com.demo.entity.User;
 import com.demo.feign.OrderFeign;
+import com.demo.service.UserService;
 import com.demo.util.JsonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -30,6 +34,16 @@ import java.io.IOException;
 public class UserController {
     @Value("${server.port}")
     private String port;
+    @Resource
+    private UserService userService;
+
+    @PassToken
+    @PostMapping("create")
+    public JsonResult<String> create(User user){
+        user.insert();
+        return JsonResult.okMsg("创建成功");
+    }
+
 
     @Autowired
     private OrderFeign orderFeign;
