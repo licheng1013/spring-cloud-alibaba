@@ -12,7 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -37,6 +39,25 @@ public class UserTest {
         boolean bb = b.updateById();
         System.out.println(aa);
         System.out.println(bb);
+    }
+
+    @Test
+    public void test2() throws FileNotFoundException {
+        File file = new File("C:\\Users\\root\\Desktop\\全部号码_100000条.txt");
+        String read = IoUtil.read(new BufferedReader(new FileReader(file)));
+        String[] split = read.split("\n");
+        ArrayList<User> list = new ArrayList<>();
+        for (String tel : split) {
+            if (StrUtil.isNotBlank(tel)) {
+                User user = new User();
+                user.setTel(tel.trim());
+                user.setNickName("超强哈市奇");
+                user.setUserName( tel+"大熊");
+                list.add(user);
+            }
+        }
+        userService.saveBatch(list);
+        log.info("执行结果: {}","结束");
     }
 
     public static void main(String[] args) throws Exception {
