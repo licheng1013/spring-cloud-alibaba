@@ -4,7 +4,9 @@ import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.ShearCaptcha;
 import cn.hutool.captcha.generator.RandomGenerator;
 import cn.hutool.core.img.ImgUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.qrcode.QrCodeUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.demo.annotation.ParamLog;
 import com.demo.authentication.PassToken;
 import com.demo.entity.User;
@@ -40,8 +42,12 @@ public class UserController {
     @PassToken
     @PostMapping("create")
     public JsonResult<String> create(User user){
-        user.insert();
-        return JsonResult.okMsg("创建成功");
+        User tel = userService.getOne(new QueryWrapper<User>().eq("tel", user.getTel()));
+        if (tel == null && StrUtil.isNotBlank(user.getTel())) {
+            user.insert();
+            return JsonResult.okMsg("创建成功");
+        }
+        return JsonResult.fail("创建失败");
     }
 
 

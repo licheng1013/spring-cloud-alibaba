@@ -1,11 +1,19 @@
 package com.demo;
 
+import cn.hutool.core.io.IoUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.http.HttpUtil;
 import com.demo.entity.User;
 import com.demo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.HashMap;
 
 /**
  * @author root
@@ -29,5 +37,28 @@ public class UserTest {
         boolean bb = b.updateById();
         System.out.println(aa);
         System.out.println(bb);
+    }
+
+    public static void main(String[] args) throws Exception {
+        int i = 0;
+        File file = new File("C:\\Users\\root\\Desktop\\全部号码_100000条.txt");
+        String read = IoUtil.read(new BufferedReader(new FileReader(file)));
+        String[] split = read.split("\n");
+        for (String tel : split) {
+            i++;
+            String port = i%2 == 0?"9000":"9001";
+            if (StrUtil.isNotBlank(tel)) {
+                new Thread(()->{
+                    HashMap<String, Object> map = new HashMap<>();
+                    map.put("tel",tel.trim());
+                    map.put("userName", tel+"大熊");
+                    map.put("nickName", "超强哈市奇");
+                    String body = HttpUtil.createPost("http://localhost:"+port+"/user/create").form(map).execute().body();
+                    log.info("请求结果: {}",body);
+                }).start();
+            }
+        }
+        Thread.sleep(20000);
+        log.info("运行: {}", "结束");
     }
 }
