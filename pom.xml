@@ -43,4 +43,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    <properties>
+        <skipTests>true</skipTests>
+    </properties>
 </project>
