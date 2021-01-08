@@ -31,7 +31,6 @@ public class UserTest {
     public void test1(){
         User a = userService.getById(5);
         User b = userService.getById(5);
-
         a.setMoney(a.getMoney()-500);
         b.setMoney(b.getMoney()+200);
 

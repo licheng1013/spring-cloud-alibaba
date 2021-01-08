@@ -7,6 +7,8 @@ import cn.hutool.core.img.ImgUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.qrcode.QrCodeUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.demo.annotation.ParamLog;
 import com.demo.authentication.PassToken;
 import com.demo.entity.User;
@@ -48,6 +50,12 @@ public class UserController {
             return JsonResult.okMsg("创建成功");
         }
         return JsonResult.fail("创建失败");
+    }
+
+    @PassToken
+    @GetMapping("list")
+    public JsonResult<IPage<User>> list(Page<User> page,User user){
+        return JsonResult.okData(user.selectPage(page, new QueryWrapper<>(user)));
     }
 
 
