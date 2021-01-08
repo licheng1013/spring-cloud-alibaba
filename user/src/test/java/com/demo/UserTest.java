@@ -1,6 +1,9 @@
 package com.demo;
 
 import cn.hutool.core.io.IoUtil;
+import cn.hutool.core.lang.Console;
+import cn.hutool.core.thread.ConcurrencyTester;
+import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
 import com.demo.entity.User;
@@ -15,7 +18,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * @author root
@@ -27,12 +29,13 @@ import java.util.HashMap;
 public class UserTest {
     @Autowired
     private UserService userService;
+
     @Test
-    public void test1(){
+    public void test1() {
         User a = userService.getById(5);
         User b = userService.getById(5);
-        a.setMoney(a.getMoney()-500);
-        b.setMoney(b.getMoney()+200);
+        a.setMoney(a.getMoney() - 500);
+        b.setMoney(b.getMoney() + 200);
 
         boolean aa = a.updateById();
         boolean bb = b.updateById();
@@ -51,34 +54,21 @@ public class UserTest {
                 User user = new User();
                 user.setTel(tel.trim());
                 user.setNickName("超强哈市奇");
-                user.setUserName( tel+"大熊");
+                user.setUserName(tel + "大熊");
                 list.add(user);
             }
         }
         userService.saveBatch(list);
-        log.info("执行结果: {}","结束");
+        log.info("执行结果: {}", "结束");
     }
 
-    public static void main(String[] args) throws Exception {
-        int i = 0;
-        File file = new File("C:\\Users\\root\\Desktop\\全部号码_100000条.txt");
-        String read = IoUtil.read(new BufferedReader(new FileReader(file)));
-        String[] split = read.split("\n");
-        for (String tel : split) {
-            i++;
-            String port = i%2 == 0?"9000":"9001";
-            if (StrUtil.isNotBlank(tel)) {
-                new Thread(()->{
-                    HashMap<String, Object> map = new HashMap<>();
-                    map.put("tel",tel.trim());
-                    map.put("userName", tel+"大熊");
-                    map.put("nickName", "超强哈市奇");
-                    String body = HttpUtil.createPost("http://localhost:"+port+"/user/create").form(map).execute().body();
-                    log.info("请求结果: {}",body);
-                }).start();
-            }
-        }
-        Thread.sleep(20000);
+    public static void main(String[] args)  {
+        ConcurrencyTester tester = ThreadUtil.concurrencyTest(500, () -> {
+            String s = HttpUtil.get("http://localhost:9000/user/list?tel=18377331999");
+            log.info("请求结果: {}",s);
+        });
+
+        Console.log(tester.getInterval());
         log.info("运行: {}", "结束");
     }
 }

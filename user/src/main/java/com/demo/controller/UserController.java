@@ -54,7 +54,8 @@ public class UserController {
 
     @PassToken
     @GetMapping("list")
-    public JsonResult<IPage<User>> list(Page<User> page,User user){
+    public JsonResult<IPage<User>> list(Page<User> page,User user) throws InterruptedException {
+        Thread.sleep(500);
         return JsonResult.okData(user.selectPage(page, new QueryWrapper<>(user)));
     }
 
