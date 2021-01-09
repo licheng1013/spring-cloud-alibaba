@@ -13,6 +13,7 @@
         <module>order</module>
         <module>common</module>
         <module>redis</module>
+        <module>rabbitmq</module>
     </modules>
     <packaging>pom</packaging>
     <dependencyManagement>
@@ -46,5 +47,6 @@
     <properties>
         <!--跳过打包测试-->
         <skipTests>true</skipTests>
+        <lombok.version>1.18.16</lombok.version>
     </properties>
 </project>

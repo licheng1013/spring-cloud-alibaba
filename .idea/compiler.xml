@@ -6,11 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="pull" />
         <module name="tests" />
         <module name="common" />
         <module name="user" />
         <module name="gateway" />
         <module name="redis" />
+        <module name="push" />
         <module name="order" />
       </profile>
     </annotationProcessing>

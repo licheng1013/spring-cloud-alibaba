@@ -1,0 +1,33 @@
+server:
+  port: 9100
+  shutdown: graceful
+spring:
+#  application:
+#    name: alibaba-push
+  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: 192.168.1.20:8848 #本次单机
+    stream:
+      binders:
+        defaultRabbit:
+          type: rabbit
+      bindings: #服务的整合处理
+        output:
+          destination: test # 生产者和消费者destination需要一致
+          content-type: application/json # 设置消息类型，本次为json，文本则设为text/plain
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://47.105.222.40:3306/t_test1?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai #保证插入的时间不会少8小时,取出来少8小时
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  rabbitmq:
+    addresses: 192.168.1.99:5672,192.168.1.10:5673,192.168.1.9:5674
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
