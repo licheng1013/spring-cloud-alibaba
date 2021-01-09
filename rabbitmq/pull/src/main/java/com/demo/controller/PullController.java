@@ -32,7 +32,8 @@ public class PullController {
      */
     @StreamListener(Sink.INPUT)
     public void input(Message<String> msg) {
-       log.info("接受的消息的: {} 端口: {}",msg.getPayload(),port );
+        log.info("接受的消息的: {} 端口: {}",msg.getPayload(),port );
+//        int i  = 1/0;
         String tel = msg.getPayload();
         User user = userService.getOne(new QueryWrapper<User>().eq("tel", tel));
         if (user == null && StrUtil.isNotBlank(msg.getPayload())) {

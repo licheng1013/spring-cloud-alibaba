@@ -14,6 +14,8 @@ spring:
           type: rabbit
       bindings: # 服务的整合处理
         input: # 读流 , rabbitMQ的队列名是 destination.group = test.input
+          consumer:
+            requeueRejected: true # 重复消费
           destination: test # 生产者和消费者destination需要一致
           content-type: application/json # 设置消息类型，本次为json，文本则设为text/plain
           group: input  #不同的组存在重复消费，相同的组之间竞争消费,生产者可以不设置group
