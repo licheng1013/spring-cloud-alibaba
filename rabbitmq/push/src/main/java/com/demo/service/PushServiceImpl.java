@@ -24,10 +24,10 @@ public class PushServiceImpl {
     @Autowired
     private MessageChannel output;
 
-    public String push(){
+    public String push(String tel){
         String uuid = UUID.randomUUID().toString();
-        log.info("消息制作: {} 端口: {}",uuid,port);
-        output.send(MessageBuilder.withPayload(uuid).build());
+        log.info("消息制作: {} 端口: {}",tel,port);
+        output.send(MessageBuilder.withPayload(tel).build());
         return uuid + port;
     }
 }

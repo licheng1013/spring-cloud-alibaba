@@ -21,7 +21,7 @@ public class PushController {
 
     @GetMapping("test")
     @PassToken
-    public JsonResult<String> test(){
-        return JsonResult.okData(pushService.push());
+    public JsonResult<String> test(String tel){
+        return JsonResult.okData(pushService.push(tel));
     }
 }

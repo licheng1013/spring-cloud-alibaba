@@ -4,7 +4,6 @@ import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.thread.ConcurrencyTester;
 import cn.hutool.core.thread.ThreadUtil;
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
 import com.demo.entity.User;
 import com.demo.service.UserService;
@@ -17,7 +16,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
 
 /**
  * @author root
@@ -48,18 +46,14 @@ public class UserTest {
         File file = new File("C:\\Users\\root\\Desktop\\全部号码_100000条.txt");
         String read = IoUtil.read(new BufferedReader(new FileReader(file)));
         String[] split = read.split("\n");
-        ArrayList<User> list = new ArrayList<>();
-        for (String tel : split) {
-            if (StrUtil.isNotBlank(tel)) {
-                User user = new User();
-                user.setTel(tel.trim());
-                user.setNickName("超强哈市奇");
-                user.setUserName(tel + "大熊");
-                list.add(user);
+        for (int i = 0; i < split.length; i++) {
+            if (i==500) {
+                break;
             }
+            String body = HttpUtil.get("http://localhost:9100/push/test?tel=" + split[i]);
+            log.info("请求信息: {}",body);
         }
-        userService.saveBatch(list);
-        log.info("执行结果: {}", "结束");
+
     }
 
     public static void main(String[] args)  {
