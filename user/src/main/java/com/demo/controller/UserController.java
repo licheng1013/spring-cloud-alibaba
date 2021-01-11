@@ -16,14 +16,12 @@ import com.demo.util.JsonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author root
@@ -58,9 +56,16 @@ public class UserController {
     @PostMapping("update")
     public JsonResult<String> update(User user){
         log.info("请求收到: {}","update");
-        return JsonResult.okMsg(user.updateById()?"更新成功":"更新失败");
+        user.updateById();
+        return JsonResult.okMsg("更新成功");
     }
 
+    @PostMapping("delete")
+    public JsonResult<String> delete(@RequestParam List<String> idList){
+        log.info("请求收到: {}","delete");
+        userService.removeByIds(idList);
+        return JsonResult.okMsg("删除成功");
+    }
 
     @Autowired
     private OrderFeign orderFeign;
