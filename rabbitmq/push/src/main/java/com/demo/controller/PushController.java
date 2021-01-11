@@ -1,6 +1,5 @@
 package com.demo.controller;
 
-import com.demo.authentication.PassToken;
 import com.demo.service.PushServiceImpl;
 import com.demo.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ public class PushController {
     private PushServiceImpl pushService;
 
     @GetMapping("test")
-    @PassToken
     public JsonResult<String> test(String tel){
         return JsonResult.okData(pushService.push(tel));
     }

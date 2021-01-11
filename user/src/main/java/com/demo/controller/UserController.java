@@ -9,8 +9,6 @@ import cn.hutool.extra.qrcode.QrCodeUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.demo.annotation.ParamLog;
-import com.demo.authentication.PassToken;
 import com.demo.entity.User;
 import com.demo.feign.OrderFeign;
 import com.demo.service.UserService;
@@ -41,7 +39,6 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @PassToken
     @PostMapping("create")
     public JsonResult<String> create(User user){
         User tel = userService.getOne(new QueryWrapper<User>().eq("tel", user.getTel()));
@@ -52,10 +49,9 @@ public class UserController {
         return JsonResult.fail("创建失败");
     }
 
-    @PassToken
     @GetMapping("list")
-    public JsonResult<IPage<User>> list(Page<User> page,User user) throws InterruptedException {
-        Thread.sleep(500);
+    public JsonResult<IPage<User>> list(Page<User> page,User user)  {
+        log.info("请求收到: {}","ok");
         return JsonResult.okData(user.selectPage(page, new QueryWrapper<>(user)));
     }
 
@@ -65,8 +61,6 @@ public class UserController {
 
     /** 接口测试 **/
     @GetMapping("test")
-    @PassToken
-    @ParamLog
     public JsonResult<String> test() {
         return JsonResult.okMsg("Hello World " + port);
     }

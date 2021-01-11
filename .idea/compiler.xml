@@ -14,6 +14,7 @@
         <module name="redis" />
         <module name="push" />
         <module name="order" />
+        <module name="authentication" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
