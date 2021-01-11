@@ -52,7 +52,13 @@ public class UserController {
     @GetMapping("list")
     public JsonResult<IPage<User>> list(Page<User> page,User user)  {
         log.info("请求收到: {}","ok");
-        return JsonResult.okData(user.selectPage(page, new QueryWrapper<>(user)));
+        return JsonResult.okData(user.selectPage(page, new QueryWrapper<>(user).orderByDesc("create_time")));
+    }
+
+    @PostMapping("update")
+    public JsonResult<String> update(User user){
+        log.info("请求收到: {}","ok");
+        return JsonResult.okMsg(user.updateById()?"更新成功":"更新失败");
     }
 
 
