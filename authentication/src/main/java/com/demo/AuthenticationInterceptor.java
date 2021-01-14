@@ -44,7 +44,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             return true;
         }
         //解密token
-        String token = request.getHeader("UserToken"); //获取请求头里面的token
+        String token = request.getHeader("Authentication"); //获取请求头里面的token
         String userId = TokenUtil.getUserId(token);
         log.info("userId: {}", userId);
         return true;

@@ -9,6 +9,8 @@ import cn.hutool.extra.qrcode.QrCodeUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.demo.PassToken;
+import com.demo.TokenUtil;
 import com.demo.entity.User;
 import com.demo.feign.OrderFeign;
 import com.demo.service.UserService;
@@ -36,6 +38,15 @@ public class UserController {
     private String port;
     @Resource
     private UserService userService;
+
+    @PostMapping("login")
+    @PassToken
+    public JsonResult<String> login(String username,String password){
+        if ("admin".equals(username) && "admin".equals(password)) {
+            return JsonResult.okData(TokenUtil.getToken("1"));
+        }
+        return JsonResult.fail("账号或密码错误");
+    }
 
     @PostMapping("create")
     public JsonResult<String> create(User user){
