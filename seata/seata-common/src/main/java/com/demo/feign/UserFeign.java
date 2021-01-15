@@ -1,6 +1,8 @@
 package com.demo.feign;
 
+import com.demo.util.JsonResult;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * @author root
@@ -9,4 +11,6 @@ import org.springframework.cloud.openfeign.FeignClient;
  */
 @FeignClient(name = "seata-user")
 public interface UserFeign {
+    @PostMapping("/user/remove/money")
+    JsonResult<String> removeMoney();
 }
