@@ -15,6 +15,7 @@
         <module>redis</module>
         <module>rabbitmq</module>
         <module>authentication</module>
+        <module>seata</module>
     </modules>
     <packaging>pom</packaging>
     <dependencyManagement>
@@ -50,6 +51,9 @@
         <skipTests>true</skipTests>
         <!--版本依赖定义-->
         <lombok.version>1.18.16</lombok.version>
-        <hutool-all.version>5.5.4</hutool-all.version>
+        <hutool.version>5.5.4</hutool.version>
+        <mybatis-plus.version>3.4.1</mybatis-plus.version>
+        <mysql.version>8.0.16</mysql.version>
+        <alibaba-druid.version>1.1.12</alibaba-druid.version>
     </properties>
 </project>

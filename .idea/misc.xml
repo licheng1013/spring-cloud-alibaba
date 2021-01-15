@@ -13,6 +13,7 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/push/pom.xml" />
+        <option value="$PROJECT_DIR$/seata/seata-shop/pom.xml" />
         <option value="$PROJECT_DIR$/tests/pom.xml" />
       </set>
     </option>

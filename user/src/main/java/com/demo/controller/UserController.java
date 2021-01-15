@@ -59,6 +59,7 @@ public class UserController {
     }
 
     @GetMapping("list")
+    @PassToken
     public JsonResult<IPage<User>> list(Page<User> page,User user)  {
         log.info("请求收到: {}","list");
         return JsonResult.okData(user.selectPage(page, new QueryWrapper<>(user).orderByDesc("create_time")));
