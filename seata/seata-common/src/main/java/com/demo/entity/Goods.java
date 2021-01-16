@@ -1,5 +1,7 @@
 package com.demo.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +18,7 @@ public class Goods extends Model<Goods> {
     /**
      * ${column.comment}
      */
+    @TableId(type = IdType.AUTO)
     private Integer goodsId;
     /**
      * 商品信息
@@ -25,4 +28,6 @@ public class Goods extends Model<Goods> {
      * 库存
      */
     private Integer total;
+    /** 商品金额 **/
+    private Integer money;
 }

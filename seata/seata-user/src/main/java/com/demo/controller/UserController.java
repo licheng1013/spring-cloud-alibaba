@@ -5,6 +5,8 @@ import com.demo.feign.UserFeign;
 import com.demo.service.UserService;
 import com.demo.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,11 +25,13 @@ public class UserController implements UserFeign {
 
 
     @Override
-    public JsonResult<String> update(User user) {
-        return null;
+    @PostMapping("update")
+    public JsonResult<Boolean> update(User user) {
+        return JsonResult.okData(user.updateById());
     }
 
     @Override
+    @GetMapping("find")
     public JsonResult<User> find(Serializable userId) {
         return JsonResult.okData(userService.getById(userId));
     }

@@ -5,6 +5,8 @@ import com.demo.util.JsonResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.Serializable;
 
@@ -17,10 +19,10 @@ import java.io.Serializable;
 public interface GoodsFeign {
 
     /** 查询商品 **/
-    @GetMapping("/goods/find")
-    JsonResult<Goods> find(Serializable goodsId);
+    @GetMapping( value = "/goods/find")
+    JsonResult<Goods> find(@RequestParam("goodsId") Serializable goodsId);
 
     /** 删除商品 **/
-    @PostMapping( "/goods/remove")
-    JsonResult<Boolean> update(Goods goods);
+    @PostMapping( "/goods/update")
+    JsonResult<Boolean> update(@RequestBody Goods goods);
 }

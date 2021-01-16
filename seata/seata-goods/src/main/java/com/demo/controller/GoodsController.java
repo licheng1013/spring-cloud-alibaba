@@ -4,9 +4,9 @@ import com.demo.entity.Goods;
 import com.demo.feign.GoodsFeign;
 import com.demo.service.GoodsService;
 import com.demo.util.JsonResult;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
 
@@ -17,17 +17,20 @@ import java.io.Serializable;
  */
 @RequestMapping("goods")
 @RestController
+@Slf4j
 public class GoodsController implements GoodsFeign {
 
     @Autowired
     private GoodsService goodsService;
 
     @Override
-    public JsonResult<Goods> find(Serializable goodsId) {
+    @GetMapping("find")
+    public JsonResult<Goods> find( Serializable goodsId) {
         return JsonResult.okData(goodsService.getById(goodsId));
     }
 
     @Override
+    @PostMapping("update")
     public JsonResult<Boolean> update(Goods goods) {
         return JsonResult.okData(goods.updateById());
     }

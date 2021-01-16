@@ -1,5 +1,7 @@
 package com.demo.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +18,7 @@ public class User extends Model<User> {
     /**
      * ${column.comment}
      */
+    @TableId(type = IdType.AUTO)
     private Integer userId;
     /**
      * ${column.comment}
