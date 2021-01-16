@@ -14,4 +14,9 @@ import org.springframework.stereotype.Service;
 @Service("orderService")
 public class OrderServiceImpl extends ServiceImpl<OrderDao, Order> implements OrderService {
 
+    @Override
+    public String create() {
+
+        return null;
+    }
 }

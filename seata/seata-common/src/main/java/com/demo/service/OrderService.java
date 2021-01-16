@@ -9,5 +9,5 @@ import com.demo.entity.Order;
  * @description
  */
 public interface OrderService extends IService<Order> {
-
+    String create();
 }

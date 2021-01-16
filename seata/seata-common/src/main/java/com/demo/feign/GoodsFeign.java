@@ -1,9 +1,12 @@
 package com.demo.feign;
 
+import com.demo.entity.Goods;
 import com.demo.util.JsonResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.io.Serializable;
 
 /**
  * @author root
@@ -15,9 +18,9 @@ public interface GoodsFeign {
 
     /** 查询商品 **/
     @GetMapping("/goods/find")
-    JsonResult<String> find();
+    JsonResult<Goods> find(Serializable goodsId);
 
     /** 删除商品 **/
     @PostMapping( "/goods/remove")
-    JsonResult<String> remove();
+    JsonResult<Boolean> update(Goods goods);
 }
