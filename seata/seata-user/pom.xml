@@ -11,6 +11,13 @@
 
     <artifactId>seata-user</artifactId>
     <dependencies>
+
+        <dependency>
+            <groupId>org.example</groupId>
+            <artifactId>seata-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
         <dependency>
             <groupId>io.seata</groupId>
             <artifactId>seata-spring-boot-starter</artifactId>

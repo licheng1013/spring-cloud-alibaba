@@ -1,8 +1,12 @@
 package com.demo.feign;
 
+import com.demo.entity.User;
 import com.demo.util.JsonResult;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.io.Serializable;
 
 /**
  * @author root
@@ -11,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @FeignClient(name = "seata-user")
 public interface UserFeign {
-    @PostMapping("/user/remove/money")
-    JsonResult<String> removeMoney();
+    @PostMapping("/user/update/")
+    JsonResult<String> update( User user);
+    @GetMapping("/user/find")
+    JsonResult<User> find(Serializable userId);
 }
