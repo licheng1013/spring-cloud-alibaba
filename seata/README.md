@@ -9,7 +9,7 @@
 - https://seata.io/zh-cn 
 - 资源都在resource目录下
 - 配置是需要导入到nacos中
-- 运行nacos-config.sh脚本
+- 运行nacos-config.sh脚本(单机seata服务器可以不用运行)
 - 创建三个数据库
 - seata_goods(商品),seata_order(订单),seata_user(用户)
 - 三个库都必须导入undo_log.sql
