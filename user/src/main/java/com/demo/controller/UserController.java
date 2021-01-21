@@ -49,6 +49,7 @@ public class UserController {
     }
 
     @PostMapping("create")
+    @PassToken
     public JsonResult<String> create(User user){
         User tel = userService.getOne(new QueryWrapper<User>().eq("tel", user.getTel()));
         if (tel == null && StrUtil.isNotBlank(user.getTel())) {
