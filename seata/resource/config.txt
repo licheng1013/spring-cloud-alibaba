@@ -1,12 +1,7 @@
 service.vgroupMapping.my_test_tx_group=default
 service.default.grouplist=192.168.1.99:8091
 store.mode=file
-store.file.dir=file_store/data
-store.db.datasource=druid
-store.db.dbType=mysql
-store.db.driverClassName=com.mysql.jdbc.Driver
 store.db.url=jdbc:mysql://127.0.0.1:3306/seata?useUnicode=true
 store.db.user=username
 store.db.password=password
-store.redis.host=127.0.0.1
-store.redis.port=6379
+
