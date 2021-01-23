@@ -15,9 +15,17 @@
 - 三个库都必须导入undo_log.sql
 - 其他的根据名称对应导入sql下面的sql即可如 seata_goods 导入 goods.sql
 - 测试接口 http://localhost:9600/order/create
+
+
+### seata部署
 - seata-docker部署
 - https://gitee.com/licheng1013/docker-seata   
 
 ### config.txt
 - 简化配置在seata/resource
 - 完整配置在script目录下
+
+### 目标要求
+- seata分布式事务(ok)
+- seata单机(ok)
+- seata集群
