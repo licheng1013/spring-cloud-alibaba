@@ -17,3 +17,7 @@
 - 测试接口 http://localhost:9600/order/create
 - seata-docker部署
 - https://gitee.com/licheng1013/docker-seata   
+
+### config.txt
+- 简化配置在seata/resource
+- 完整配置在script目录下
