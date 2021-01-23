@@ -16,7 +16,6 @@
         <module>seata-order</module>
         <module>seata-goods</module>
         <module>seata-common</module>
-        <module>seata-test</module>
     </modules>
 
     <dependencies>

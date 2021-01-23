@@ -14,7 +14,7 @@ import java.util.HashMap;
  */
 public class SeataTest {
     public static void main(String[] args) {
-        ConcurrencyTester tester = ThreadUtil.concurrencyTest(100, () -> {
+        ConcurrencyTester tester = ThreadUtil.concurrencyTest(10, () -> {
             String post = HttpUtil.post("http://localhost:9600/order/create",new HashMap<>());
             Console.log(post);
         });

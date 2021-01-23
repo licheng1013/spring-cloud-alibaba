@@ -46,7 +46,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, Order> implements Or
         order.setDescription("事务");
         order.setMoney(goods.getMoney());
         order.insert();
-
 //        int i = 1/0;//异常测试
     }
 }

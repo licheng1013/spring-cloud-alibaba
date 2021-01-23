@@ -23,7 +23,9 @@ spring:
         - 47.105.222.40:7004
         - 47.105.222.40:7005
         - 47.105.222.40:7006
-
+    jedis:
+      pool:
+        max-active: 30
 
 management:
   endpoints:
