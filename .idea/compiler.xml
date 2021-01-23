@@ -15,6 +15,7 @@
         <module name="seata-goods" />
         <module name="seata-order" />
         <module name="seata-common" />
+        <module name="seata-test" />
         <module name="user" />
         <module name="gateway" />
         <module name="order" />

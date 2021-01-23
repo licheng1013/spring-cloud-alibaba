@@ -3,23 +3,20 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>spring-cloud-alibaba</artifactId>
+        <artifactId>seata</artifactId>
         <groupId>org.example</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>seata</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>seata-user</module>
-        <module>seata-order</module>
-        <module>seata-goods</module>
-        <module>seata-common</module>
-        <module>seata-test</module>
-    </modules>
+    <artifactId>seata-test</artifactId>
 
     <dependencies>
-
+        <!--工具类-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
     </dependencies>
 </project>
