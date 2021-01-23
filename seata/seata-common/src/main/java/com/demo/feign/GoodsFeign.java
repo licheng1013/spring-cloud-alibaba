@@ -22,7 +22,7 @@ public interface GoodsFeign {
     @GetMapping( value = "/goods/find")
     JsonResult<Goods> find(@RequestParam("goodsId") Serializable goodsId);
 
-    /** 删除商品 **/
+    /** 修改商品 **/
     @PostMapping( "/goods/update")
     JsonResult<Boolean> update(@RequestBody Goods goods);
 }
