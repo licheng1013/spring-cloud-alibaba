@@ -14,6 +14,15 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    cluster:
+      nodes:
+        - 47.105.222.40:7001
+        - 47.105.222.40:7002
+        - 47.105.222.40:7003
+        - 47.105.222.40:7004
+        - 47.105.222.40:7005
+        - 47.105.222.40:7006
 
 
 management:
