@@ -14,7 +14,7 @@
 - seata_goods(商品),seata_order(订单),seata_user(用户)
 - 三个库都必须导入undo_log.sql
 - 其他的根据名称对应导入sql下面的sql即可如 seata_goods 导入 goods.sql
-- 测试接口 http://localhost:9600/order/create
+- 测试接口 http://localhost:9600/order/create?userId=1&goodsId=1
 
 
 ### seata部署
