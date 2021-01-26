@@ -13,6 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface OrderFeign {
 
     @PostMapping(value = "/order/create")
-    JsonResult<String> create();
+    JsonResult<String> create(Integer userId,Integer goodsId);
 
 }

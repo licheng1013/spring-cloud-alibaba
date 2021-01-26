@@ -35,4 +35,20 @@ public class GoodsController implements GoodsFeign {
         return JsonResult.okData(goods.updateById());
     }
 
+    @Override
+    @PostMapping("update/total")
+    public JsonResult<Boolean> updateTotal(Serializable goodsId, Integer num) {
+        return JsonResult.okData(goodsService.updateTotal(goodsId, num));
+    }
+
+    @Override
+    @GetMapping("find/money")
+    public JsonResult<Integer> getMoney(Integer goodsId) {
+        Goods byId = goodsService.getById(goodsId);
+        if (byId == null) {
+            throw new RuntimeException("商品未找到");
+        }
+        return JsonResult.okData(byId.getMoney());
+    }
+
 }

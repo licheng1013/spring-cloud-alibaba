@@ -35,4 +35,10 @@ public class UserController implements UserFeign {
     public JsonResult<User> find(Serializable userId) {
         return JsonResult.okData(userService.getById(userId));
     }
+
+    @Override
+    @PostMapping("update/money")
+    public JsonResult<Boolean> updateMoney(Serializable userId, Integer money) {
+        return JsonResult.okData(userService.updateMoney(userId, money));
+    }
 }

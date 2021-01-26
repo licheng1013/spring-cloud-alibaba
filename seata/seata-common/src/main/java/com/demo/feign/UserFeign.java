@@ -22,4 +22,7 @@ public interface UserFeign {
 
     @GetMapping("/user/find")
     JsonResult<User> find(@RequestParam("userId")Serializable userId);
+
+    @PostMapping("/user/update/money")
+    JsonResult<Boolean> updateMoney(@RequestParam("userId") Serializable userId, @RequestParam("money") Integer money);
 }

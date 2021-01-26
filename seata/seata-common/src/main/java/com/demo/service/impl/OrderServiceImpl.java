@@ -2,9 +2,7 @@ package com.demo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.demo.dao.OrderDao;
-import com.demo.entity.Goods;
 import com.demo.entity.Order;
-import com.demo.entity.User;
 import com.demo.feign.GoodsFeign;
 import com.demo.feign.UserFeign;
 import com.demo.service.OrderService;
@@ -26,25 +24,19 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, Order> implements Or
 
     @Override
     @GlobalTransactional
-    public void create() {
-        String userId = "1";
-        String goodsId = "1";
+    public void create(Integer userId, Integer goodsId) {
+        Integer money = goodsFeign.getMoney(goodsId).getData();
         //查询商品
-        Goods goods = goodsFeign.find(goodsId).getData();
-        goods.setTotal(goods.getTotal() - 1);
-        goodsFeign.update(goods);
-
+        goodsFeign.updateTotal(goodsId, 1);
         //查询用户
-        User user = userFeign.find(userId).getData();
-        user.setMoney(user.getMoney()-goods.getMoney());
-        userFeign.update(user);
+        userFeign.updateMoney(userId,money );
 
         Order order = new Order();
-        order.setGoodsId(goods.getGoodsId());
-        order.setUserId(user.getUserId());
+        order.setGoodsId(goodsId);
+        order.setUserId(userId);
         order.setAmount(1);
         order.setDescription("事务");
-        order.setMoney(goods.getMoney());
+        order.setMoney(money);
         order.insert();
 //        int i = 1/0;//异常测试
     }

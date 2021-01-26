@@ -6,6 +6,8 @@ import com.demo.entity.Goods;
 import com.demo.service.GoodsService;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
+
 /**
  * @author lc
  * @date 2021-01-15
@@ -14,4 +16,12 @@ import org.springframework.stereotype.Service;
 @Service("goodsService")
 public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements GoodsService {
 
+    @Override
+    public Boolean updateTotal(Serializable goodsId, Integer num) {
+        Goods byId = getById(goodsId);
+        if (byId == null)
+            throw new RuntimeException("商品找不到");
+        byId.setTotal(byId.getTotal()-num);
+        return byId.updateById();
+    }
 }

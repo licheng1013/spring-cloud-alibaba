@@ -21,8 +21,8 @@ public class OrderController implements OrderFeign {
 
     @Override
     @PostMapping("create")
-    public JsonResult<String> create() {
-        orderService.create();
+    public JsonResult<String> create(Integer userId,Integer groupId) {
+        orderService.create(userId, groupId);
         return JsonResult.okMsg("创建订单成功");
     }
 }

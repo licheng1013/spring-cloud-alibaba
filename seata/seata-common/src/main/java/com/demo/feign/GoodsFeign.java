@@ -25,4 +25,11 @@ public interface GoodsFeign {
     /** 修改商品 **/
     @PostMapping( "/goods/update")
     JsonResult<Boolean> update(@RequestBody Goods goods);
+
+    /** 修改商品数量 **/
+    @PostMapping("/goods/update/total")
+    JsonResult<Boolean> updateTotal(@RequestParam("goodsId") Serializable goodsId,@RequestParam("num") Integer num);
+
+    @GetMapping("/goods/find/money")
+    JsonResult<Integer> getMoney(@RequestParam("goodsId") Integer goodsId);
 }
