@@ -12,10 +12,9 @@
         <module>gateway</module>
         <module>order</module>
         <module>common</module>
-        <module>redis</module>
         <module>rabbitmq</module>
-        <module>authentication</module>
         <module>seata</module>
+        <module>core</module>
     </modules>
     <packaging>pom</packaging>
     <dependencyManagement>
