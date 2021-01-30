@@ -22,5 +22,5 @@ public interface GoodsFeign {
     boolean updateTotal(@RequestParam("goodsId") Serializable goodsId,@RequestParam("num") Integer num);
 
     @GetMapping(value = "/goods/find/money")
-    Integer getMoney( @RequestParam("goodsId") Integer goodsId);
+    Integer getMoney( @RequestParam("goodsId")Integer goodsId);
 }
