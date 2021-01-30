@@ -20,8 +20,8 @@ public class OrderController implements OrderFeign {
 
     @Override
     @RequestMapping("test")
-    public JsonResult<String> test() {
-        return JsonResult.okMsg("Hello Order "+port);
+    public String test() {
+        return "Hello Order "+port;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.demo.controller;
 
+import com.demo.feign.GoodsFeign;
 import com.demo.feign.OrderFeign;
 import com.demo.service.OrderService;
 import com.demo.util.JsonResult;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController implements OrderFeign {
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private GoodsFeign goodsFeign;
 
     @Override
     @PostMapping("create")

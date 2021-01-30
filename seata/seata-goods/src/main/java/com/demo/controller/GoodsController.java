@@ -5,10 +5,7 @@ import com.demo.feign.GoodsFeign;
 import com.demo.service.GoodsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
 
@@ -35,6 +32,7 @@ public class GoodsController implements GoodsFeign {
     @Override
     @GetMapping("find/money")
     public Integer getMoney(Integer goodsId) {
+        System.out.println(goodsId);
         Goods byId = goodsService.getById(goodsId);
         if (byId == null) {
             throw new RuntimeException("商品未找到");

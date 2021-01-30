@@ -14,7 +14,12 @@ spring:
     username: root
     password: root
 
-
+feign:
+  compression:
+    response:
+      enabled: true
+    request:
+      enabled: true
 management:
   endpoints:
     web:
@@ -44,4 +49,3 @@ seata:
       group : "SEATA_GROUP"
       username: ""
       password: ""
-

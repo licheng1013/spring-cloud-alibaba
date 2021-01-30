@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient(name = "alibaba-order")
 public interface OrderFeign {
     @RequestMapping(value = "/order/test",method = RequestMethod.GET)
-    JsonResult<String> test();
+    String test();
 
     @RequestMapping(value = "/order/exception",method = RequestMethod.GET)
     JsonResult<String> exception();

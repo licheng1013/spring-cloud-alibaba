@@ -20,6 +20,7 @@ management:
       exposure:
         include: "*"
 
+
 seata:
   application-id: applicationName
   tx-service-group: my_test_tx_group
@@ -44,3 +45,9 @@ seata:
       group : "SEATA_GROUP"
       username: ""
       password: ""
+feign:
+  compression:
+    response:
+      enabled: true
+    request:
+      enabled: true

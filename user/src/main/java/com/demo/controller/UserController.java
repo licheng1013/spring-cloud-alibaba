@@ -90,9 +90,10 @@ public class UserController {
     }
     /** openfeign调用测试 **/
     @GetMapping("feign/test")
+    @PassToken
     public JsonResult<String> feignTest(){
         log.info("feign调用: {}",port);
-        return orderFeign.test();
+        return JsonResult.okData(orderFeign.test());
     }
 
     /** 异常测试 **/
