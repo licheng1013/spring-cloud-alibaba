@@ -23,4 +23,8 @@ public interface GoodsFeign {
 
     @GetMapping(value = "/goods/find/money")
     Integer getMoney( @RequestParam("goodsId")Integer goodsId);
+
+    /** 修改商品数量 **/
+    @PostMapping("/goods/update/total/tcc")
+    boolean updateTotalTcc(@RequestParam("goodsId") Serializable goodsId,@RequestParam("num") Integer num);
 }

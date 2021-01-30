@@ -16,4 +16,6 @@ public interface UserFeign {
 
     @PostMapping("/user/update/money")
     boolean updateMoney(@RequestParam("userId") Serializable userId, @RequestParam("money") Integer money);
+    @PostMapping("/user/update/money/tcc")
+    boolean updateMoneyTcc(@RequestParam("userId") Serializable userId, @RequestParam("money") Integer money);
 }

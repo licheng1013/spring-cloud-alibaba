@@ -9,5 +9,7 @@ import com.demo.entity.Order;
  * @description
  */
 public interface OrderService extends IService<Order> {
-    void create(Integer userId, Integer goodsId);
+    void createAt(Integer userId, Integer goodsId);
+
+    void createTcc(Integer userId, Integer goodsId);
 }

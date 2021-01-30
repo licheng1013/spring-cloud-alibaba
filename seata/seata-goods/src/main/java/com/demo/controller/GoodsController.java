@@ -40,4 +40,10 @@ public class GoodsController implements GoodsFeign {
         return byId.getMoney();
     }
 
+    @Override
+    @PostMapping("update/total/tcc")
+    public boolean updateTotalTcc(Serializable goodsId, Integer num) {
+        return goodsService.updateTotalTcc(null,goodsId, num);
+    }
+
 }

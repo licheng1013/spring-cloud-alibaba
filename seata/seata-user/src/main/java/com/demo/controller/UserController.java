@@ -25,4 +25,10 @@ public class UserController implements UserFeign {
     public boolean updateMoney(Serializable userId, Integer money) {
         return userService.updateMoney(userId, money);
     }
+
+    @Override
+    @PostMapping("update/money/tcc")
+    public boolean updateMoneyTcc(Serializable userId, Integer money) {
+        return userService.updateMoneyTcc(null,userId, money);
+    }
 }
