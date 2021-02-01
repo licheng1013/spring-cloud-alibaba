@@ -47,6 +47,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, Order> implements Or
     }
 
     @Override
+    @GlobalTransactional
     public void createTcc(Integer userId, Integer goodsId) {
         Integer money = goodsFeign.getMoney(goodsId);
         //查询商品

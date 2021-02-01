@@ -7,11 +7,11 @@
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://192.168.1.99:3306</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="47.105.222.40" uuid="b7ebb8e5-15f8-4c13-a3b5-f64664396b65">
+    <data-source source="LOCAL" name="121.4.194.98" uuid="b7ebb8e5-15f8-4c13-a3b5-f64664396b65">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://47.105.222.40:3306</jdbc-url>
+      <jdbc-url>jdbc:mysql://121.4.194.98:3306</jdbc-url>
     </data-source>
   </component>
 </project>

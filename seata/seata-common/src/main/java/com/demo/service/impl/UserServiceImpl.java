@@ -45,14 +45,14 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     @Override
     public boolean commit(BusinessActionContext actionContext) {
         String xid = actionContext.getXid();
-        log.info("xid: {}",xid );
+        log.info("提交xid: {}",xid );
         return true;
     }
 
     @Override
     public boolean rollback(BusinessActionContext actionContext) {
         String xid = actionContext.getXid();
-        log.info("xid: {}",xid);
+        log.info("回滚xid: {}",xid);
         return true;
     }
 }

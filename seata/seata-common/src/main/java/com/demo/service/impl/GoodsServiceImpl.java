@@ -43,14 +43,14 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
     @Override
     public boolean commit(BusinessActionContext actionContext) {
         String xid = actionContext.getXid();
-        log.info("xid: {}",xid );
+        log.info("提交xid: {}",xid );
         return true;
     }
 
     @Override
     public boolean rollback(BusinessActionContext actionContext) {
         String xid = actionContext.getXid();
-        log.info("xid: {}",xid);
+        log.info("回滚xid: {}",xid);
         return true;
     }
 }
