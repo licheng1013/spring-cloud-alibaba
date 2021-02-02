@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("order")
 public class OrderController {
-
-    @DubboReference
+    @DubboReference(loadbalance = "roundrobin")
     private UserService userService;
 
     @GetMapping("test")
     public Object test(){
+
         return userService.hello();
     }
 }
