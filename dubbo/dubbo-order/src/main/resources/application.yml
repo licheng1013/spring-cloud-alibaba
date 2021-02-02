@@ -1,2 +1,11 @@
 server:
   port: 8100
+
+spring:
+  application:
+    name: dubbo-order
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://47.105.222.40:3306/seata_order?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai #保证插入的时间不会少8小时,取出来少8小时
+    username: root
+    password: root
