@@ -15,6 +15,7 @@
         <module>rabbitmq</module>
         <module>seata</module>
         <module>core</module>
+        <module>dubbo</module>
     </modules>
     <packaging>pom</packaging>
     <dependencyManagement>

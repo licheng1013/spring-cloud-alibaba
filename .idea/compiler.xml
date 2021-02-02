@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="dubbo-order" />
         <module name="seata-user" />
         <module name="push" />
         <module name="redis" />
@@ -18,6 +19,7 @@
         <module name="seata-common" />
         <module name="seata-test" />
         <module name="user" />
+        <module name="dubbo-user" />
         <module name="gateway" />
         <module name="order" />
         <module name="authentication" />
