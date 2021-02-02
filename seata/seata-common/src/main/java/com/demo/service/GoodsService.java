@@ -3,6 +3,7 @@ package com.demo.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.demo.entity.Goods;
 import io.seata.rm.tcc.api.BusinessActionContext;
+import io.seata.rm.tcc.api.LocalTCC;
 import io.seata.rm.tcc.api.TwoPhaseBusinessAction;
 
 import java.io.Serializable;
@@ -12,6 +13,7 @@ import java.io.Serializable;
  * @date 2021-01-15
  * @description
  */
+@LocalTCC
 public interface GoodsService extends IService<Goods> {
 
     Boolean updateTotal(Serializable goodsId, Integer num);
