@@ -1,8 +1,8 @@
 package com.demo;
 
-import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @author root
@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2021/2/2 11:28
  */
 @SpringBootApplication
-@EnableDubbo
+@EnableDiscoveryClient
 public class DubboOrderApp {
     public static void main(String[] args) {
         SpringApplication.run(DubboOrderApp.class, args);

@@ -16,6 +16,9 @@
         <module>dubbo-order</module>
         <module>dubbo-common</module>
     </modules>
+    <properties>
+        <dubbo.version>2.7.8</dubbo.version>
+    </properties>
 
     <dependencies>
         <!--mybatis-plus-->
@@ -33,17 +36,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-        <!-- Dubbo dependency -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>dubbo</artifactId>
-            <version>2.6.9</version>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>dubbo-registry-nacos</artifactId>
-            <version>2.6.7</version>
         </dependency>
 
         <!-- 使用Spring装配方式时可选: -->
@@ -74,6 +66,23 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>${dubbo.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+            <version>${dubbo.version}</version>
+        </dependency>
+        <!-- Dubbo Registry Nacos -->
+        <dependency>
+            <groupId>com.alibaba.nacos</groupId>
+            <artifactId>nacos-client</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+
     </dependencies>
 
 </project>

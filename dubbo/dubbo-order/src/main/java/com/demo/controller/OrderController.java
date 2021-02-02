@@ -1,5 +1,7 @@
 package com.demo.controller;
 
+import com.demo.service.UserService;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,9 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("order")
 public class OrderController {
 
+    @DubboReference
+    private UserService userService;
 
     @GetMapping("test")
     public Object test(){
-        return null;
+        return userService.hello();
     }
 }

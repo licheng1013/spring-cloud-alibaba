@@ -9,3 +9,14 @@ spring:
     url: jdbc:mysql://47.105.222.40:3306/seata_user?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai #保证插入的时间不会少8小时,取出来少8小时
     username: root
     password: root
+
+nacos: #必须配置
+  host: 192.168.1.99
+  port: 8848
+
+
+dubbo:
+  registry:
+    address: nacos://192.168.1.99:8848
+  scan:
+    base-packages: com.demo.service #必须配置,否则无法调用成功 ,生产者

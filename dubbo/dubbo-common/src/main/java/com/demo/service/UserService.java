@@ -9,6 +9,5 @@ import com.demo.entity.User;
  * @description
  */
 public interface UserService extends IService<User> {
-
-
+    String hello();
 }
