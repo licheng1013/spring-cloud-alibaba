@@ -45,6 +45,9 @@
 - 消息队列(单机)(未完成)
 - 消息队列(集群)(未完成)
 - https://gitee.com/licheng1013/docker-rabbitmq-cluster
+### dubbo
+- dubbo测试完成
+
 ### 使用常见问题
 - 使用openfeign的接口的启动类上需要加上 @EnableFeignClients 注解
 
