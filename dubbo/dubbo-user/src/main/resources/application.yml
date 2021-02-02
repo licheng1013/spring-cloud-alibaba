@@ -20,3 +20,6 @@ dubbo:
     address: nacos://192.168.1.99:8848
   scan:
     base-packages: com.demo.service #必须配置,否则无法调用成功 ,生产者
+  protocol:
+    name: dubbo
+    port: -1

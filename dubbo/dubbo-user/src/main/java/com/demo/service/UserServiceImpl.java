@@ -5,6 +5,7 @@ import com.demo.dao.UserDao;
 import com.demo.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * @author lc
@@ -14,9 +15,11 @@ import org.apache.dubbo.config.annotation.DubboService;
 @DubboService
 @Slf4j
 public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserService {
+    @Value("${server.port}")
+    private String port;
 
     @Override
     public String hello() {
-        return "Hello World";
+        return "Hello World "+port;
     }
 }
