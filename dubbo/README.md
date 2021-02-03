@@ -2,7 +2,7 @@
 
 ## 介绍
 - 2020/1/15
-- seata的简明教程
+- seata的简明教程-dubbo
 - 本次demo AT模式
 
 ### seata
