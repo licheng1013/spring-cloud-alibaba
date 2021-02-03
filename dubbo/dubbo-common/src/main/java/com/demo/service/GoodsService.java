@@ -13,4 +13,6 @@ import java.io.Serializable;
 public interface GoodsService extends IService<Goods> {
 
     boolean updateTotal(Serializable goodsId, Integer num);
+
+    Integer getMoney( Integer goodsId);
 }
