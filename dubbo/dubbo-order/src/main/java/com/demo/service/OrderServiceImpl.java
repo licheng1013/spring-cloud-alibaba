@@ -6,6 +6,7 @@ import com.demo.entity.Order;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.stereotype.Service;
 
 /**
  * @author lc
@@ -13,6 +14,7 @@ import org.apache.dubbo.config.annotation.DubboService;
  * @description
  */
 @DubboService
+@Service
 public class OrderServiceImpl extends ServiceImpl<OrderDao, Order> implements OrderService {
     @DubboReference(loadbalance = "roundrobin")
     private UserService userService;

@@ -27,7 +27,7 @@ public class OrderController {
         return userService.hello();
     }
 
-    @Autowired(required = false)
+    @Autowired
     private OrderService orderService;
 
 
