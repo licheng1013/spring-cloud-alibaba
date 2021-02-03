@@ -3,6 +3,7 @@ package com.demo.service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.demo.dao.GoodsDao;
 import com.demo.entity.Goods;
+import io.seata.rm.tcc.api.BusinessActionContext;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
 
@@ -24,6 +25,20 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
             throw new RuntimeException("商品找不到");
         byId.setTotal(byId.getTotal() - num);
         return byId.updateById();
+    }
+
+    @Override
+    public boolean commit(BusinessActionContext actionContext) {
+        String xid = actionContext.getXid();
+        System.out.println("Goods xid:" + xid);
+        return true;
+    }
+
+    @Override
+    public boolean rollback(BusinessActionContext actionContext) {
+        String xid = actionContext.getXid();
+        System.out.println("Goods xid:" + xid);
+        return true;
     }
 
     @Override
