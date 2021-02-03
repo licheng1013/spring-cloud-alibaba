@@ -1,8 +1,9 @@
-package com.demo.service;
+package com.demo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.demo.dao.OrderDao;
 import com.demo.entity.Order;
+import com.demo.service.OrderService;
 
 /**
  * @author lc

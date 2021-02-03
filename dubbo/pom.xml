@@ -15,6 +15,7 @@
         <module>dubbo-user</module>
         <module>dubbo-order</module>
         <module>dubbo-common</module>
+        <module>dubbo-goods</module>
     </modules>
     <properties>
         <dubbo.version>2.7.8</dubbo.version>

@@ -11,6 +11,7 @@
         <module name="seata-user" />
         <module name="push" />
         <module name="redis" />
+        <module name="dubbo-goods" />
         <module name="pull" />
         <module name="tests" />
         <module name="common" />
