@@ -16,3 +16,33 @@ nacos: #必须配置
 dubbo:
   registry:
     address: nacos://192.168.1.99:8848 #消费值
+
+seata:
+  application-id: applicationName
+  tx-service-group: my_test_tx_group
+  excludes-for-auto-proxying: firstClassNameForExclude,secondClassNameForExclude
+  service:
+    #    vgroup-mapping:
+    #      my_test_tx_group: default #默认
+    grouplist:
+      default: 192.168.1.99:8091
+  config:
+    type: nacos
+    nacos:
+      serverAddr: 192.168.1.99:8848
+      group: SEATA_GROUP
+      username: ""
+      password: ""
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 192.168.1.99:8848
+      group : "SEATA_GROUP"
+      username: ""
+      password: ""
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

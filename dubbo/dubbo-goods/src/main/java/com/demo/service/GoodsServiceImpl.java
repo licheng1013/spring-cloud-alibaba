@@ -1,9 +1,8 @@
-package com.demo.service.impl;
+package com.demo.service;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.demo.dao.GoodsDao;
 import com.demo.entity.Goods;
-import com.demo.service.GoodsService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
 

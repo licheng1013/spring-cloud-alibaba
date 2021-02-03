@@ -1,13 +1,11 @@
-package com.demo.service.impl;
+package com.demo.service;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.demo.dao.OrderDao;
 import com.demo.entity.Order;
-import com.demo.service.GoodsService;
-import com.demo.service.OrderService;
-import com.demo.service.UserService;
+import io.seata.spring.annotation.GlobalTransactional;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author lc
@@ -16,12 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @DubboService
 public class OrderServiceImpl extends ServiceImpl<OrderDao, Order> implements OrderService {
-    @Autowired
+    @DubboReference(loadbalance = "roundrobin")
     private UserService userService;
-    @Autowired
+    @DubboReference(loadbalance = "roundrobin")
     private GoodsService goodsService;
 
     @Override
+    @GlobalTransactional
     public void createAt(Integer userId, Integer goodsId) {
         Integer money = goodsService.getMoney(goodsId);
         //查询商品
