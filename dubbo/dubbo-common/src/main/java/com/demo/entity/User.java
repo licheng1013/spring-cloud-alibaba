@@ -24,4 +24,6 @@ public class User extends Model<User> {
      * ${column.comment}
      */
     private Integer money;
+    /** 冻结金额 **/
+    private Integer freeze;
 }

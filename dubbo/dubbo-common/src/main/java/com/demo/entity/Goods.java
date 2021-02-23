@@ -30,4 +30,6 @@ public class Goods extends Model<Goods> {
     private Integer total;
     /** 商品金额 **/
     private Integer money;
+    /** 冻结物品 **/
+    private Integer freeze;
 }
