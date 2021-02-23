@@ -11,7 +11,7 @@
  Target Server Version : 80021
  File Encoding         : 65001
 
- Date: 16/01/2021 14:44:54
+ Date: 23/02/2021 16:28:51
 */
 
 SET NAMES utf8mb4;
@@ -26,12 +26,13 @@ CREATE TABLE `goods`  (
   `info` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '商品信息',
   `total` int NOT NULL COMMENT '库存',
   `money` int NOT NULL COMMENT '商品金额',
+  `freeze` int NOT NULL DEFAULT 0 COMMENT '冻结数量',
   PRIMARY KEY (`goods_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of goods
 -- ----------------------------
-INSERT INTO `goods` VALUES (1, '苹果', 18, 1000);
+INSERT INTO `goods` VALUES (1, '苹果', 19, 1000, 0);
 
 SET FOREIGN_KEY_CHECKS = 1;

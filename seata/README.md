@@ -15,7 +15,7 @@
 - 三个库都必须导入undo_log.sql
 - 其他的根据名称对应导入sql下面的sql即可如 seata_goods 导入 goods.sql
 - 测试接口 http://localhost:9600/order/create?userId=1&goodsId=1
-
+- freeze 字段是tcc事务下面使用
 
 ### seata部署
 - seata-docker部署
