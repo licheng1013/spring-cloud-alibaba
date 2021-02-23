@@ -3,7 +3,9 @@ package com.demo.service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.demo.dao.OrderDao;
 import com.demo.entity.Order;
+import io.seata.rm.tcc.api.BusinessActionContext;
 import io.seata.spring.annotation.GlobalTransactional;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
  */
 @DubboService
 @Service
+@Slf4j
 public class OrderServiceImpl extends ServiceImpl<OrderDao, Order> implements OrderService {
     @DubboReference(loadbalance = "roundrobin")
     private UserService userService;
@@ -28,7 +31,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, Order> implements Or
      */
     @Override
     @GlobalTransactional
-    public void createAt(Integer userId, Integer goodsId) {
+    public void createAt(BusinessActionContext actionContext,Integer userId, Integer goodsId) {
         Integer money = goodsService.getMoney(goodsId);
         //查询商品
         boolean b = goodsService.updateTotal(null,goodsId, 1);
@@ -47,6 +50,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, Order> implements Or
         order.setDescription("事务");
         order.setMoney(money);
         order.insert();
-        int i = 1 / 0;
     }
+
+
 }

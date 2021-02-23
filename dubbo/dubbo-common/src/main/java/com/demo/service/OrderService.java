@@ -2,6 +2,7 @@ package com.demo.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.demo.entity.Order;
+import io.seata.rm.tcc.api.BusinessActionContext;
 
 /**
  * @author lc
@@ -9,5 +10,6 @@ import com.demo.entity.Order;
  * @description
  */
 public interface OrderService extends IService<Order> {
-    void createAt(Integer userId, Integer goodsId);
+    void createAt(BusinessActionContext actionContext,Integer userId, Integer goodsId);
+
 }
