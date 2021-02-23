@@ -21,17 +21,22 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, Order> implements Or
     @DubboReference(loadbalance = "roundrobin")
     private GoodsService goodsService;
 
+    /**
+     * @author lc
+     * @date 2021/2/23
+     * @description 会回滚
+     */
     @Override
     @GlobalTransactional
     public void createAt(Integer userId, Integer goodsId) {
         Integer money = goodsService.getMoney(goodsId);
         //查询商品
-        boolean b = goodsService.updateTotal(goodsId, 1);
+        boolean b = goodsService.updateTotal(null,goodsId, 1);
         if (!b) {
             throw new RuntimeException("修改商品失败");
         }
         //查询用户
-        boolean c = userService.updateMoney(userId, money);
+        boolean c = userService.updateMoney(null,userId, money);
         if (!c) {
             throw new RuntimeException("修改金额失败");
         }
@@ -42,5 +47,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, Order> implements Or
         order.setDescription("事务");
         order.setMoney(money);
         order.insert();
+        int i = 1 / 0;
     }
 }

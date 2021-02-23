@@ -17,7 +17,7 @@ import java.io.Serializable;
 public interface GoodsService extends IService<Goods> {
 
     @TwoPhaseBusinessAction(name = "updateTotal", commitMethod = "commit", rollbackMethod = "rollback")
-    boolean updateTotal(Serializable goodsId, Integer num);
+    boolean updateTotal(BusinessActionContext actionContext,Serializable goodsId, Integer num);
 
     boolean commit(BusinessActionContext actionContext);
     boolean rollback(BusinessActionContext actionContext);

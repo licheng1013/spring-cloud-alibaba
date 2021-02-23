@@ -27,7 +27,9 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     }
 
     @Override
-    public boolean updateMoney(Serializable userId, Integer money) {
+    public boolean updateMoney(BusinessActionContext actionContext,Serializable userId, Integer money) {
+        String xid = actionContext.getXid();
+        System.out.println("try user xid:" + xid);
         User byId = getById(userId);
         if (byId == null) {
             throw new RuntimeException("用户未找到");

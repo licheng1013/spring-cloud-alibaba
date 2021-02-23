@@ -17,7 +17,7 @@ import java.io.Serializable;
 public interface UserService extends IService<User> {
     String hello();
     @TwoPhaseBusinessAction(name = "updateMoney", commitMethod = "commit", rollbackMethod = "rollback")
-    boolean updateMoney(Serializable userId, Integer money);
+    boolean updateMoney(BusinessActionContext actionContext,Serializable userId, Integer money);
     boolean commit(BusinessActionContext actionContext);
     boolean rollback(BusinessActionContext actionContext);
 }
