@@ -29,3 +29,4 @@
 - seata分布式事务(ok)
 - seata单机(ok)
 - seata集群
+- 乐观锁测试
