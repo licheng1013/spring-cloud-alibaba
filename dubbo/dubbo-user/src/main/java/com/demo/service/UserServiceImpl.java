@@ -57,8 +57,12 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         }
         User user = getById(userId.toString());
         user.setFreeze(user.getFreeze()-(Integer)money); //把冻结金额扣除掉
-        ResultHolder.remove(xid); //删除xid
-        return user.updateById();
+        boolean b = user.updateById();
+        if(b){
+            //没有处理成功则继续处理
+            ResultHolder.remove(xid); //删除xid
+        }
+        return b;
     }
 
     @Override
@@ -75,7 +79,11 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         User user = getById(userId.toString());
         user.setFreeze(user.getFreeze()-(Integer)money); //把冻结金额扣除掉,并补回金额
         user.setMoney(user.getMoney()+(Integer)money);
-        ResultHolder.remove(xid); //删除xid
-        return user.updateById();
+        boolean b = user.updateById();
+        if(b){
+            //没有处理成功则继续处理
+            ResultHolder.remove(xid); //删除xid
+        }
+        return b;
     }
 }
