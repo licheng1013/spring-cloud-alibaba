@@ -33,7 +33,7 @@ public class OrderController {
 
     @PostMapping("create")
     public JsonResult<String> create(Integer userId, Integer goodsId) {
-        orderService.createAt(null,userId, goodsId);
+        orderService.createAt(userId, goodsId);
         return JsonResult.okMsg("创建订单成功");
     }
 }

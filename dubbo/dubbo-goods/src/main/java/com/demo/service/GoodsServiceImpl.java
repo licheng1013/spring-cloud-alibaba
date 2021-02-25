@@ -23,17 +23,25 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
      * @author lc
      * @date 2021/2/23
      * @description 锁定资源,检查资源
+     * @param goodsId 商品id
+     * @param num 扣除数量
      */
     @Override
     public boolean updateTotal(BusinessActionContext actionContext,Serializable goodsId, Integer num) {
         String xid = actionContext.getXid();
         System.out.println("try Goods xid:" + xid);
-        Goods byId = getById(goodsId);
-        if (byId == null)
+        Goods goods = getById(goodsId);
+        if (goods == null) {
             throw new RuntimeException("商品找不到");
-        byId.setTotal(byId.getTotal() - num);
+        }
+        if (goods.getTotal() < num){
+            throw new RuntimeException("商品数量不足");
+        }
+
+        goods.setTotal(goods.getTotal() - num);//扣除并冻结起来
+        goods.setFreeze(goods.getFreeze() + num);
         ResultHolder.set(xid, "goods");
-        return byId.updateById();
+        return goods.updateById();
     }
 
     /**
@@ -44,13 +52,20 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
     @Override
     public boolean commit(BusinessActionContext actionContext) {
         String xid = actionContext.getXid();
+        Object goodsId = actionContext.getActionContext("goodsId");
+        Object num = actionContext.getActionContext("num");
+        log.info("商品服务 commit,商品id: {},商品扣除数量: {},xid: {}",goodsId,num,xid);
         String v = ResultHolder.get(xid);
         if (v == null) {
+            log.info("commit空提交处理");
             return true; //空回滚
         }
-        System.out.println("Goods xid:" + xid);
+        //业务处理
+        Goods goods = getById(goodsId.toString());
+        goods.setFreeze(goods.getFreeze()-(Integer)num);
+
         ResultHolder.remove(xid); //处理后删除
-        return true;
+        return goods.updateById();
     }
 
     /**
@@ -61,13 +76,21 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
     @Override
     public boolean rollback(BusinessActionContext actionContext) {
         String xid = actionContext.getXid();
+        Object goodsId = actionContext.getActionContext("goodsId");
+        Object num = actionContext.getActionContext("num");
         String v = ResultHolder.get(xid);
+        log.info("商品服务 rollback,商品id: {},商品回滚数量: {},xid: {}",goodsId,num,xid);
         if (v == null) {
+            log.info("rollback空回滚处理");
             return true; //空回滚
         }
-        System.out.println("Goods xid:" + xid);
+        //业务处理
+        Goods goods = getById(goodsId.toString());
+        goods.setFreeze(goods.getFreeze()-(Integer)num);
+        goods.setTotal(goods.getTotal() + (Integer) num);
+
         ResultHolder.remove(xid); //处理后删除
-        return true;
+        return goods.updateById();
     }
 
     @Override
