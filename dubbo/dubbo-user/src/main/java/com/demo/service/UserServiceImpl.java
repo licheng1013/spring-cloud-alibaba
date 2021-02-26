@@ -53,15 +53,19 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         Object money = actionContext.getActionContext("money");
         log.info("用户服务 commit,用户id: {},用户扣除金额: {},xid: {}",userId,money,xid);
         String v = ResultHolder.get(xid);
+        ResultHolder.remove(xid); //删除xid
         if (v == null) {
             log.info("用户服务空提交");
             return true;
         }
         User user = getById(userId.toString());
         user.setFreeze(user.getFreeze()-(Integer)money); //把冻结金额扣除掉
-        //没有处理成功则继续处理
-        ResultHolder.remove(xid); //删除xid
-        return user.updateById();
+        boolean b = user.updateById();
+        if(!b){
+            //没有处理成功则继续处理
+            ResultHolder.set(xid,"user"); //删除xid
+        }
+        return b;
     }
 
     @Override
@@ -71,6 +75,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         Object money = actionContext.getActionContext("money");
         log.info("用户服务 rollback,用户id: {},用户扣除金额: {},xid: {}",userId,money,xid);
         String v = ResultHolder.get(xid);
+        ResultHolder.remove(xid); //删除xid
         if (v == null) {
             log.info("用户服务空回滚");
             return true;
@@ -78,8 +83,11 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         User user = getById(userId.toString());
         user.setFreeze(user.getFreeze()-(Integer)money); //把冻结金额扣除掉,并补回金额
         user.setMoney(user.getMoney()+(Integer)money);
-        //没有处理成功则继续处理
-        ResultHolder.remove(xid); //删除xid
-        return  user.updateById();
+        boolean b = user.updateById();
+        if(!b){
+            //没有处理成功则继续处理
+            ResultHolder.set(xid,"user"); //删除xid
+        }
+        return b;
     }
 }

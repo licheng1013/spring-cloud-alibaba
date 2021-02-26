@@ -56,6 +56,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
         Object num = actionContext.getActionContext("num");
         log.info("商品服务 commit,商品id: {},商品扣除数量: {},xid: {}",goodsId,num,xid);
         String v = ResultHolder.get(xid);
+        ResultHolder.remove(xid); //如果没有处理成功则进行处理
         if (v == null) {
             log.info("commit空提交处理");
             return true; //空回滚
@@ -63,10 +64,12 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
         //业务处理
         Goods goods = getById(goodsId.toString());
         goods.setFreeze(goods.getFreeze()-(Integer)num);
-
-        //如果没有处理成功则进行处理
-        ResultHolder.remove(xid); //处理后删除
-        return goods.updateById();
+        boolean b = goods.updateById();
+        if(!b){
+            //如果没有处理成功则进行处理
+            ResultHolder.set(xid,"goods"); //处理后删除
+        }
+        return b;
     }
 
     /**
@@ -80,6 +83,8 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
         Object goodsId = actionContext.getActionContext("goodsId");
         Object num = actionContext.getActionContext("num");
         String v = ResultHolder.get(xid);
+
+        ResultHolder.remove(xid); //如果没有处理成功则进行处理
         log.info("商品服务 rollback,商品id: {},商品回滚数量: {},xid: {}",goodsId,num,xid);
         if (v == null) {
             log.info("rollback空回滚处理");
@@ -90,9 +95,12 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
         goods.setFreeze(goods.getFreeze()-(Integer)num);
         goods.setTotal(goods.getTotal() + (Integer) num);
 
-        //如果没有处理成功则进行处理
-        ResultHolder.remove(xid); //处理后删除
-        return goods.updateById();
+        boolean b = goods.updateById();
+        if(!b){
+            //如果没有处理成功则进行处理
+            ResultHolder.set(xid,"goods"); //处理后删除
+        }
+        return b;
     }
 
     @Override
