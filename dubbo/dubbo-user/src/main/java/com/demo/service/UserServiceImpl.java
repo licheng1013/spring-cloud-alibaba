@@ -8,6 +8,7 @@ import io.seata.rm.tcc.api.BusinessActionContext;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 
@@ -18,6 +19,7 @@ import java.io.Serializable;
  */
 @DubboService
 @Slf4j
+@Service
 public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserService {
     @Value("${server.port}")
     private String port;
@@ -57,12 +59,9 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         }
         User user = getById(userId.toString());
         user.setFreeze(user.getFreeze()-(Integer)money); //把冻结金额扣除掉
-        boolean b = user.updateById();
-        if(b){
-            //没有处理成功则继续处理
-            ResultHolder.remove(xid); //删除xid
-        }
-        return b;
+        //没有处理成功则继续处理
+        ResultHolder.remove(xid); //删除xid
+        return user.updateById();
     }
 
     @Override
@@ -79,11 +78,8 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         User user = getById(userId.toString());
         user.setFreeze(user.getFreeze()-(Integer)money); //把冻结金额扣除掉,并补回金额
         user.setMoney(user.getMoney()+(Integer)money);
-        boolean b = user.updateById();
-        if(b){
-            //没有处理成功则继续处理
-            ResultHolder.remove(xid); //删除xid
-        }
-        return b;
+        //没有处理成功则继续处理
+        ResultHolder.remove(xid); //删除xid
+        return  user.updateById();
     }
 }

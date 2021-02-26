@@ -63,12 +63,10 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
         //业务处理
         Goods goods = getById(goodsId.toString());
         goods.setFreeze(goods.getFreeze()-(Integer)num);
-        boolean b = goods.updateById();
-        if(b){
-            //如果没有处理成功则进行处理
-            ResultHolder.remove(xid); //处理后删除
-        }
-        return b;
+
+        //如果没有处理成功则进行处理
+        ResultHolder.remove(xid); //处理后删除
+        return goods.updateById();
     }
 
     /**
@@ -92,12 +90,9 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
         goods.setFreeze(goods.getFreeze()-(Integer)num);
         goods.setTotal(goods.getTotal() + (Integer) num);
 
-        boolean b = goods.updateById();
-        if(b){
-            //如果没有处理成功则进行处理
-            ResultHolder.remove(xid); //处理后删除
-        }
-        return b;
+        //如果没有处理成功则进行处理
+        ResultHolder.remove(xid); //处理后删除
+        return goods.updateById();
     }
 
     @Override
