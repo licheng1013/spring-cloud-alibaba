@@ -53,7 +53,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         Object money = actionContext.getActionContext("money");
         log.info("用户服务 commit,用户id: {},用户扣除金额: {},xid: {}",userId,money,xid);
         String v = ResultHolder.get(xid);
-        ResultHolder.remove(xid); //删除xid
+
         if (v == null) {
             log.info("用户服务空提交");
             return true;
@@ -61,9 +61,10 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         User user = getById(userId.toString());
         user.setFreeze(user.getFreeze()-(Integer)money); //把冻结金额扣除掉
         boolean b = user.updateById();
-        if(!b){
+        if(b){
+            ResultHolder.remove(xid); //删除xid
             //没有处理成功则继续处理
-            ResultHolder.set(xid,"user"); //删除xid
+//            ResultHolder.set(xid,"user"); //删除xid
         }
         return b;
     }
@@ -75,7 +76,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         Object money = actionContext.getActionContext("money");
         log.info("用户服务 rollback,用户id: {},用户扣除金额: {},xid: {}",userId,money,xid);
         String v = ResultHolder.get(xid);
-        ResultHolder.remove(xid); //删除xid
+
         if (v == null) {
             log.info("用户服务空回滚");
             return true;
@@ -84,9 +85,10 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         user.setFreeze(user.getFreeze()-(Integer)money); //把冻结金额扣除掉,并补回金额
         user.setMoney(user.getMoney()+(Integer)money);
         boolean b = user.updateById();
-        if(!b){
+        if(b){
+            ResultHolder.remove(xid); //删除xid
             //没有处理成功则继续处理
-            ResultHolder.set(xid,"user"); //删除xid
+//            ResultHolder.set(xid,"user"); //删除xid
         }
         return b;
     }
