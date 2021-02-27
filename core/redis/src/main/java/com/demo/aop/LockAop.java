@@ -17,31 +17,46 @@ import java.lang.reflect.Method;
 @Aspect
 @Configuration
 @Slf4j
-public class ResetAop {
+public class LockAop {
     @Autowired
     private RedisString redisString;
 
-    @Around(value="@annotation(lock)")
+    /** 配套手动释放锁 **/
+    public static ThreadLocal<String> lock = new ThreadLocal<>();
+    public static void set(String key){
+        lock.set(key);
+    }
+    public static String get(){
+        return lock.get();
+    }
+
+    @Around(value = "@annotation(lock)")
     public Object around(ProceedingJoinPoint joinPoint, Lock lock) throws Throwable {
         Signature signature = joinPoint.getSignature(); //方法签名
-        MethodSignature methodSignature = (MethodSignature)signature;//强转
+        MethodSignature methodSignature = (MethodSignature) signature;//强转
         Method method = methodSignature.getMethod(); //获取的方法对象
         Lock lk = method.getAnnotation(Lock.class);//获取方法上的注解
         Object[] args = joinPoint.getArgs();
         StringBuilder key = new StringBuilder(lk.prefix());
-        for (Object o:args) {//遍历
+        for (Object o : args) {//遍历
             if (o != null) {
-                key.append(o.toString());
+                key.append(o.toString()).append(":");
             }
         }
-        log.info("锁key: {}",key);
+        log.info("锁key: {}", key);
         String v = redisString.lock(key.toString(), lk.timeout());
         if (v != null) { //锁被使用,抛出异常
             Constructor<? extends Throwable> constructor = lk.exception().getConstructor(String.class);
             throw constructor.newInstance(lk.msg());
         }
-        Object o = joinPoint.proceed();
-        redisString.remove(key.toString());//释放锁
+        Object o;
+        try {
+            o = joinPoint.proceed();
+        } finally {//不管业务结果,都必须释放锁
+            if (!lk.isLock()){
+                redisString.remove(key.toString());//释放锁
+            }
+        }
         return o;
     }
 }

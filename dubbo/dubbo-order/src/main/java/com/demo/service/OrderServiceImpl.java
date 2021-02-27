@@ -1,6 +1,7 @@
 package com.demo.service;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.demo.annotation.Lock;
 import com.demo.dao.OrderDao;
 import com.demo.entity.Order;
 import io.seata.spring.annotation.GlobalTransactional;
@@ -26,10 +27,11 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, Order> implements Or
     /**
      * @author lc
      * @date 2021/2/23
-     * @description 会回滚
+     * @description 同一用户购买同一个物品时,在某段时间内只能执行一次,否则会出现线程不安全问题
      */
     @Override
     @GlobalTransactional
+    @Lock(prefix = "createOrder:")
     public void createAt(Integer userId, Integer goodsId) {
         Integer money = goodsService.getMoney(goodsId);
         //查询用户

@@ -9,6 +9,16 @@ spring:
     url: jdbc:mysql://47.105.222.40:3306/seata_user?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai #保证插入的时间不会少8小时,取出来少8小时
     username: root
     password: root
+  redis:
+    cluster:
+      nodes:
+        - 47.105.222.40:7001
+        - 47.105.222.40:7002
+        - 47.105.222.40:7003
+        - 47.105.222.40:7004
+        - 47.105.222.40:7005
+        - 47.105.222.40:7006
+
 
 nacos: #必须配置
   host: 192.168.1.99

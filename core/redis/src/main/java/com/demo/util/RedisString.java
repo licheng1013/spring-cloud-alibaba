@@ -1,5 +1,6 @@
 package com.demo.util;
 
+import com.demo.aop.LockAop;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -76,5 +77,14 @@ public class RedisString {
             return null;
         }
         return s;
+    }
+
+    /**
+     * @author lc
+     * @date 2021/2/27
+     * @description 删除当前线程的锁
+     */
+    public void removeLock(){
+        remove(LockAop.get());
     }
 }

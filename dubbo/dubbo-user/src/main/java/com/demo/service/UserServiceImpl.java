@@ -1,6 +1,7 @@
 package com.demo.service;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.demo.annotation.Lock;
 import com.demo.dao.UserDao;
 import com.demo.entity.User;
 import com.demo.util.ResultHolder;
@@ -91,5 +92,16 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
 //            ResultHolder.set(xid,"user"); //删除xid
         }
         return b;
+    }
+
+    /**
+     * @author lc
+     * @date 2021/2/27
+     * @description 如果需要在多个地方修改金额,请加锁使用
+     */
+    @Override
+    @Lock(prefix = "getMoney:")
+    public Integer getMoney(Serializable userId) {
+        return getById(userId).getMoney();
     }
 }
