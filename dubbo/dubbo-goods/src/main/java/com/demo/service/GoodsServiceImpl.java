@@ -1,12 +1,14 @@
 package com.demo.service;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.demo.annotation.Lock;
 import com.demo.dao.GoodsDao;
 import com.demo.entity.Goods;
 import com.demo.util.ResultHolder;
 import io.seata.rm.tcc.api.BusinessActionContext;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 
@@ -17,6 +19,7 @@ import java.io.Serializable;
  */
 @Slf4j
 @DubboService
+@Service
 public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements GoodsService {
 
     /**
@@ -27,6 +30,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
      * @description 锁定资源, 检查资源
      */
     @Override
+    @Lock(prefix = "updateTotal:",msg = "抢购人数太多")
     public boolean updateTotal(BusinessActionContext actionContext, Serializable goodsId, Integer num) {
         String xid = actionContext.getXid();
         System.out.println("try Goods xid:" + xid);
