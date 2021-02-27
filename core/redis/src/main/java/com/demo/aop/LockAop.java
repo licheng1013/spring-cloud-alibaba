@@ -1,6 +1,7 @@
 package com.demo.aop;
 
 import com.demo.annotation.Lock;
+import com.demo.util.AopUtil;
 import com.demo.util.RedisString;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.util.Map;
 
 @Aspect
 @Configuration
@@ -44,6 +46,8 @@ public class LockAop {
             }
         }
         log.info("锁key: {}", key);
+        Map<String, Object> map = AopUtil.getMap(joinPoint.getArgs(), method.getParameters());
+        log.info("参数map: {}",map);
         String v = redisString.lock(key.toString(), lk.timeout());
         if (v != null) { //锁被使用,抛出异常
             Constructor<? extends Throwable> constructor = lk.exception().getConstructor(String.class);

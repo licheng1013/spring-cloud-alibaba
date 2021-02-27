@@ -19,5 +19,5 @@ public @interface Lock {
     /** 是否手动释放锁,基于ThreadLocal,true开启手动释放锁,默认false自动释放锁,3秒超时 **/
     boolean isLock() default false;
     /** 排除指定参数 **/
-    int [] exclude() default {};
+    String [] exclude() default {};
 }
