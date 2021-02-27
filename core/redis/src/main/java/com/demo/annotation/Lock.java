@@ -16,6 +16,6 @@ public @interface Lock {
     long timeout() default 3000;
     /** 报错信息 **/
     String msg()  default  "锁被占用";
-    /** 是否手动释放锁,基于ThreadLocal,true开启手动释放锁,默认false关闭 **/
+    /** 是否手动释放锁,基于ThreadLocal,true开启手动释放锁,默认false自动释放锁 **/
     boolean isLock() default false;
 }

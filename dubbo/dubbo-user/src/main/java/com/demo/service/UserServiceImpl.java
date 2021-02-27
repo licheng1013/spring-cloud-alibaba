@@ -100,7 +100,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
      * @description 如果需要在多个地方修改金额,请加锁使用
      */
     @Override
-    @Lock(prefix = "getMoney:")
+    @Lock(prefix = "getMoney:",isLock = true)
     public Integer getMoney(Serializable userId) {
         return getById(userId).getMoney();
     }
