@@ -1,6 +1,6 @@
 package com.demo.config;
 
-import com.demo.annotation.TimeOut;
+import com.demo.annotation.Lock;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
@@ -14,12 +14,12 @@ import java.lang.reflect.Method;
 @Configuration
 public class ResetAop {
 
-    @Around(value="@annotation(timeOut)")
-    public Object around(ProceedingJoinPoint joinPoint, TimeOut timeOut) throws Throwable {
+    @Around(value="@annotation(lock)")
+    public Object around(ProceedingJoinPoint joinPoint, Lock lock) throws Throwable {
         Signature signature = joinPoint.getSignature(); //方法签名
         MethodSignature methodSignature = (MethodSignature)signature;//强转
         Method targetMethod = methodSignature.getMethod(); //获取的方法对象
-        TimeOut time = targetMethod.getAnnotation(TimeOut.class);//获取方法上的注解
+        Lock time = targetMethod.getAnnotation(Lock.class);//获取方法上的注解
         long l = System.currentTimeMillis();
         Object proceed = null ;
         while (true){

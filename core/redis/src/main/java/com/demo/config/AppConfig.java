@@ -7,6 +7,11 @@ import org.springframework.data.redis.connection.RedisClusterConfiguration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 
+/**
+ * @author lc
+ * @date 2021/2/27
+ * @description redis配置
+ */
 @Configuration
 public class AppConfig {
 
