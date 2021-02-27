@@ -23,5 +23,4 @@ public interface UserService extends IService<User> {
             , @BusinessActionContextParameter(paramName = "money") Integer money);
     boolean commit(BusinessActionContext actionContext);
     boolean rollback(BusinessActionContext actionContext);
-    Integer getMoney(Serializable userId);
 }
