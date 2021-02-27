@@ -31,6 +31,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     }
 
     @Override
+    @Lock(prefix = "updateMoney:",msg = "请稍后")
     public boolean updateMoney(BusinessActionContext actionContext,Serializable userId, Integer money) {
         String xid = actionContext.getXid();
         log.info("用户服务 xid: {}",xid );
@@ -61,13 +62,8 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         }
         User user = getById(userId.toString());
         user.setFreeze(user.getFreeze()-(Integer)money); //把冻结金额扣除掉
-        boolean b = user.updateById();
-        if(b){
-            ResultHolder.remove(xid); //删除xid
-            //没有处理成功则继续处理
-//            ResultHolder.set(xid,"user"); //删除xid
-        }
-        return b;
+        ResultHolder.remove(xid); //删除xid
+        return  user.updateById();
     }
 
     @Override
@@ -85,13 +81,8 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         User user = getById(userId.toString());
         user.setFreeze(user.getFreeze()-(Integer)money); //把冻结金额扣除掉,并补回金额
         user.setMoney(user.getMoney()+(Integer)money);
-        boolean b = user.updateById();
-        if(b){
-            ResultHolder.remove(xid); //删除xid
-            //没有处理成功则继续处理
-//            ResultHolder.set(xid,"user"); //删除xid
-        }
-        return b;
+        ResultHolder.remove(xid); //删除xid
+        return user.updateById();
     }
 
 

@@ -20,21 +20,21 @@ import java.io.Serializable;
 public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements GoodsService {
 
     /**
+     * @param goodsId 商品id
+     * @param num     扣除数量
      * @author lc
      * @date 2021/2/23
-     * @description 锁定资源,检查资源
-     * @param goodsId 商品id
-     * @param num 扣除数量
+     * @description 锁定资源, 检查资源
      */
     @Override
-    public boolean updateTotal(BusinessActionContext actionContext,Serializable goodsId, Integer num) {
+    public boolean updateTotal(BusinessActionContext actionContext, Serializable goodsId, Integer num) {
         String xid = actionContext.getXid();
         System.out.println("try Goods xid:" + xid);
         Goods goods = getById(goodsId);
         if (goods == null) {
             throw new RuntimeException("商品找不到");
         }
-        if (goods.getTotal() < num){
+        if (goods.getTotal() < num) {
             throw new RuntimeException("商品数量不足");
         }
 
@@ -47,14 +47,14 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
     /**
      * @author lc
      * @date 2021/2/23
-     * @description 释放锁定的资源,并成功提交,业务上失败则短信通知
+     * @description 释放锁定的资源, 并成功提交, 业务上失败则短信通知
      */
     @Override
     public boolean commit(BusinessActionContext actionContext) {
         String xid = actionContext.getXid();
         Object goodsId = actionContext.getActionContext("goodsId");
         Object num = actionContext.getActionContext("num");
-        log.info("商品服务 commit,商品id: {},商品扣除数量: {},xid: {}",goodsId,num,xid);
+        log.info("商品服务 commit,商品id: {},商品扣除数量: {},xid: {}", goodsId, num, xid);
         String v = ResultHolder.get(xid);
 
 
@@ -64,19 +64,15 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
         }
         //业务处理
         Goods goods = getById(goodsId.toString());
-        goods.setFreeze(goods.getFreeze()-(Integer)num);
-        boolean b = goods.updateById();
-        if(b){
-            //        ResultHolder.set(xid,"goods"); //处理后删除
-            ResultHolder.remove(xid); //如果没有处理成功则进行处理
-        }
-        return b;
+        goods.setFreeze(goods.getFreeze() - (Integer) num);
+        ResultHolder.remove(xid); //删除xid
+        return goods.updateById();
     }
 
     /**
      * @author lc
      * @date 2021/2/23
-     * @description 回滚操作,业务上失败则短信通知
+     * @description 回滚操作, 业务上失败则短信通知
      */
     @Override
     public boolean rollback(BusinessActionContext actionContext) {
@@ -86,23 +82,18 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
         String v = ResultHolder.get(xid);
 
 
-        log.info("商品服务 rollback,商品id: {},商品回滚数量: {},xid: {}",goodsId,num,xid);
+        log.info("商品服务 rollback,商品id: {},商品回滚数量: {},xid: {}", goodsId, num, xid);
         if (v == null) {
             log.info("rollback空回滚处理");
             return true; //空回滚
         }
         //业务处理
         Goods goods = getById(goodsId.toString());
-        goods.setFreeze(goods.getFreeze()-(Integer)num);
+        goods.setFreeze(goods.getFreeze() - (Integer) num);
         goods.setTotal(goods.getTotal() + (Integer) num);
 
-        boolean b = goods.updateById();
-        if(b){
-            //如果没有处理成功则进行处理
-//            ResultHolder.set(xid,"goods"); //处理后删除
-            ResultHolder.remove(xid); //如果没有处理成功则进行处理
-        }
-        return b;
+        ResultHolder.remove(xid); //删除xid
+        return goods.updateById();
     }
 
     @Override
