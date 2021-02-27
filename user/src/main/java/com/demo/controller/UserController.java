@@ -13,6 +13,7 @@ import com.demo.PassToken;
 import com.demo.TokenUtil;
 import com.demo.annotation.Lock;
 import com.demo.entity.User;
+import com.demo.exception.ServiceException;
 import com.demo.feign.OrderFeign;
 import com.demo.service.UserService;
 import com.demo.util.JsonResult;
@@ -87,7 +88,7 @@ public class UserController {
     /** 接口测试 **/
     @GetMapping("test")
     @PassToken
-    @Lock(prefix = "createOrder:")
+    @Lock(prefix = "createOrder:",exception = ServiceException.class)
     public JsonResult<String> test(String userId,String goodsId) {
         return JsonResult.okMsg("Hello World " + port);
     }

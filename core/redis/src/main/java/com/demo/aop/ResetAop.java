@@ -11,6 +11,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
 @Aspect
@@ -36,7 +37,8 @@ public class ResetAop {
         log.info("锁key: {}",key);
         String v = redisString.lock(key.toString(), lk.timeout());
         if (v != null) { //锁被使用,抛出异常
-            throw lk.exception().newInstance();
+            Constructor<? extends Throwable> constructor = lk.exception().getConstructor(String.class);
+            throw constructor.newInstance(lk.msg());
         }
         Object o = joinPoint.proceed();
         redisString.remove(key.toString());//释放锁
