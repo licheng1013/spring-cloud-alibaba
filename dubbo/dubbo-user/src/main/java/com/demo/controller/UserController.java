@@ -27,7 +27,7 @@ public class UserController {
         if (user.getMoney() < money) {
             throw new RuntimeException("金额不足");
         }
-        Thread.sleep(10000);
+        Thread.sleep(2000);
         user.setMoney(user.getMoney()-money);
         return JsonResult.okData(user.updateById());
     }
@@ -38,7 +38,7 @@ public class UserController {
         if (user.getMoney() < money) {
             throw new RuntimeException("金额不足");
         }
-        Thread.sleep(800);
+        Thread.sleep(2000);
         user.setMoney(user.getMoney()-money);
         return JsonResult.okData(user.updateById());
     }
