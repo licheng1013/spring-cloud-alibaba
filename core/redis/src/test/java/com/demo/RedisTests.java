@@ -1,9 +1,12 @@
 package com.demo;
 
 import com.demo.util.RedisString;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.HashMap;
 
 /**
  * @author root
@@ -21,5 +24,9 @@ public class RedisTests {
         //RedisClusterConnection connection = factory.getClusterConnection();
         redisString.set("c", "Hello World hi c");
         System.out.println(redisString.get("a"));
+    }
+
+    public static void main(String[] args) {
+
     }
 }

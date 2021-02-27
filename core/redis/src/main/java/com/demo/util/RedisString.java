@@ -28,7 +28,9 @@ public class RedisString {
     /**
      * @author lc
      * @date 2020/12/19
-     * @description 增加超时单位秒
+     * @param time 超时时间,单位秒
+     * @param k 键
+     * @param v 值
      */
     public void set(String k,String v,long time){
         set(k, v, time, TimeUnit.SECONDS);
@@ -50,5 +52,29 @@ public class RedisString {
      */
     public String get(String k){
         return stringRedisTemplate.opsForValue().get(k);
+    }
+
+    /**
+     * @author lc
+     * @date 2021/2/27
+     * @param k 释放锁
+     */
+    public void remove(String k) {
+        stringRedisTemplate.delete(k);
+    }
+
+
+    /**
+     * @param k 键
+     * @param time 锁超时时间
+     * @return 返回值 != null表示锁在使用
+     */
+    public String lock(String k,long time){
+        String s = get(k);
+        if (s == null) {
+            set(k, k, time,TimeUnit.MILLISECONDS);
+            return null;
+        }
+        return s;
     }
 }

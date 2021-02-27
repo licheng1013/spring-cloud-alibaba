@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.demo.PassToken;
 import com.demo.TokenUtil;
+import com.demo.annotation.Lock;
 import com.demo.entity.User;
 import com.demo.feign.OrderFeign;
 import com.demo.service.UserService;
@@ -85,9 +86,12 @@ public class UserController {
 
     /** 接口测试 **/
     @GetMapping("test")
-    public JsonResult<String> test() {
+    @PassToken
+    @Lock(prefix = "createOrder:")
+    public JsonResult<String> test(String userId,String goodsId) {
         return JsonResult.okMsg("Hello World " + port);
     }
+
     /** openfeign调用测试 **/
     @GetMapping("feign/test")
     @PassToken
