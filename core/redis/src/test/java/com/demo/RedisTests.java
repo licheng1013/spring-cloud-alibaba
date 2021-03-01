@@ -1,12 +1,9 @@
 package com.demo;
 
 import com.demo.util.RedisString;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.HashMap;
 
 /**
  * @author root
@@ -27,6 +24,5 @@ public class RedisTests {
     }
 
     public static void main(String[] args) {
-
     }
 }
