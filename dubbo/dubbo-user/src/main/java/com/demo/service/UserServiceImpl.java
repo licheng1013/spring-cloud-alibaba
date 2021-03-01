@@ -1,7 +1,6 @@
 package com.demo.service;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.demo.annotation.Lock;
 import com.demo.dao.UserDao;
 import com.demo.entity.User;
 import com.demo.util.ResultHolder;
@@ -31,7 +30,6 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     }
 
     @Override
-    @Lock(prefix = "updateMoney:",msg = "请稍后")
     public boolean updateMoney(BusinessActionContext actionContext,Serializable userId, Integer money) {
         String xid = actionContext.getXid();
         log.info("用户服务 xid: {}",xid );
@@ -44,8 +42,11 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         }
         user.setMoney(user.getMoney()-money); //冻结金额并添加到冻结金额里面
         user.setFreeze(user.getFreeze()+money);
-        ResultHolder.set(xid, "1");
-        return user.updateById();
+        boolean b = user.updateById();
+        if(b){
+            ResultHolder.set(xid, "1");
+        }
+        return b;
     }
 
     @Override
@@ -60,10 +61,13 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
             log.info("用户服务空提交");
             return true;
         }
-        User user = getById(userId.toString());
+        User user = getById(userId.toString()); //如果用户在其他地方查询了金额,会出现线程问题
         user.setFreeze(user.getFreeze()-(Integer)money); //把冻结金额扣除掉
-        ResultHolder.remove(xid); //删除xid
-        return  user.updateById();
+        boolean b = user.updateById();
+        if(b){
+            ResultHolder.remove(xid); //删除xid
+        }
+        return b;
     }
 
     @Override
@@ -81,8 +85,11 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         User user = getById(userId.toString());
         user.setFreeze(user.getFreeze()-(Integer)money); //把冻结金额扣除掉,并补回金额
         user.setMoney(user.getMoney()+(Integer)money);
-        ResultHolder.remove(xid); //删除xid
-        return user.updateById();
+        boolean b = user.updateById();
+        if(b){
+            ResultHolder.remove(xid); //删除xid
+        }
+        return b;
     }
 
 

@@ -1,7 +1,6 @@
 package com.demo.service;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.demo.annotation.Lock;
 import com.demo.dao.GoodsDao;
 import com.demo.entity.Goods;
 import com.demo.util.ResultHolder;
@@ -30,7 +29,6 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
      * @description 锁定资源, 检查资源
      */
     @Override
-    @Lock(prefix = "updateTotal:",msg = "抢购人数太多")
     public boolean updateTotal(BusinessActionContext actionContext, Serializable goodsId, Integer num) {
         String xid = actionContext.getXid();
         System.out.println("try Goods xid:" + xid);
@@ -44,8 +42,11 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
 
         goods.setTotal(goods.getTotal() - num);//扣除并冻结起来
         goods.setFreeze(goods.getFreeze() + num);
-        ResultHolder.set(xid, "goods");
-        return goods.updateById();
+        boolean b = goods.updateById();
+        if (b) { //扣减成功才设置xid
+            ResultHolder.set(xid, "goods");
+        }
+        return b;
     }
 
     /**
@@ -69,8 +70,11 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
         //业务处理
         Goods goods = getById(goodsId.toString());
         goods.setFreeze(goods.getFreeze() - (Integer) num);
-        ResultHolder.remove(xid); //删除xid
-        return goods.updateById();
+        boolean b = goods.updateById();
+        if (b) {
+            ResultHolder.remove(xid); //删除xid
+        }
+        return b;
     }
 
     /**
@@ -96,8 +100,11 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
         goods.setFreeze(goods.getFreeze() - (Integer) num);
         goods.setTotal(goods.getTotal() + (Integer) num);
 
-        ResultHolder.remove(xid); //删除xid
-        return goods.updateById();
+        boolean b = goods.updateById();
+        if (b) {
+            ResultHolder.remove(xid); //删除xid
+        }
+        return b;
     }
 
     @Override
