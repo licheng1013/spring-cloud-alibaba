@@ -90,6 +90,7 @@ public class UserController {
     @PassToken
     @Lock(prefix = "createOrder:",exception = ServiceException.class)
     public JsonResult<String> test(String userId,String goodsId) {
+        int i = 1/0;
         return JsonResult.okMsg("Hello World " + port);
     }
 
