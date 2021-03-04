@@ -89,4 +89,8 @@ public class RedisString {
         remove(LockAop.get()); //线程解锁
         LockAop.remove();
     }
+
+    public Long increment(String k,Integer num){
+        return stringRedisTemplate.opsForValue().increment(k, num);
+    }
 }

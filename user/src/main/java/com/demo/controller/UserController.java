@@ -142,23 +142,15 @@ public class UserController {
 
     @PassToken
     @GetMapping("redis")
-    public JsonResult<Integer> redis(){
+    public JsonResult<Long> redis(){
         String k = "goodsId:1";
         String goods = redisString.get(k);
-        if (StrUtil.isBlank(goods)) {
-            redisString.set(k, "100");
+        int i = Integer.parseInt(goods);
+        if (i < 1) {
+            throw new ServiceException("抢购失败");
         }
-        boolean b = redisString.lock("redis", 1000);
-        if (!b) {
-            throw new ServiceException("以存在");
-        }
-
-        int num = Integer.parseInt(redisString.get(k)); //未加锁情况下
-        num -= 1;
-        redisString.set(k, Integer.toString(num));
-
-        redisString.removeLock();
-        return JsonResult.okData(num);
+        Long increment = redisString.increment(k, -1);
+        return JsonResult.okData(increment);
     }
 
 }
