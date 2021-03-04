@@ -148,11 +148,16 @@ public class UserController {
         if (StrUtil.isBlank(goods)) {
             redisString.set(k, "100");
         }
-        redisString.lock("redis",1000 );
+        boolean b = redisString.lock("redis", 1000);
+        if (!b) {
+            throw new ServiceException("以存在");
+        }
 
         int num = Integer.parseInt(redisString.get(k)); //未加锁情况下
         num -= 1;
         redisString.set(k, Integer.toString(num));
+
+        redisString.removeLock();
         return JsonResult.okData(num);
     }
 

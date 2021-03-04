@@ -31,6 +31,7 @@ public class LockAop {
     public static String get(){
         return lock.get();
     }
+    public static void remove() { lock.remove(); }
 
     @Around(value = "@annotation(lock)")
     public Object around(ProceedingJoinPoint joinPoint, Lock lock) throws Throwable {

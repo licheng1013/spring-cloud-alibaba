@@ -68,12 +68,13 @@ public class RedisString {
     /**
      * @param k 键
      * @param time 锁超时时间
-     * @return true表示加锁成功,false加锁失败,单位(毫秒),1000毫秒 = 1秒
+     * @return true上锁成功,false以被上锁,单位(毫秒),1000毫秒 = 1秒
      */
     public boolean lock(String k,long time){
         String s = get(k);
         if (s == null) {
             set(k, k, time,TimeUnit.MILLISECONDS);
+            LockAop.set(k);//线程绑定key
             return true;
         }
         return false;
@@ -85,6 +86,7 @@ public class RedisString {
      * @description 删除当前线程的锁
      */
     public void removeLock(){
-        remove(LockAop.get());
+        remove(LockAop.get()); //线程解锁
+        LockAop.remove();
     }
 }
