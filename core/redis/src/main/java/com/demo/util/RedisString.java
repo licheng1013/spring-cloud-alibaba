@@ -68,15 +68,15 @@ public class RedisString {
     /**
      * @param k 键
      * @param time 锁超时时间
-     * @return 返回值 != null表示锁在使用
+     * @return true表示加锁成功,false加锁失败,单位(毫秒),1000毫秒 = 1秒
      */
-    public String lock(String k,long time){
+    public boolean lock(String k,long time){
         String s = get(k);
         if (s == null) {
             set(k, k, time,TimeUnit.MILLISECONDS);
-            return null;
+            return true;
         }
-        return s;
+        return false;
     }
 
     /**

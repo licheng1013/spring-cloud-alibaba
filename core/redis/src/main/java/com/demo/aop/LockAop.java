@@ -48,8 +48,8 @@ public class LockAop {
         log.info("锁key: {}", key);
         Map<String, Object> map = AopUtil.getMap(joinPoint.getArgs(), method.getParameters());
         log.info("参数map: {}",map);
-        String v = redisString.lock(key.toString(), lk.timeout());
-        if (v != null) { //锁被使用,抛出异常
+        boolean b = redisString.lock(key.toString(), lk.timeout());
+        if (!b) { //锁被使用,抛出异常
             Constructor<? extends Throwable> constructor = lk.exception().getConstructor(String.class);
             throw constructor.newInstance(lk.msg());
         }

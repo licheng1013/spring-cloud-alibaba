@@ -17,6 +17,7 @@ import com.demo.exception.ServiceException;
 import com.demo.feign.OrderFeign;
 import com.demo.service.UserService;
 import com.demo.util.JsonResult;
+import com.demo.util.RedisString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -133,6 +134,26 @@ public class UserController {
     public void qrCode(HttpServletResponse response) throws IOException {
         QrCodeUtil.generate("Hello World", 300, 300, ImgUtil.IMAGE_TYPE_PNG,response.getOutputStream());
         response.getOutputStream().close();;
+    }
+
+
+    @Autowired
+    private RedisString redisString;
+
+    @PassToken
+    @GetMapping("redis")
+    public JsonResult<Integer> redis(){
+        String k = "goodsId:1";
+        String goods = redisString.get(k);
+        if (StrUtil.isBlank(goods)) {
+            redisString.set(k, "100");
+        }
+        redisString.lock("redis",1000 );
+
+        int num = Integer.parseInt(redisString.get(k)); //未加锁情况下
+        num -= 1;
+        redisString.set(k, Integer.toString(num));
+        return JsonResult.okData(num);
     }
 
 }
