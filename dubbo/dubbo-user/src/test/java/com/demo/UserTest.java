@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.HashMap;
-
 /**
  * @author root
  * @description TODO
@@ -28,11 +26,4 @@ public class UserTest {
         System.out.println(user2.updateById());
     }
 
-    public static void main(String[] args) {
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("1", "ok");
-        Object o = map.get("1");
-        map.remove("1");
-        System.out.println(o);
-    }
 }
