@@ -29,5 +29,22 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_STRING" value="-parameters" />
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="authentication" options="" />
+      <module name="common" options="" />
+      <module name="dubbo-goods" options="" />
+      <module name="dubbo-order" options="" />
+      <module name="dubbo-user" options="" />
+      <module name="gateway" options="" />
+      <module name="order" options="" />
+      <module name="pull" options="" />
+      <module name="push" options="" />
+      <module name="redis" options="" />
+      <module name="seata-common" options="" />
+      <module name="seata-goods" options="" />
+      <module name="seata-order" options="" />
+      <module name="seata-user" options="" />
+      <module name="user" options="" />
+    </option>
   </component>
 </project>

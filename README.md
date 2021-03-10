@@ -52,9 +52,17 @@
 ### 使用常见问题
 - 使用openfeign的接口的启动类上需要加上 @EnableFeignClients 注解
 
+```
+<!--不需要运行但是要被其他项目所依赖的包,需要改成jar包-->
+<packaging>jar</packaging>
+```
+
+
+
 ## 项目说明
 - common(公共项目)
 - gateway(api网关)
 - order(示例订单模块)
 - user(示例用户模块)
 - redis(如果需要使用redis,则在其他模块依赖此模块进去,配置yml即可)
+

@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>dubbo-common</artifactId>
-    <packaging>pom</packaging>
+    <!--不需要运行但是要被其他项目所依赖的包,需要改成jar包-->
+    <packaging>jar</packaging>
 
 </project>
