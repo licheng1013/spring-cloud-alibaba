@@ -12,6 +12,7 @@
         <module name="push" />
         <module name="redis" />
         <module name="dubbo-goods" />
+        <module name="dubbo-common" />
         <module name="pull" />
         <module name="tests" />
         <module name="common" />
@@ -32,6 +33,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="authentication" options="" />
       <module name="common" options="" />
+      <module name="dubbo-common" options="" />
       <module name="dubbo-goods" options="" />
       <module name="dubbo-order" options="" />
       <module name="dubbo-user" options="" />
