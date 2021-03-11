@@ -12,7 +12,7 @@ spring:
     gateway:
       globalcors:
         cors-configurations:
-          ALL:
+          '[/**]':
             allowedOrigins: "*"
             allowedMethods: "*"
             allowedHeaders: "*"
