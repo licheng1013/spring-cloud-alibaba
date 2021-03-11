@@ -8,7 +8,7 @@ spring:
     nacos:
       discovery:
         server-addr: 192.168.1.99:8848 #本次单机
-        enabled: false
+        enabled: true
     gateway:
       routes:
         - id: order-route
