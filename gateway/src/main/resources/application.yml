@@ -16,7 +16,6 @@ spring:
             allowedOrigins: "*"
             allowedMethods: "*"
             allowedHeaders: "*"
-        add-to-simple-url-handler-mapping: true
       routes:
         - id: order-route
           uri: lb://alibaba-order
