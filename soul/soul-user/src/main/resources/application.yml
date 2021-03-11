@@ -1,0 +1,14 @@
+server:
+  port: 8200
+
+soul:
+  client:
+    registerType: http #http #zookeeper #etcd
+    serverLists: http://192.168.1.99:9095 #http://localhost:9095 #localhost:2181 #http://localhost:2379
+    props:
+      contextPath: /user
+spring:
+  application:
+    name: soul-user
+soul-user:
+  ribbon.NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
