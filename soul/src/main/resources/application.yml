@@ -1,0 +1,21 @@
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.1.99:8848 #本次单机
+  application:
+    name: soul
+
+management:
+  health:
+    defaults:
+      enabled: false
+soul :
+  sync:
+    websocket :
+      urls: ws://192.168.1.99:9095/websocket  #设置成你的soul-admin地址
+server:
+  port: 9100

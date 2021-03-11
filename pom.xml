@@ -16,6 +16,7 @@
         <module>seata</module>
         <module>core</module>
         <module>dubbo</module>
+        <module>soul</module>
     </modules>
     <packaging>pom</packaging>
     <dependencyManagement>

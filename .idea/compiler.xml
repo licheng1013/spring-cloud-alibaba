@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="dubbo-order" />
         <module name="seata-user" />
+        <module name="soul" />
         <module name="push" />
         <module name="redis" />
         <module name="dubbo-goods" />
@@ -46,6 +47,7 @@
       <module name="seata-goods" options="" />
       <module name="seata-order" options="" />
       <module name="seata-user" options="" />
+      <module name="soul" options="" />
       <module name="user" options="" />
     </option>
   </component>
