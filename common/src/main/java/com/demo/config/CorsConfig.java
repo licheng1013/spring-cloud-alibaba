@@ -25,6 +25,7 @@ public class CorsConfig {
         corsConfiguration.setAllowCredentials(true);
         // 4允许任何方法（post、get等）
         corsConfiguration.addAllowedMethod("*");
+        // 5设置预检请求的时间
         corsConfiguration.setMaxAge(Duration.ofDays(1));
         return corsConfiguration;  
     }  
