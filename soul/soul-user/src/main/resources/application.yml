@@ -2,13 +2,13 @@ server:
   port: 8200
 
 soul:
-  client:
-    registerType: http #http #zookeeper #etcd
-    serverLists: http://192.168.1.99:9095 #http://localhost:9095 #localhost:2181 #http://localhost:2379
-    props:
-      contextPath: /user
+  springcloud:
+    admin-url: http://192.168.1.99:9095
+    context-path: /user
 spring:
   application:
     name: soul-user
-soul-user:
-  ribbon.NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.1.99:8848 #本次单机
