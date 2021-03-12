@@ -4,7 +4,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;  
 import org.springframework.web.cors.CorsConfiguration;  
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;  
-import org.springframework.web.filter.CorsFilter;  
+import org.springframework.web.filter.CorsFilter;
+
+import java.time.Duration;
 
 /**
  * @author lc
@@ -23,6 +25,7 @@ public class CorsConfig {
         corsConfiguration.setAllowCredentials(true);
         // 4允许任何方法（post、get等）
         corsConfiguration.addAllowedMethod("*");
+        corsConfiguration.setMaxAge(Duration.ofDays(1));
         return corsConfiguration;  
     }  
   
