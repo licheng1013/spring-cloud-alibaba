@@ -21,10 +21,10 @@ spring:
           uri: lb://alibaba-order
           predicates:
             - Path=/order/**
-        - id: user-route
-          uri: lb://alibaba-user
-          predicates:
-            - Path=/user/**
+#        - id: user-route
+#          uri: lb://alibaba-user
+#          predicates:
+#            - Path=/user/**
 management:
   endpoints:
     web:
