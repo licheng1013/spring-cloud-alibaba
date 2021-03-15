@@ -54,6 +54,17 @@ public class GatewayPropertiesConfig extends GatewayProperties {
         }
         String[] split = list.split(SPLIT_0);
         List<Map<String, Object>> maps = Parsing(split);
+        routeDefinitions = build(maps);
+        GatewayPropertiesConfig.list = routeDefinitions;
+        System.out.println(GatewayPropertiesConfig.list);
+    }
+
+    /**
+     * @param maps 分割好的
+     * @return 构建出来
+     */
+    public List<RouteDefinition> build(List<Map<String, Object>> maps){
+        List<RouteDefinition> routeDefinitions = new ArrayList<>();
         maps.forEach(i -> {
             RouteDefinition definition = new RouteDefinition();
             definition.setId(i.get(ID).toString());
@@ -75,9 +86,7 @@ public class GatewayPropertiesConfig extends GatewayProperties {
             definition.setPredicates(p);
             routeDefinitions.add(definition);
         });
-
-        GatewayPropertiesConfig.list = routeDefinitions;
-        System.out.println(GatewayPropertiesConfig.list);
+        return routeDefinitions;
     }
 
     public List<Map<String, Object>> Parsing(String[] list) {
