@@ -45,10 +45,12 @@ public class UserController {
     @PostMapping("login")
     @PassToken
     public JsonResult<String> login(String username,String password){
+        log.info(username );
+        log.info(password );
         if ("admin".equals(username) && "admin".equals(password)) {
             return JsonResult.okData(TokenUtil.getToken("1"));
         }
-        return JsonResult.fail("账号或密码错误");
+        throw new RuntimeException("账号或密码错误");
     }
 
     @PostMapping("create")
