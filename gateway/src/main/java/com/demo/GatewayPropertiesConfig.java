@@ -8,7 +8,6 @@ import org.springframework.cloud.gateway.handler.predicate.PredicateDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
@@ -30,8 +29,7 @@ import java.util.Map;
 public class GatewayPropertiesConfig extends GatewayProperties {
     private static  List<RouteDefinition> list = new ArrayList<>();
 
-    @Value("${user.msg}")
-    private String msg;
+
     public static final String ID = "id"; // id
     public static final String URI = "uri"; // uri
     public static final String predicates = "path"; // 路径
@@ -41,8 +39,11 @@ public class GatewayPropertiesConfig extends GatewayProperties {
     public static final String SPLIT_3 = "-";
 
 
+    /**
+     * @param list 动态网关配置
+     */
     @Value("${user.list}")
-    public void setTest(String list) {
+    public void setList(String list) {
         List<RouteDefinition> routeDefinitions = new ArrayList<>();
         if (StringUtils.isBlank(list)) {
             GatewayPropertiesConfig.list = routeDefinitions;
@@ -103,8 +104,4 @@ public class GatewayPropertiesConfig extends GatewayProperties {
         return list;
     }
 
-    @GetMapping("test")
-    public Object routers() {
-        return msg;
-    }
 }
