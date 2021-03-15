@@ -1,5 +1,6 @@
 package com.demo;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.gateway.config.GatewayProperties;
@@ -34,16 +35,21 @@ public class GatewayPropertiesConfig extends GatewayProperties {
     public static final String ID = "id"; // id
     public static final String URI = "uri"; // uri
     public static final String predicates = "path"; // 路径
+    public static final String SPLIT_0 = ",";
     public static final String SPLIT_1 = "@";
     public static final String SPLIT_2 = ";";
     public static final String SPLIT_3 = "-";
 
 
     @Value("${user.list}")
-    public void setTest(String[] list) {
+    public void setTest(String list) {
         List<RouteDefinition> routeDefinitions = new ArrayList<>();
-
-        List<Map<String, Object>> maps = Parsing(list);
+        if (StringUtils.isBlank(list)) {
+            GatewayPropertiesConfig.list = routeDefinitions;
+            return;
+        }
+        String[] split = list.split(SPLIT_0);
+        List<Map<String, Object>> maps = Parsing(split);
         maps.forEach(i -> {
             RouteDefinition definition = new RouteDefinition();
             definition.setId(i.get(ID).toString());
