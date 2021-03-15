@@ -16,15 +16,15 @@ spring:
             allowedOrigins: "*"
             allowedMethods: "*"
             allowedHeaders: "*"
-      routes:
-        - id: order-route
-          uri: lb://alibaba-order
-          predicates:
-            - Path=/order/**
-        - id: user-route
-          uri: lb://alibaba-user
-          predicates:
-            - Path=/user/**
+#      routes:
+#        - id: order-route
+#          uri: lb://alibaba-order
+#          predicates:
+#            - Path=/order/**
+#        - id: user-route
+#          uri: lb://alibaba-user
+#          predicates:
+#            - Path=/user/**
 management:
   endpoints:
     web:
