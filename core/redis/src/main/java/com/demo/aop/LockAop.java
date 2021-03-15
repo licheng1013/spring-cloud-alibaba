@@ -61,7 +61,7 @@ public class LockAop {
             throw new RuntimeException(e);
         } finally {//不管业务结果,都必须释放锁
             if (!lk.isLock()){
-                redisString.remove(key.toString());//释放锁
+                redisString.removeLock();
             }
         }
         return o;
