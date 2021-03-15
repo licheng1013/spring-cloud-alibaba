@@ -44,7 +44,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         user.setFreeze(user.getFreeze()+money);
         boolean b = user.updateById();
         if(b){
-            ResultHolder.set(xid, "1");
+            ResultHolder.set(xid, "1"); // 生产由redis实现
         }
         return b;
     }

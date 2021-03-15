@@ -44,7 +44,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
         goods.setFreeze(goods.getFreeze() + num);
         boolean b = goods.updateById();
         if (b) { //扣减成功才设置xid
-            ResultHolder.set(xid, "goods");
+            ResultHolder.set(xid, "goods"); // 生产由redis实现
         }
         return b;
     }
