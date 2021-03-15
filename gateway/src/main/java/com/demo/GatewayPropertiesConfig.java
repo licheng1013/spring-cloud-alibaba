@@ -34,6 +34,10 @@ public class GatewayPropertiesConfig extends GatewayProperties {
     public static final String ID = "id"; // id
     public static final String URI = "uri"; // uri
     public static final String predicates = "path"; // 路径
+    public static final String SPLIT_1 = "@";
+    public static final String SPLIT_2 = ";";
+    public static final String SPLIT_3 = "-";
+
 
     @Value("${user.list}")
     public void setTest(String[] list) {
@@ -69,13 +73,13 @@ public class GatewayPropertiesConfig extends GatewayProperties {
     public List<Map<String, Object>> Parsing(String[] list) {
         List<Map<String, Object>> maps = new ArrayList<>();
         for (String s : list) {
-            String[] split = s.split(";"); //分隔符
+            String[] split = s.split(SPLIT_1); //分隔符
             Map<String, Object> map = new HashMap<>();
             for (String v : split) {
-                String[] t = v.split(":"); //分隔符
+                String[] t = v.split(SPLIT_2); //分隔符
                 Object l = t[1];
                 if ("path".equals(t[0])) {
-                    String[] j = t[1].split("-");
+                    String[] j = t[1].split(SPLIT_3);
                     if (j.length != 0) { //至少有一个
                         l = j;
                     }
