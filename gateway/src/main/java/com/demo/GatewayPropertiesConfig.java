@@ -1,13 +1,9 @@
 package com.demo;
 
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.gateway.config.GatewayProperties;
 import org.springframework.cloud.gateway.handler.predicate.PredicateDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinition;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -19,10 +15,10 @@ import java.util.List;
  * @description 重写路由变为动态配置
  * @date 2021/3/13 17:45
  */
-@Configuration
-@Primary
-@RestController
-@RefreshScope
+//@Configuration
+//@Primary
+//@RestController
+//@RefreshScope
 public class GatewayPropertiesConfig extends  GatewayProperties {
 
 //    @Value("${routes}")
