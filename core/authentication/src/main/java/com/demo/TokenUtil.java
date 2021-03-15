@@ -26,8 +26,10 @@ public class TokenUtil  {
             Algorithm algorithm = Algorithm.HMAC256(secretKey);
             return JWT.create().withKeyId(userId.toString())
                     .withIssuer("auth0")
+//                    .withExpiresAt(DateUtil.endOfDay(new Date())) // 过期时间,这里表示是未来的时间,否则无限报错
                     .sign(algorithm);
-        } catch (Exception exception){
+        } catch (Exception e){
+            e.printStackTrace();
             throw new RuntimeException("token生成失败");
         }
     }
@@ -43,8 +45,10 @@ public class TokenUtil  {
                     .withIssuer("auth0")
                     .build(); //Reusable verifier instance
             DecodedJWT jwt = verifier.verify(token);
+           // jwt.getExpiresAt(); // 过期时间
             return jwt.getKeyId();
-        } catch (Exception exception){
+        } catch (Exception e){
+            e.printStackTrace();
             throw new RuntimeException("token解密失败");
         }
     }
