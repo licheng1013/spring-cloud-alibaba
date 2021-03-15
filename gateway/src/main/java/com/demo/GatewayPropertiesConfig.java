@@ -42,6 +42,11 @@ public class GatewayPropertiesConfig extends  GatewayProperties {
         list.add(definition);
         return list;
     }
+    @GetMapping("get")
+    public Object get(){
+        return list;
+    }
+
     @GetMapping("del")
     public Object delete(){
         list.clear();
