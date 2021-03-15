@@ -10,12 +10,12 @@ spring:
         server-addr: 192.168.1.99:8848 #本次单机
         enabled: true
     gateway:
-#      globalcors:
-#        cors-configurations:
-#          '[/**]':
-#            allowedOrigins: "*"
-#            allowedMethods: "*"
-#            allowedHeaders: "*"
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
       routes:
         - id: order-route
           uri: lb://alibaba-order
