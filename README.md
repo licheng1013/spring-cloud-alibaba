@@ -20,6 +20,7 @@
 ### gateway
 - 网关
 - https://spring.io/projects/spring-cloud-gateway
+- nacos+gateway 动态网关实现
 ### openfeign
 - 服务调用
 - https://spring.io/projects/spring-cloud-openfeign
