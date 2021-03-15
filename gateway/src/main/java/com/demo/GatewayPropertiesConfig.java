@@ -1,6 +1,5 @@
 package com.demo;
 
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.gateway.config.GatewayProperties;
 import org.springframework.cloud.gateway.handler.predicate.PredicateDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinition;
@@ -21,7 +20,7 @@ import java.util.List;
  */
 @Configuration
 @Primary
-1@RestController
+@RestController
 public class GatewayPropertiesConfig extends  GatewayProperties {
     private  static final ArrayList<RouteDefinition> list = new ArrayList<>();
     @Override
