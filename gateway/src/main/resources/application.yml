@@ -16,7 +16,7 @@ spring:
             allowedOrigins: "*"
             allowedMethods: "*"
             allowedHeaders: "*"
-#      routes:
+#      routes: # nacos动态化
 #        - id: order-route
 #          uri: lb://alibaba-order
 #          predicates:
