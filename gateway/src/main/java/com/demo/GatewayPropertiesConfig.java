@@ -1,5 +1,6 @@
 package com.demo;
 
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.gateway.config.GatewayProperties;
 import org.springframework.cloud.gateway.handler.predicate.PredicateDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinition;
@@ -21,7 +22,12 @@ import java.util.List;
 @Configuration
 @Primary
 @RestController
+@RefreshScope
 public class GatewayPropertiesConfig extends  GatewayProperties {
+
+//    @Value("${routes}")
+    public String map;
+
     private  static final ArrayList<RouteDefinition> list = new ArrayList<>();
     @Override
     public List<RouteDefinition> getRoutes() {
@@ -51,5 +57,10 @@ public class GatewayPropertiesConfig extends  GatewayProperties {
     public Object delete(){
         list.clear();
         return list;
+    }
+
+    @GetMapping("routes")
+    public Object routers(){
+        return map;
     }
 }
