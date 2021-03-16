@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.buffer.DataBufferFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
@@ -18,7 +19,7 @@ import reactor.core.publisher.Mono;
 public class ErrorWebExceptionHandlerConfig implements ErrorWebExceptionHandler {
     /**
      * @param exchange 上下文
-     * @param ex 异常信息
+     * @param ex       异常信息
      * @return 处理结果
      */
     @Override
@@ -28,7 +29,14 @@ public class ErrorWebExceptionHandlerConfig implements ErrorWebExceptionHandler 
         return response.writeWith(Mono.fromSupplier(() -> {
             DataBufferFactory dataBufferFactory = response.bufferFactory();
             try {
-                byte[] value = new ObjectMapper().writeValueAsBytes(JsonResult.fail(ex.getMessage()));
+                ObjectMapper mapper = new ObjectMapper();
+                String msg = null;
+                if (response.getStatusCode().equals(HttpStatus.NOT_FOUND)) {//404处理
+                    msg = "页面正在准备中";
+                }else {
+                    msg = ex.getMessage();
+                }
+                byte[] value = mapper.writeValueAsBytes(JsonResult.fail(msg));
                 return dataBufferFactory.wrap(value);
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
