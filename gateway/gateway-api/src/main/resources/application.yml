@@ -32,4 +32,4 @@ management:
         include: "*"
 logging:
   level:
-    com.alibaba.nacos.client.config.impl.ClientWorker: WARN
+    com.alibaba.nacos.client.config.impl.ClientWorker: WARN #禁用nacos的刷屏
