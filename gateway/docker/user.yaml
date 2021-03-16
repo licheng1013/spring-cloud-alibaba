@@ -1,0 +1,14 @@
+version: "3"
+services:
+  user1:
+    image: user:1
+    ports:
+      - "8200:9000"
+#  api2:
+#    image: user:1
+#    ports:
+#      - "8201:9000"
+#  api3:
+#    image: user:1
+#    ports:
+#      - "8202:9000"

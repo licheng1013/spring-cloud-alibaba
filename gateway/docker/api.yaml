@@ -1,0 +1,14 @@
+version: "3"
+services:
+  api1:
+    image: registry.cn-guangzhou.aliyuncs.com/my-docker1/docker:1
+    ports:
+      - "9000:9000"
+  api2:
+    image: registry.cn-guangzhou.aliyuncs.com/my-docker1/docker:1
+    ports:
+      - "9001:9000"
+  api3:
+    image: registry.cn-guangzhou.aliyuncs.com/my-docker1/docker:1
+    ports:
+      - "9002:9000"
