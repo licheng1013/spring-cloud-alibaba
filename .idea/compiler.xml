@@ -9,7 +9,9 @@
         <outputRelativeToContentRoot value="true" />
         <module name="dubbo-order" />
         <module name="seata-user" />
+        <module name="gateway-user" />
         <module name="soul-api" />
+        <module name="gateway-api" />
         <module name="push" />
         <module name="redis" />
         <module name="dubbo-goods" />
@@ -18,17 +20,19 @@
         <module name="pull" />
         <module name="tests" />
         <module name="common" />
+        <module name="gateway-order" />
         <module name="seata-goods" />
         <module name="seata-order" />
         <module name="seata-common" />
         <module name="seata-test" />
-        <module name="user" />
         <module name="dubbo-user" />
-        <module name="gateway" />
-        <module name="order" />
         <module name="authentication" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="order" target="1.8" />
+      <module name="user" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_STRING" value="-parameters" />
@@ -40,6 +44,9 @@
       <module name="dubbo-order" options="" />
       <module name="dubbo-user" options="" />
       <module name="gateway" options="" />
+      <module name="gateway-api" options="" />
+      <module name="gateway-order" options="" />
+      <module name="gateway-user" options="" />
       <module name="order" options="" />
       <module name="pull" options="" />
       <module name="push" options="" />

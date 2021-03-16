@@ -8,7 +8,6 @@
     <artifactId>spring-cloud-alibaba</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>user</module>
         <module>gateway</module>
         <module>order</module>
         <module>common</module>

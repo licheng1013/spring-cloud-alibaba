@@ -10,28 +10,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>gateway</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>gateway-api</module>
+        <module>gateway-user</module>
+        <module>gateway-order</module>
+    </modules>
 
-    <dependencies>
-        <!--gateway-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway</artifactId>
-        </dependency>
-        <!--alibaba-nacos-->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
-        <!-- 监控-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
 
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-        </dependency>
-    </dependencies>
 
 </project>
