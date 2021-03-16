@@ -31,7 +31,7 @@ public class ErrorWebExceptionHandlerConfig implements ErrorWebExceptionHandler 
             try {
                 ObjectMapper mapper = new ObjectMapper();
                 String msg = null;
-                if (response.getStatusCode().equals(HttpStatus.NOT_FOUND)) {//404处理
+                if (HttpStatus.NOT_FOUND.equals(response.getStatusCode())) {//404处理
                     msg = "页面正在准备中";
                 }else {
                     msg = ex.getMessage();
