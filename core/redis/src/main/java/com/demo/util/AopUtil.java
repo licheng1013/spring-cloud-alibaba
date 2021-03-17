@@ -41,4 +41,11 @@ public class AopUtil {
         }
         return (T)annotation;
     }
+
+    public static Class<?> getReturnType(ProceedingJoinPoint joinPoint){
+        Signature signature = joinPoint.getSignature(); //方法签名
+        MethodSignature methodSignature = (MethodSignature) signature;//强转
+        Method method = methodSignature.getMethod(); //获取的方法对象
+        return method.getReturnType();
+    }
 }

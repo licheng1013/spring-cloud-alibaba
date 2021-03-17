@@ -37,19 +37,22 @@ public class CacheAop {
         HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
         Map<String, String> map = ServletUtil.getParamMap(request);
         String requestURI = request.getRequestURI();
-        StringBuilder sb = new StringBuilder(requestURI);
+        StringBuilder sb = new StringBuilder(requestURI).append(":");
         map.forEach((k,v) ->{
             sb.append(k).append(":").append(v);
         });
         String key = sb.toString();
         String v = redisString.get(key);
+        log.info("key: {}",key);
         if (StrUtil.isBlank(v)) { //为空则调用业务方法
+            log.info("进入缓存: key {},",key);
             Cache invoke = AopUtil.invoke(joinPoint, Cache.class); //这里获取的对象应必须存在
             long random = RandomUtil.randomLong(invoke.minTime(), invoke.maxTime());
             Object proceed = joinPoint.proceed();
             redisString.set(key, JSONUtil.toJsonStr(proceed),random);
             return proceed;
         }
-        return v;
+        Class<?> returnType = AopUtil.getReturnType(joinPoint);
+        return JSONUtil.toBean(v, returnType);
     }
 }

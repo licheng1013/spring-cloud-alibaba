@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.demo.PassToken;
 import com.demo.TokenUtil;
+import com.demo.annotation.Cache;
 import com.demo.annotation.Lock;
 import com.demo.entity.User;
 import com.demo.exception.ServiceException;
@@ -66,6 +67,7 @@ public class UserController {
 
     @GetMapping("list")
     @PassToken
+    @Cache
     public JsonResult<IPage<User>> list(Page<User> page,User user)  {
         log.info("请求收到: {}","list");
         return JsonResult.okData(user.selectPage(page, new QueryWrapper<>(user).orderByDesc("create_time")));
