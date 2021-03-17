@@ -43,11 +43,12 @@ public class CacheAop {
         });
         String key = sb.toString();
         String v = redisString.get(key);
-        if (StrUtil.isBlank(v)) { //
+        if (StrUtil.isBlank(v)) { //为空则调用业务方法
             Cache invoke = AopUtil.invoke(joinPoint, Cache.class); //这里获取的对象应必须存在
             long random = RandomUtil.randomLong(invoke.minTime(), invoke.maxTime());
             Object proceed = joinPoint.proceed();
             redisString.set(key, JSONUtil.toJsonStr(proceed),random);
+            return proceed;
         }
         return v;
     }
