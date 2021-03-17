@@ -71,6 +71,13 @@ public class UserController {
         return JsonResult.okData(user.selectPage(page, new QueryWrapper<>(user).orderByDesc("create_time")));
     }
 
+    @GetMapping("port")
+    @PassToken
+    public JsonResult<String> port(){
+        return JsonResult.okData(port);
+    }
+
+
     @PostMapping("update")
     public JsonResult<String> update(User user){
         log.info("请求收到: {}","update");
