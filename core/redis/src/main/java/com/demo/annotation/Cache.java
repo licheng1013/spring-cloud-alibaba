@@ -12,12 +12,12 @@ import java.lang.annotation.*;
 @Target(ElementType.METHOD)
 public @interface Cache {
     /**
-     * @return 默认起始随机时间
+     * @return 默认起始随机时间,单位(秒)
      */
-    long statTime() default 0;
+    long minTime() default 30;
 
     /**
-     * @return 默认结束随机时间
+     * @return 默认结束随机时间,单位(秒),时间必须大于起始时间,否则以起始时间为随机数即1-30秒
      */
-    long endTime() default 0;
+    long maxTime() default 60;
 }
