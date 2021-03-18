@@ -7,7 +7,6 @@ import cn.hutool.core.img.ImgUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.qrcode.QrCodeUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.demo.PassToken;
 import com.demo.TokenUtil;
@@ -19,6 +18,7 @@ import com.demo.feign.OrderFeign;
 import com.demo.service.UserService;
 import com.demo.util.JsonResult;
 import com.demo.util.RedisString;
+import com.demo.util.VOUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -45,9 +46,9 @@ public class UserController {
 
     @PostMapping("login")
     @PassToken
-    public JsonResult<String> login(String username,String password){
-        log.info(username );
-        log.info(password );
+    public JsonResult<String> login(String username, String password) {
+        log.info(username);
+        log.info(password);
         if ("admin".equals(username) && "admin".equals(password)) {
             return JsonResult.okData(TokenUtil.getToken("1"));
         }
@@ -56,7 +57,7 @@ public class UserController {
 
     @PostMapping("create")
     @PassToken
-    public JsonResult<String> create(User user){
+    public JsonResult<String> create(User user) {
         User tel = userService.getOne(new QueryWrapper<User>().eq("tel", user.getTel()));
         if (tel == null && StrUtil.isNotBlank(user.getTel())) {
             user.insert();
@@ -68,28 +69,28 @@ public class UserController {
     @GetMapping("list")
     @PassToken
     @Cache
-    public JsonResult<IPage<User>> list(Page<User> page,User user)  {
-        log.info("请求收到: {}","list");
-        return JsonResult.okData(user.selectPage(page, new QueryWrapper<>(user).orderByDesc("create_time")));
+    public JsonResult<HashMap<String, Object>> list(Page<User> page, User user) {
+        log.info("请求收到: {}", "list");
+        return VOUtil.VOPage(user.selectPage(page, new QueryWrapper<>(user).orderByDesc("create_time")));
     }
 
     @GetMapping("port")
     @PassToken
-    public JsonResult<String> port(){
+    public JsonResult<String> port() {
         return JsonResult.okData(port);
     }
 
 
     @PostMapping("update")
-    public JsonResult<String> update(User user){
-        log.info("请求收到: {}","update");
+    public JsonResult<String> update(User user) {
+        log.info("请求收到: {}", "update");
         user.updateById();
         return JsonResult.okMsg("更新成功");
     }
 
     @PostMapping("delete")
-    public JsonResult<String> delete(@RequestParam List<String> idList){
-        log.info("请求收到: {}","delete");
+    public JsonResult<String> delete(@RequestParam List<String> idList) {
+        log.info("请求收到: {}", "delete");
         userService.removeByIds(idList);
         return JsonResult.okMsg("删除成功");
     }
@@ -97,38 +98,48 @@ public class UserController {
     @Autowired
     private OrderFeign orderFeign;
 
-    /** 接口测试 **/
+    /**
+     * 接口测试
+     **/
     @GetMapping("test")
     @PassToken
-    @Lock(prefix = "createOrder:",exception = ServiceException.class)
-    public JsonResult<String> test(String userId,String goodsId) {
-        int i = 1/0;
+    @Lock(prefix = "createOrder:", exception = ServiceException.class)
+    public JsonResult<String> test(String userId, String goodsId) {
+        int i = 1 / 0;
         return JsonResult.okMsg("Hello World " + port);
     }
 
-    /** openfeign调用测试 **/
+    /**
+     * openfeign调用测试
+     **/
     @GetMapping("feign/test")
     @PassToken
-    public JsonResult<String> feignTest(){
-        log.info("feign调用: {}",port);
+    public JsonResult<String> feignTest() {
+        log.info("feign调用: {}", port);
         return JsonResult.okData(orderFeign.test());
     }
 
-    /** 异常测试 **/
+    /**
+     * 异常测试
+     **/
     @GetMapping("exception")
-    public JsonResult<String> exception(){
-        int i = 1/0;
+    public JsonResult<String> exception() {
+        int i = 1 / 0;
         return JsonResult.okMsg("Hello exception");
     }
 
-    /** openfeign异常调用测试 **/
+    /**
+     * openfeign异常调用测试
+     **/
     @GetMapping("feign/exception")
-    public JsonResult<String> feignException(){
+    public JsonResult<String> feignException() {
         return orderFeign.exception();
     }
 
 
-    /** 随机验证码 **/
+    /**
+     * 随机验证码
+     **/
     @GetMapping("code")
     public void code(HttpServletResponse response) throws IOException {
         ShearCaptcha captcha = CaptchaUtil.createShearCaptcha(200, 100, 4, 4);
@@ -140,11 +151,15 @@ public class UserController {
         captcha.write(response.getOutputStream());
         response.getOutputStream().close();
     }
-    /** 二维码 **/
+
+    /**
+     * 二维码
+     **/
     @GetMapping("qrCode")
     public void qrCode(HttpServletResponse response) throws IOException {
-        QrCodeUtil.generate("Hello World", 300, 300, ImgUtil.IMAGE_TYPE_PNG,response.getOutputStream());
-        response.getOutputStream().close();;
+        QrCodeUtil.generate("Hello World", 300, 300, ImgUtil.IMAGE_TYPE_PNG, response.getOutputStream());
+        response.getOutputStream().close();
+        ;
     }
 
 
@@ -153,7 +168,7 @@ public class UserController {
 
     @PassToken
     @GetMapping("redis")
-    public JsonResult<Long> redis(){
+    public JsonResult<Long> redis() {
         String k = "goodsId:1";
         String goods = redisString.get(k);
         int i = Integer.parseInt(goods);
