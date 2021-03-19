@@ -32,7 +32,7 @@ public class GoodsController implements GoodsFeign {
     @Override
     @GetMapping("find/money")
     public Integer getMoney(Integer goodsId) {
-        System.out.println(goodsId);
+//        System.out.println(goodsId);
         Goods byId = goodsService.getById(goodsId);
         if (byId == null) {
             throw new RuntimeException("商品未找到");
