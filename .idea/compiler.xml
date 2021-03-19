@@ -27,6 +27,7 @@
         <module name="seata-test" />
         <module name="dubbo-user" />
         <module name="authentication" />
+        <module name="dubbo-api" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -39,6 +40,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="authentication" options="" />
       <module name="common" options="" />
+      <module name="dubbo-api" options="" />
       <module name="dubbo-common" options="" />
       <module name="dubbo-goods" options="" />
       <module name="dubbo-order" options="" />
