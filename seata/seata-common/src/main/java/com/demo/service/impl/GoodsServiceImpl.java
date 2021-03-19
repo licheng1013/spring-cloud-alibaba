@@ -30,8 +30,8 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
 
     @Override
     public Boolean updateTotalTcc(BusinessActionContext actionContext, Serializable goodsId, Integer num) {
-//        String xid = actionContext.getXid();
-//        System.out.println("TccActionTwo prepare, xid:" + xid);
+        String xid = actionContext.getXid();
+        log.info("商品服务try: xid: {}",xid);
 
         Goods byId = getById(goodsId);
         if (byId == null)

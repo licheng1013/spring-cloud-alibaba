@@ -32,7 +32,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     @Override
     public Boolean updateMoneyTcc(BusinessActionContext actionContext, Serializable userId, Integer money) {
         String xid = actionContext.getXid();
-        log.info("xid: {}",xid );
+        log.info("用户服务try: xid: {}",xid);
 
         User byId = getById(userId);
         if (byId == null) {
