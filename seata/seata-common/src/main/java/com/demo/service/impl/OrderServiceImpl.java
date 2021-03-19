@@ -27,12 +27,12 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, Order> implements Or
     public void createOrder(Integer userId, Integer goodsId) {
         Integer money = goodsFeign.getMoney(goodsId);
         //查询商品
-        boolean b = goodsFeign.updateTotal(goodsId, 1);
+        boolean b = goodsFeign.updateTotalTcc(goodsId, 1);
         if (!b) {
             throw new RuntimeException("修改商品失败");
         }
         //查询用户
-        boolean c = userFeign.updateMoney(userId, money);
+        boolean c = userFeign.updateMoneyTcc(userId, money);
         if (!c) {
             throw new RuntimeException("修改金额失败");
         }
