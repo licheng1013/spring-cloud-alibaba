@@ -1,12 +1,14 @@
 package com.demo.service;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.demo.dao.UserDao;
 import com.demo.entity.User;
-import com.demo.util.ResultHolder;
+import com.demo.util.RedisString;
 import io.seata.rm.tcc.api.BusinessActionContext;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,9 @@ import java.io.Serializable;
 public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserService {
     @Value("${server.port}")
     private String port;
+
+    @Autowired
+    private RedisString redisString;
 
     @Override
     public String hello() {
@@ -44,7 +49,8 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         user.setFreeze(user.getFreeze()+money);
         boolean b = user.updateById();
         if(b){
-            ResultHolder.set(xid, "1"); // 生产由redis实现
+            redisString.set(xid, "1");// 生产由redis实现
+            //ResultHolder.set(xid, "1");//单机
         }
         return b;
     }
@@ -55,9 +61,9 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         Object userId = actionContext.getActionContext("userId");
         Object money = actionContext.getActionContext("money");
         log.info("用户服务 commit,用户id: {},用户扣除金额: {},xid: {}",userId,money,xid);
-        String v = ResultHolder.get(xid);
+        String v = redisString.get(xid);//ResultHolder.get(xid)
 
-        if (v == null) {
+        if (StrUtil.isBlank(v)) {
             log.info("用户服务空提交");
             return true;
         }
@@ -65,7 +71,8 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         user.setFreeze(user.getFreeze()-(Integer)money); //把冻结金额扣除掉
         boolean b = user.updateById();
         if(b){
-            ResultHolder.remove(xid); //删除xid
+            redisString.remove(xid);// 生产由redis实现
+            //ResultHolder.remove(xid); //删除xid,单机
         }
         return b;
     }
@@ -76,9 +83,9 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         Object userId = actionContext.getActionContext("userId");
         Object money = actionContext.getActionContext("money");
         log.info("用户服务 rollback,用户id: {},用户扣除金额: {},xid: {}",userId,money,xid);
-        String v = ResultHolder.get(xid);
+        String v = redisString.get(xid);//ResultHolder.get(xid)
 
-        if (v == null) {
+        if (StrUtil.isBlank(v)) {
             log.info("用户服务空回滚");
             return true;
         }
@@ -87,7 +94,8 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         user.setMoney(user.getMoney()+(Integer)money);
         boolean b = user.updateById();
         if(b){
-            ResultHolder.remove(xid); //删除xid
+            redisString.remove(xid);// 生产由redis实现
+            //ResultHolder.remove(xid); //删除xid
         }
         return b;
     }

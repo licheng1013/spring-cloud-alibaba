@@ -1,12 +1,14 @@
 package com.demo.service;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.demo.dao.GoodsDao;
 import com.demo.entity.Goods;
-import com.demo.util.ResultHolder;
+import com.demo.util.RedisString;
 import io.seata.rm.tcc.api.BusinessActionContext;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
@@ -20,6 +22,8 @@ import java.io.Serializable;
 @DubboService
 @Service
 public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements GoodsService {
+    @Autowired
+    private RedisString redisString;
 
     /**
      * @param goodsId 商品id
@@ -44,7 +48,8 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
         goods.setFreeze(goods.getFreeze() + num);
         boolean b = goods.updateById();
         if (b) { //扣减成功才设置xid
-            ResultHolder.set(xid, "goods"); // 生产由redis实现
+            redisString.set(xid,"1");// 生产由redis实现
+            //ResultHolder.set(xid, "goods"); // 生产由redis实现
         }
         return b;
     }
@@ -60,10 +65,10 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
         Object goodsId = actionContext.getActionContext("goodsId");
         Object num = actionContext.getActionContext("num");
         log.info("商品服务 commit,商品id: {},商品扣除数量: {},xid: {}", goodsId, num, xid);
-        String v = ResultHolder.get(xid);
+        String v = redisString.get(xid);//ResultHolder.get(xid)
 
 
-        if (v == null) {
+        if (StrUtil.isBlank(v)) {
             log.info("commit空提交处理");
             return true; //空回滚
         }
@@ -72,7 +77,8 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
         goods.setFreeze(goods.getFreeze() - (Integer) num);
         boolean b = goods.updateById();
         if (b) {
-            ResultHolder.remove(xid); //删除xid
+            redisString.remove(xid);// 生产由redis实现
+            //ResultHolder.remove(xid); //删除xid
         }
         return b;
     }
@@ -87,11 +93,10 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
         String xid = actionContext.getXid();
         Object goodsId = actionContext.getActionContext("goodsId");
         Object num = actionContext.getActionContext("num");
-        String v = ResultHolder.get(xid);
-
+        String v = redisString.get(xid);//ResultHolder.get(xid)
 
         log.info("商品服务 rollback,商品id: {},商品回滚数量: {},xid: {}", goodsId, num, xid);
-        if (v == null) {
+        if (StrUtil.isBlank(v)) {
             log.info("rollback空回滚处理");
             return true; //空回滚
         }
@@ -102,7 +107,8 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
 
         boolean b = goods.updateById();
         if (b) {
-            ResultHolder.remove(xid); //删除xid
+            redisString.remove(xid);// 生产由redis实现
+            //ResultHolder.remove(xid); //删除xid
         }
         return b;
     }
