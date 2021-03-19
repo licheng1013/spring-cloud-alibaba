@@ -3,6 +3,7 @@ package com.demo.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.demo.entity.Goods;
 import io.seata.rm.tcc.api.BusinessActionContext;
+import io.seata.rm.tcc.api.BusinessActionContextParameter;
 import io.seata.rm.tcc.api.LocalTCC;
 import io.seata.rm.tcc.api.TwoPhaseBusinessAction;
 
@@ -19,7 +20,8 @@ public interface GoodsService extends IService<Goods> {
     Boolean updateTotal(Serializable goodsId, Integer num);
 
     @TwoPhaseBusinessAction(name = "updateTotalTcc", commitMethod = "commit", rollbackMethod = "rollback")
-    Boolean updateTotalTcc(BusinessActionContext actionContext,Serializable goodsId, Integer num);
+    Boolean updateTotalTcc(BusinessActionContext actionContext, @BusinessActionContextParameter(paramName = "goodsId")  Serializable goodsId,
+                           @BusinessActionContextParameter(paramName = "num") Integer num);
 
     boolean commit(BusinessActionContext actionContext);
 
