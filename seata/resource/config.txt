@@ -1,5 +1,5 @@
 service.vgroupMapping.my_test_tx_group=default
-service.default.grouplist=192.168.1.99:8091
+service.default.grouplist=192.168.1.99:8091,192.168.1.99:8092,192.168.1.99:8093
 store.mode=db
 store.db.url=jdbc:mysql://192.168.1.99:3307/t_seata_config?useUnicode=true
 store.db.user=root

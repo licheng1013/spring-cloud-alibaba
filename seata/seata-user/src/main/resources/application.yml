@@ -47,7 +47,7 @@ seata:
     #    vgroup-mapping:
     #      my_test_tx_group: default #默认
     grouplist:
-      default: 192.168.1.99:8091
+      default: 192.168.1.99:8091,192.168.1.99:8092,192.168.1.99:8093
   config:
     type: nacos
     nacos:
