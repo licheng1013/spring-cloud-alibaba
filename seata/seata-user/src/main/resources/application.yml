@@ -44,10 +44,10 @@ seata:
   tx-service-group: my_test_tx_group
   excludes-for-auto-proxying: firstClassNameForExclude,secondClassNameForExclude
   service:
-    #    vgroup-mapping:
-    #      my_test_tx_group: default #默认
+#    #    vgroup-mapping:
+#    #      my_test_tx_group: default #默认
     grouplist:
-      default: 192.168.1.99:8091,192.168.1.99:8092,192.168.1.99:8093
+      default: 192.168.1.5:8091
   config:
     type: nacos
     nacos:
