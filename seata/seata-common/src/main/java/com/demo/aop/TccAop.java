@@ -34,8 +34,8 @@ public class TccAop {
         Method method = methodSignature.getMethod(); //获取的方法对象
         Tcc lk = method.getAnnotation(Tcc.class);//获取方法上的注解
         String xid = RootContext.getXID();
-        String key = lk.value() + xid;
-
+        String key = lk.prefix() + xid;
+        log.info("aop xid: {}",key);
         if (lk.type()) {
             Object proceed = joinPoint.proceed();
             if ((boolean) proceed) {

@@ -20,7 +20,7 @@ public interface GoodsService extends IService<Goods> {
     Boolean updateTotal(Serializable goodsId, Integer num);
 
     @TwoPhaseBusinessAction(name = "updateTotalTcc", commitMethod = "commit", rollbackMethod = "rollback")
-    Boolean updateTotalTcc(BusinessActionContext actionContext, @BusinessActionContextParameter(paramName = "goodsId")  Serializable goodsId,
+    boolean updateTotalTcc(BusinessActionContext actionContext, @BusinessActionContextParameter(paramName = "goodsId")  Serializable goodsId,
                            @BusinessActionContextParameter(paramName = "num") Integer num);
 
     boolean commit(BusinessActionContext actionContext);

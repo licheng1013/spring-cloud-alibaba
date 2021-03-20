@@ -14,10 +14,10 @@ public @interface Tcc {
     /**
      * @return 配置指定前缀key进行保存.... try,commit,rollback方法必须注解前缀必须一致
      */
-    String value() default "";
+    String prefix() default "";
 
     /**
-     * @return true表示一阶段,需要插入数据,false表示二阶段,处理完就不再处理
+     * @return true表示一阶段,false表示二阶段,空回滚..回收redis
      */
     boolean type() default true;
 }

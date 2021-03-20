@@ -1,7 +1,8 @@
 package com.demo.service.impl;
 
-import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.demo.aop.Tcc;
+import com.demo.config.KeyConfig;
 import com.demo.dao.GoodsDao;
 import com.demo.entity.Goods;
 import com.demo.service.GoodsService;
@@ -34,7 +35,8 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
     }
 
     @Override
-    public Boolean updateTotalTcc(BusinessActionContext actionContext, Serializable goodsId, Integer num) {
+    @Tcc(prefix = KeyConfig.GOODS_KEY)
+    public boolean updateTotalTcc(BusinessActionContext actionContext, Serializable goodsId, Integer num) {
         String xid = actionContext.getXid();
         log.info("商品服务try: xid: {}", xid);
         Goods goods = getById(goodsId);
@@ -47,60 +49,64 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
 
         goods.setTotal(goods.getTotal() - num);//扣除并冻结起来
         goods.setFreeze(goods.getFreeze() + num);
+        log.info("商品对象: {}",goods);
         boolean b = goods.updateById();
-        if (b) { //扣减成功才设置xid
-            redisString.set(xid,"1");// 生产由redis实现
-            //ResultHolder.set(xid, "goods"); // 生产由redis实现
-        }
+        log.info("修改结果: {}",b);
+//        if (b) { //扣减成功才设置xid //注解驱动
+//            redisString.set(xid,"1");// 生产由redis实现
+//            //ResultHolder.set(xid, "goods"); // 生产由redis实现
+//        }
         return b;
     }
 
     @Override
+    @Tcc(prefix = KeyConfig.GOODS_KEY,type = false)
     public boolean commit(BusinessActionContext actionContext) {
         String xid = actionContext.getXid();
         Object goodsId = actionContext.getActionContext("goodsId");
         Object num = actionContext.getActionContext("num");
         log.info("商品服务 commit,商品id: {},商品扣除数量: {},xid: {}", goodsId, num, xid);
-        String v = redisString.get(xid);//ResultHolder.get(xid)
+//        String v = redisString.get(xid);//ResultHolder.get(xid)//注解驱动
 
 
-        if (StrUtil.isBlank(v)) {
-            log.info("commit空提交处理");
-            return true; //空回滚
-        }
+//        if (StrUtil.isBlank(v)) { //注解驱动
+//            log.info("commit空提交处理");
+//            return true; //空回滚
+//        }
         //业务处理
         Goods goods = getById(goodsId.toString());
         goods.setFreeze(goods.getFreeze() - (Integer) num);
         boolean b = goods.updateById();
-        if (b) {
-            redisString.remove(xid);// 生产由redis实现
-            //ResultHolder.remove(xid); //删除xid
-        }
+//        if (b) { //注解驱动
+//            redisString.remove(xid);// 生产由redis实现
+//            //ResultHolder.remove(xid); //删除xid
+//        }
         return b;
     }
 
     @Override
+    @Tcc(prefix = KeyConfig.GOODS_KEY,type = false)
     public boolean rollback(BusinessActionContext actionContext) {
         String xid = actionContext.getXid();
         Object goodsId = actionContext.getActionContext("goodsId");
         Object num = actionContext.getActionContext("num");
-        String v = redisString.get(xid);//ResultHolder.get(xid)
+//        String v = redisString.get(xid);//ResultHolder.get(xid) // 注解驱动
 
         log.info("商品服务 rollback,商品id: {},商品回滚数量: {},xid: {}", goodsId, num, xid);
-        if (StrUtil.isBlank(v)) {
-            log.info("rollback空回滚处理");
-            return true; //空回滚
-        }
+//        if (StrUtil.isBlank(v)) { // 注解驱动
+//            log.info("rollback空回滚处理");
+//            return true; //空回滚
+//        }
         //业务处理
         Goods goods = getById(goodsId.toString());
         goods.setFreeze(goods.getFreeze() - (Integer) num);
         goods.setTotal(goods.getTotal() + (Integer) num);
 
         boolean b = goods.updateById();
-        if (b) {
-            redisString.remove(xid);// 生产由redis实现
-            //ResultHolder.remove(xid); //删除xid
-        }
+//        if (b) { 注解驱动
+//            redisString.remove(xid);// 生产由redis实现
+//            //ResultHolder.remove(xid); //删除xid
+//        }
         return b;
     }
 }
