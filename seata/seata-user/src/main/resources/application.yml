@@ -43,7 +43,7 @@ seata:
   application-id: applicationName
   tx-service-group: my_test_tx_group
   excludes-for-auto-proxying: firstClassNameForExclude,secondClassNameForExclude
-#  service:
+#  service:#可在nacos配置
 #    #    vgroup-mapping:
 #    #      my_test_tx_group: default #默认
 #    grouplist: # 可从nacos获取
