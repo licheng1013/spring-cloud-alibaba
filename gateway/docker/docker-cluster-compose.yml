@@ -1,0 +1,41 @@
+version: "3"
+services:
+  seata1:
+    image: seataio/seata-server
+    hostname: seata-server
+    container_name: seata-8091
+    ports:
+      - "8091:8091"
+    environment:
+      - SEATA_PORT=8091
+      - SEATA_IP=192.168.1.99 #本机ip外网则外网ip
+      #- STORE_MODE=file #这个是默认配置
+      - SEATA_CONFIG_NAME=file:/root/seata-config/registry
+    volumes:
+      - ./config:/root/seata-config
+  seata2:
+    image: seataio/seata-server
+    hostname: seata-server
+    container_name: seata-8092
+    ports:
+      - "8092:8091"
+    environment:
+      - SEATA_PORT=8092
+      - SEATA_IP=192.168.1.99 #本机ip外网则外网ip
+      #- STORE_MODE=file #这个是默认配置
+      - SEATA_CONFIG_NAME=file:/root/seata-config/registry
+    volumes:
+      - ./config:/root/seata-config
+  seata3:
+    image: seataio/seata-server
+    hostname: seata-server
+    container_name: seata-8093
+    ports:
+      - "8093:8091"
+    environment:
+      - SEATA_PORT=8093
+      - SEATA_IP=192.168.1.99 #本机ip外网则外网ip
+      #- STORE_MODE=file #这个是默认配置
+      - SEATA_CONFIG_NAME=file:/root/seata-config/registry
+    volumes:
+      - ./config:/root/seata-config
