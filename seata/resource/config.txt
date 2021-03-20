@@ -4,4 +4,4 @@ store.mode=db
 store.db.url=jdbc:mysql://192.168.1.99:3306/t_seata_config?useUnicode=true
 store.db.user=root
 store.db.password=root
-
+store.db.driverClassName=com.mysql.cj.jdbc.Driver
