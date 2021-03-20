@@ -29,3 +29,19 @@
 - seata分布式事务(ok)
 - seata单机(ok)
 - seata集群
+
+### 问题seata
+- mysql8 最简配置
+```
+service.vgroupMapping.my_test_tx_group=default
+service.default.grouplist=192.168.1.99:8091
+store.mode=db
+store.db.url=jdbc:mysql://192.168.1.99:3306/t_seata_config?useUnicode=true
+store.db.user=root
+store.db.password=root
+store.db.dbType=mysql
+store.db.datasource=druid
+store.db.driverClassName=com.mysql.cj.jdbc.Driver
+```
+- mysql5 只需要替换className即可
+store.db.driverClassName=com.mysql.jdbc.Driver
