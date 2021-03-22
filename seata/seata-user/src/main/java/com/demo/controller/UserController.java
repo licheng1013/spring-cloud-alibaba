@@ -1,11 +1,12 @@
 package com.demo.controller;
 
+import com.demo.annotation.Cache;
+import com.demo.entity.User;
 import com.demo.feign.UserFeign;
 import com.demo.service.UserService;
+import com.demo.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
 
@@ -30,5 +31,11 @@ public class UserController implements UserFeign {
     @PostMapping("update/money/tcc")
     public boolean updateMoneyTcc(Serializable userId, Integer money) {
         return userService.updateMoneyTcc(null,userId, money);
+    }
+
+    @GetMapping("getInfo/{id}")
+    @Cache
+    public JsonResult<User> getInfo(@PathVariable String id){
+        return JsonResult.okData(userService.getById(id));
     }
 }
