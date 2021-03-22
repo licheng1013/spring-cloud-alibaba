@@ -25,6 +25,8 @@ spring:
     jedis:
       pool:
         max-active: -1
+        max-idle: 100
+        min-idle: 50
 
 
 management:
