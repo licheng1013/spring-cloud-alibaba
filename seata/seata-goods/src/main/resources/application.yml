@@ -1,6 +1,10 @@
 server:
   port: 9500
   shutdown: graceful
+  undertow:
+    buffer-size: 1024
+    direct-buffers: true
+
 spring:
   application:
     name: seata-goods

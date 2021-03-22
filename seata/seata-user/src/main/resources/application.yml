@@ -1,6 +1,9 @@
 server:
   port: 9700
   shutdown: graceful
+  undertow:
+    buffer-size: 1024
+    direct-buffers: true
 spring:
   application:
     name: seata-user
