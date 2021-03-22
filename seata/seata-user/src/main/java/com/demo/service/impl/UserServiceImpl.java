@@ -2,7 +2,6 @@ package com.demo.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.demo.aop.Tcc;
 import com.demo.config.KeyConfig;
 import com.demo.dao.UserDao;
 import com.demo.entity.User;
@@ -37,7 +36,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     }
 
     @Override
-    @Tcc(prefix = KeyConfig.USER_KEY)
+//    @Tcc(prefix = KeyConfig.USER_KEY)
     public Boolean updateMoneyTcc(BusinessActionContext actionContext, Serializable userId, Integer money) {
         String xid = actionContext.getXid();
         log.info("用户服务 xid: {}",xid );
@@ -51,10 +50,10 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         user.setMoney(user.getMoney()-money); //冻结金额并添加到冻结金额里面
         user.setFreeze(user.getFreeze()+money);
         boolean b = user.updateById();
-//        if(b){ //注解驱动
-//            redisString.set(xid, "1");// 生产由redis实现
+        if(b){ //注解驱动
+            redisString.set(KeyConfig.USER_KEY+xid, "1");// 生产由redis实现
 //            //ResultHolder.set(xid, "1");//单机
-//        }
+        }
         return b;
     }
 

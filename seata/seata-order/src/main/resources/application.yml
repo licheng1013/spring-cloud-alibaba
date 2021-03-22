@@ -10,7 +10,7 @@ spring:
         server-addr: 192.168.1.99:8848 #本次单机
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://47.105.222.40:3306/seata_order?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai #保证插入的时间不会少8小时,取出来少8小时
+    url: jdbc:mysql://192.168.1.99:3306/seata_order?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai #保证插入的时间不会少8小时,取出来少8小时
     username: root
     password: root
   redis:
@@ -29,11 +29,18 @@ spring:
         min-idle: 50
     database: 2
 feign:
+  okhttp:
+    enabled: true
+  httpclient:
+    enabled: false
+    max-connections: 1000
+    max-connections-per-route: 100
   compression:
-    response:
-      enabled: true
     request:
       enabled: true
+    response:
+      enabled: true
+
 management:
   endpoints:
     web:
