@@ -35,7 +35,7 @@ public class UserController implements UserFeign {
 
     @GetMapping("getInfo/{id}")
     @Cache
-    public JsonResult<User> getInfo(@PathVariable String id){
+    public JsonResult<User> getInfo(@PathVariable String id)  {
         return JsonResult.okData(userService.getById(id));
     }
 }
