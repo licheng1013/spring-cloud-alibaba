@@ -27,6 +27,7 @@ spring:
         max-active: -1
         max-idle: 100
         min-idle: 50
+    database: 1
 
 
 management:
