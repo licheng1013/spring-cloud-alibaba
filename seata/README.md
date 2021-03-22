@@ -30,6 +30,10 @@
 - seata单机(ok)
 - seata集群
 
+### seata集群
+- docker下无法解决ip互通问题
+- 在linux下手动运行集群
+
 ### 问题seata
 - mysql8 最简配置
 ```
