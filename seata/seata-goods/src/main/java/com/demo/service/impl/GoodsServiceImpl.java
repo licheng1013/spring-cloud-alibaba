@@ -11,6 +11,7 @@ import io.seata.rm.tcc.api.BusinessActionContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 
@@ -36,6 +37,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
 
     @Override
 //    @Tcc(prefix = KeyConfig.GOODS_KEY)
+    @Transactional
     public boolean updateTotalTcc(BusinessActionContext actionContext, Serializable goodsId, Integer num) {
         String xid = actionContext.getXid();
         log.info("商品服务try: xid: {}", xid);
@@ -61,6 +63,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
 
     @Override
 //    @Tcc(prefix = KeyConfig.GOODS_KEY,type = false)
+    @Transactional
     public boolean commit(BusinessActionContext actionContext) {
         String xid = actionContext.getXid();
         Object goodsId = actionContext.getActionContext("goodsId");
@@ -86,6 +89,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
 
     @Override
 //    @Tcc(prefix = KeyConfig.GOODS_KEY,type = false)
+    @Transactional
     public boolean rollback(BusinessActionContext actionContext) {
         String xid = actionContext.getXid();
         Object goodsId = actionContext.getActionContext("goodsId");

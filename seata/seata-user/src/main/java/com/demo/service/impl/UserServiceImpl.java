@@ -38,6 +38,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
 
     @Override
 //    @Tcc(prefix = KeyConfig.USER_KEY)
+    @Transactional
     public Boolean updateMoneyTcc(BusinessActionContext actionContext, Serializable userId, Integer money) {
         String xid = actionContext.getXid();
         log.info("用户服务 xid: {}",xid );
