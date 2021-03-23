@@ -58,4 +58,9 @@ public class UserController implements UserFeign {
         log.info("计算结果: {}",i);
         return JsonResult.okData(i);
     }
+    @GetMapping("sleep")
+    public JsonResult<String> sleep() throws InterruptedException {
+        Thread.sleep(10000);
+        return JsonResult.okMsg("Hello World");
+    }
 }
