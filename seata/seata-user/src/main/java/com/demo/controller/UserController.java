@@ -1,10 +1,13 @@
 package com.demo.controller;
 
+import cn.hutool.core.util.StrUtil;
 import com.demo.annotation.Cache;
 import com.demo.entity.User;
 import com.demo.feign.UserFeign;
 import com.demo.service.UserService;
 import com.demo.util.JsonResult;
+import com.demo.util.RedisString;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +20,7 @@ import java.io.Serializable;
  */
 @RequestMapping("user")
 @RestController
+@Slf4j
 public class UserController implements UserFeign {
     @Autowired
     private UserService userService;
@@ -37,5 +41,21 @@ public class UserController implements UserFeign {
     @Cache
     public JsonResult<User> getInfo(@PathVariable String id)  {
         return JsonResult.okData(userService.getById(id));
+    }
+    @Autowired
+    private RedisString redisString;
+
+    @GetMapping("redis")
+    public JsonResult<Integer> redis(){
+        String redis = redisString.get("redis");
+        if (StrUtil.isBlank(redis)) {
+            redis = "100";
+            redisString.set("redis", redis);
+        }
+        int i = Integer.parseInt(redis) - 1;
+        redisString.set("redis", i+"");
+
+        log.info("计算结果: {}",i);
+        return JsonResult.okData(i);
     }
 }
