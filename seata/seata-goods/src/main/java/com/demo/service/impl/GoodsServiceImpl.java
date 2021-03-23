@@ -2,6 +2,7 @@ package com.demo.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.demo.aop.Tcc;
 import com.demo.config.KeyConfig;
 import com.demo.dao.GoodsDao;
 import com.demo.entity.Goods;
@@ -36,8 +37,8 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
     }
 
     @Override
-//    @Tcc(prefix = KeyConfig.GOODS_KEY)
-    @Transactional
+    @Tcc(prefix = KeyConfig.GOODS_KEY)
+//    @Transactional
     public boolean updateTotalTcc(BusinessActionContext actionContext, Serializable goodsId, Integer num) {
         String xid = actionContext.getXid();
         log.info("商品服务try: xid: {}", xid);
