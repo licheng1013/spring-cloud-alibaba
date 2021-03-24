@@ -52,10 +52,13 @@ public class UserController implements UserFeign {
             redis = "100";
             redisString.set("redis", redis);
         }
-        int i = Integer.parseInt(redis) - 1;
-        redisString.set("redis", i+"");
-
+        int i = Integer.parseInt(redis) ;
         log.info("计算结果: {}",i);
+        if (i <= 0){
+            return JsonResult.fail(-1);
+        }
+        i -= 1;
+        redisString.set("redis", i+"");
         return JsonResult.okData(i);
     }
     @GetMapping("sleep")
