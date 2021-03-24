@@ -87,7 +87,4 @@ public class RedisString {
         LockAop.remove();
     }
 
-    public Long increment(String k, Integer num) {
-        return stringRedisTemplate.opsForValue().increment(k, num);
-    }
 }

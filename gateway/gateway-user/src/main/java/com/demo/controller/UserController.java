@@ -166,17 +166,6 @@ public class UserController {
     @Autowired
     private RedisString redisString;
 
-    @PassToken
-    @GetMapping("redis")
-    public JsonResult<Long> redis() {
-        String k = "goodsId:1";
-        String goods = redisString.get(k);
-        int i = Integer.parseInt(goods);
-        if (i < 1) {
-            throw new ServiceException("抢购失败");
-        }
-        Long increment = redisString.increment(k, -1);
-        return JsonResult.okData(increment);
-    }
+
 
 }
