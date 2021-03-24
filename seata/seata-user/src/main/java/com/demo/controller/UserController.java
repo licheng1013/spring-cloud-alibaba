@@ -48,7 +48,7 @@ public class UserController implements UserFeign {
     @GetMapping("redis")
     public JsonResult<Integer> redis(){
 
-        boolean b = redisString.lock("test", 2000); //加锁
+        boolean b = redisString.lock("test", 1000); //加锁
         if (b) {
             String redis = redisString.get("redis");
             if (StrUtil.isBlank(redis)) {

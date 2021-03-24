@@ -73,8 +73,8 @@ public class RedisString {
      */
     public boolean lock(String k, long time) {
         LockAop.set(k);
-        Boolean expire = stringRedisTemplate.expire(k, Duration.ofMillis(time));
-        return expire != null && expire;
+        Boolean ifAbsent = stringRedisTemplate.opsForValue().setIfAbsent(k, k, Duration.ofMillis(time)); //分布式锁
+        return ifAbsent != null && ifAbsent;
     }
 
     /**
