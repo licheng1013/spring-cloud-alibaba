@@ -72,7 +72,7 @@ public class RedisString {
      */
     public boolean lock(String k,long time){
         String s = get(k);
-        if (s == null) {
+        if (s == null || "".equals(s)) {
             set(k, k, time,TimeUnit.MILLISECONDS);
             LockAop.set(k);//线程绑定key
             return true;
