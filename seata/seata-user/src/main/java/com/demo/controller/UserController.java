@@ -1,5 +1,6 @@
 package com.demo.controller;
 
+import cn.hutool.core.text.UnicodeUtil;
 import cn.hutool.core.util.StrUtil;
 import com.demo.annotation.Cache;
 import com.demo.entity.User;
@@ -68,9 +69,19 @@ public class UserController implements UserFeign {
 
         return JsonResult.okData(1);
     }
+
     @GetMapping("sleep")
     public JsonResult<String> sleep() throws InterruptedException {
         Thread.sleep(10000);
         return JsonResult.okMsg("Hello World");
     }
+
+    @GetMapping("json")
+    public JsonResult<String> json(String json){
+        //解析后的json
+        String string = UnicodeUtil.toString(json);
+        return JsonResult.okData("解码后的:"+string);
+    }
+
+
 }
