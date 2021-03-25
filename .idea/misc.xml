@@ -12,20 +12,8 @@
         <option value="$PROJECT_DIR$/core/pom.xml" />
       </list>
     </option>
-    <option name="ignoredFiles">
-      <set>
-        <option value="$PROJECT_DIR$/authentication/pom.xml" />
-        <option value="$PROJECT_DIR$/order/pom.xml" />
-        <option value="$PROJECT_DIR$/push/pom.xml" />
-        <option value="$PROJECT_DIR$/redis/pom.xml" />
-        <option value="$PROJECT_DIR$/seata/seata-shop/pom.xml" />
-        <option value="$PROJECT_DIR$/seata/seata-test/pom.xml" />
-        <option value="$PROJECT_DIR$/tests/pom.xml" />
-        <option value="$PROJECT_DIR$/user/pom.xml" />
-      </set>
-    </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <option name="BUILD_PROCESS_ADDITIONAL_VM_OPTIONS" value="-Djps.track.ap.dependencies=false" />
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
@@ -30,10 +31,6 @@
         <module name="dubbo-api" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="order" target="1.8" />
-      <module name="user" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_STRING" value="-parameters" />
@@ -49,7 +46,6 @@
       <module name="gateway-api" options="" />
       <module name="gateway-order" options="" />
       <module name="gateway-user" options="" />
-      <module name="order" options="" />
       <module name="pull" options="" />
       <module name="push" options="" />
       <module name="redis" options="" />
@@ -60,7 +56,6 @@
       <module name="soul" options="" />
       <module name="soul-api" options="" />
       <module name="soul-user" options="" />
-      <module name="user" options="" />
     </option>
   </component>
 </project>
