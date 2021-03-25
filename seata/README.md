@@ -49,3 +49,6 @@ store.db.driverClassName=com.mysql.cj.jdbc.Driver
 ```
 - mysql5 只需要替换className即可
 store.db.driverClassName=com.mysql.jdbc.Driver
+  
+### seata_config脚本
+- t_seata_config.sql
