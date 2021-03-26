@@ -26,6 +26,7 @@
         <module name="seata-order" />
         <module name="seata-common" />
         <module name="seata-test" />
+        <module name="rocketmq-push" />
         <module name="dubbo-user" />
         <module name="authentication" />
         <module name="dubbo-api" />
@@ -49,6 +50,8 @@
       <module name="pull" options="" />
       <module name="push" options="" />
       <module name="redis" options="" />
+      <module name="rocketmq" options="" />
+      <module name="rocketmq-push" options="" />
       <module name="seata-common" options="" />
       <module name="seata-goods" options="" />
       <module name="seata-order" options="" />

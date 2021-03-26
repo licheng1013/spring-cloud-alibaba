@@ -1,0 +1,6 @@
+server:
+  port: 8600
+  shutdown: graceful
+  undertow:
+    buffer-size: 1024
+    direct-buffers: true

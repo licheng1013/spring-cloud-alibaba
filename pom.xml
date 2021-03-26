@@ -15,6 +15,7 @@
         <module>core</module>
         <module>dubbo</module>
         <module>soul</module>
+        <module>rocketmq</module>
     </modules>
     <packaging>pom</packaging>
     <dependencyManagement>
@@ -55,5 +56,6 @@
         <mysql.version>8.0.16</mysql.version>
         <alibaba-druid.version>1.1.12</alibaba-druid.version>
         <dubbo.version>2.7.8</dubbo.version>
+        <rocketmq-client.version>4.3.0</rocketmq-client.version>
     </properties>
 </project>
