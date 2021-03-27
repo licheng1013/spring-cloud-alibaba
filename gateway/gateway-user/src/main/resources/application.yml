@@ -8,22 +8,22 @@ spring:
     nacos:
       discovery:
         server-addr: 192.168.1.99:8848 #本次单机
-        enabled: true
+        enabled: false
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://47.105.222.40:3306/t_test1?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai #保证插入的时间不会少8小时,取出来少8小时
+    url: jdbc:mysql://172.16.0.12:8081/t_test1?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai #保证插入的时间不会少8小时,取出来少8小时
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
     cluster:
       nodes:
-        - 47.105.222.40:7001
-        - 47.105.222.40:7002
-        - 47.105.222.40:7003
-        - 47.105.222.40:7004
-        - 47.105.222.40:7005
-        - 47.105.222.40:7006
+        - 172.16.0.12:7001
+        - 172.16.0.12:7002
+        - 172.16.0.12:7003
+        - 172.16.0.12:7004
+        - 172.16.0.12:7005
+        - 172.16.0.12:7006
     jedis:
       pool:
         max-active: -1

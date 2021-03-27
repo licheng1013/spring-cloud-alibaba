@@ -137,6 +137,31 @@ public class UserController {
     }
 
 
+    @GetMapping("redis")
+    @PassToken
+    public JsonResult<Integer> redis(){
+
+        boolean b = redisString.lock("test", 1000); //加锁
+        if (b) {
+            String redis = redisString.get("redis");
+            if (StrUtil.isBlank(redis)) {
+                redis = "100";
+                redisString.set("redis", redis);
+            }
+            int i = Integer.parseInt(redis) ;
+            log.info("计算结果: {}",i);
+            if (i <= 0){
+                return JsonResult.fail(-1);
+            }
+            i -= 1;
+            redisString.set("redis", i+"");
+
+            redisString.removeLock(); // 释放锁
+        }
+
+        return JsonResult.okData(1);
+    }
+
     /**
      * 随机验证码
      **/
