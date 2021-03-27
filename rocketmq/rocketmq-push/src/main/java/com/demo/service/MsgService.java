@@ -1,9 +1,6 @@
 package com.demo.service;
 
-import org.springframework.cloud.stream.annotation.Input;
-import org.springframework.cloud.stream.annotation.Output;
-import org.springframework.cloud.stream.binder.PollableMessageSource;
-import org.xnio.channels.MessageChannel;
+
 
 /**
  * @author root
@@ -12,9 +9,4 @@ import org.xnio.channels.MessageChannel;
  */
 public interface MsgService {
 
-    @Input
-    PollableMessageSource source();
-
-    @Output
-    MessageChannel dest();
 }

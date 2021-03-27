@@ -4,14 +4,20 @@ server:
   undertow:
     buffer-size: 1024
     direct-buffers: true
+
+
 spring:
-  cloud:
-    stream:
-      rocketmq:
-        binder:
-          name-server: 192.168.1.10:9876
-        bindings:
-          output:
-            producer:
-              group: test
+  application:
+    name: rocketmq-push
+rocketmq:
+  name-server: 192.168.1.10:9876
+  consumer:
+    group: my-group1
+    topic: test
+
+
+#        bindings:
+#          output:
+#            producer:
+#              group: test
 

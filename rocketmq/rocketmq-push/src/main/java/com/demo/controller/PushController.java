@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("rocket")
 @Slf4j
-//@EnableBinding({Source.class, Sink.class})
 public class PushController {
     @Autowired
     private RocketMQTemplate rocketMQTemplate;
