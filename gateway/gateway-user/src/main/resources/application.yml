@@ -1,6 +1,11 @@
 server:
   port: 8200
   shutdown: graceful
+  undertow:
+    buffer-size: 1024
+    direct-buffers: true
+    threads:
+      io: 8
 spring:
   application:
     name: alibaba-user
@@ -11,19 +16,26 @@ spring:
         enabled: false
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://172.16.0.12:8081/t_test1?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai #保证插入的时间不会少8小时,取出来少8小时
+    #url: jdbc:mysql://172.16.0.12:8081/t_test1?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai #保证插入的时间不会少8小时,取出来少8小时
+    url: jdbc:mysql://localhost:3306/t_test1?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai #保证插入的时间不会少8小时,取出来少8小时
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
     cluster:
       nodes:
-        - 172.16.0.12:7001
-        - 172.16.0.12:7002
-        - 172.16.0.12:7003
-        - 172.16.0.12:7004
-        - 172.16.0.12:7005
-        - 172.16.0.12:7006
+#        - 172.16.0.12:7001
+#        - 172.16.0.12:7002
+#        - 172.16.0.12:7003
+#        - 172.16.0.12:7004
+#        - 172.16.0.12:7005
+#        - 172.16.0.12:7006
+         - 192.168.1.10:7001
+         - 192.168.1.10:7002
+         - 192.168.1.10:7003
+         - 192.168.1.10:7004
+         - 192.168.1.10:7005
+         - 192.168.1.10:7006
     jedis:
       pool:
         max-active: -1
