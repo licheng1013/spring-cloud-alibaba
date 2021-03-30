@@ -1,5 +1,6 @@
-package com.demo;
+package com.demo.config;
 
+import com.demo.util.JsonResult;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
