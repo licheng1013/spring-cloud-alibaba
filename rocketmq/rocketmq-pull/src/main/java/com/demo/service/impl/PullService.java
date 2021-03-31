@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-@RocketMQMessageListener(topic = "test-topic-1", consumerGroup = "my-group")
+@RocketMQMessageListener(topic = "test", consumerGroup = "my-group")
 public class PullService implements RocketMQListener<String> {
     @Override
     public void onMessage(String message) {

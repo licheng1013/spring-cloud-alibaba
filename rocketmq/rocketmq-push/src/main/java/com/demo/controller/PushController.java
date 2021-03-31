@@ -50,9 +50,9 @@ public class PushController {
     @GetMapping("push")
     public Object msg(String msg) {
         msg = msg == null ? "Hello World" : msg;
-        MessageBuilder<String> header = MessageBuilder.withPayload("Hello World").setHeader(MessageConst.PROPERTY_TAGS, "testTag");
+        MessageBuilder<String> header = MessageBuilder.withPayload(msg).setHeader(MessageConst.PROPERTY_TAGS, "testTag");
         Message<String> message = header.build();
-        rocketMQTemplate.send("test-topic-1",message);
+        rocketMQTemplate.send("test",message);
         return msg;
     }
 
