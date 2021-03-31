@@ -4,6 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.MessageConst;
+import org.apache.rocketmq.spring.annotation.RocketMQTransactionListener;
+import org.apache.rocketmq.spring.core.RocketMQLocalTransactionListener;
+import org.apache.rocketmq.spring.core.RocketMQLocalTransactionState;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
@@ -54,6 +57,32 @@ public class PushController {
         Message<String> message = header.build();
         rocketMQTemplate.send("test",message);
         return msg;
+    }
+
+    @GetMapping("transaction")
+    public Object transaction(String msg){
+        msg = msg == null ? "Hello transaction" : msg;
+        MessageBuilder<String> header = MessageBuilder.withPayload(msg);
+        Message<String> message = header.build();
+        rocketMQTemplate.sendMessageInTransaction("test-transaction",message,null);
+        return msg;
+    }
+
+    @RocketMQTransactionListener
+    static class TransactionListenerImpl implements RocketMQLocalTransactionListener {
+        @Override
+        public RocketMQLocalTransactionState executeLocalTransaction(Message msg, Object arg) {
+            // ... local transaction process, return bollback, commit or unknown
+            log.info("中间状态: {}",new String((byte[]) msg.getPayload()));
+            return RocketMQLocalTransactionState.UNKNOWN;
+        }
+
+        @Override
+        public RocketMQLocalTransactionState checkLocalTransaction(Message msg) {
+            // ... check transaction status and return bollback, commit or unknown
+            log.info("提交状态: {}",new String((byte[]) msg.getPayload()));
+            return RocketMQLocalTransactionState.COMMIT;
+        }
     }
 
 
