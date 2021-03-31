@@ -17,6 +17,7 @@
         <module name="redis" />
         <module name="dubbo-goods" />
         <module name="dubbo-common" />
+        <module name="rocketmq-pull" />
         <module name="soul-user" />
         <module name="pull" />
         <module name="tests" />
@@ -51,6 +52,7 @@
       <module name="push" options="" />
       <module name="redis" options="" />
       <module name="rocketmq" options="" />
+      <module name="rocketmq-pull" options="" />
       <module name="rocketmq-push" options="" />
       <module name="seata-common" options="" />
       <module name="seata-goods" options="" />

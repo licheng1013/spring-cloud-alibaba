@@ -1,17 +1,17 @@
 server:
-  port: 8600
+  port: 8700
   shutdown: graceful
   undertow:
     buffer-size: 1024
     direct-buffers: true
 
+
 spring:
   application:
-    name: rocketmq-push
+    name: rocketmq-pull
 rocketmq:
   name-server: 192.168.1.30:9876
-  producer:
-    group: my-group
+
 
 
 
