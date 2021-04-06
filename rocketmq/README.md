@@ -24,3 +24,7 @@ nohup sh bin/mqbroker -n 192.168.1.30:9876 -c conf/broker.conf autoCreateTopicEn
 tail -f ~/logs/rocketmqlogs/broker.log  
 ```
 
+### 测试
+- 生产者生产消息
+- http://localhost:8600/rocket/push
+- 查看消费值日志-查看是否消费成功
