@@ -1,10 +1,9 @@
 package com.demo;
 
 import cn.hutool.core.io.IoUtil;
-import cn.hutool.core.lang.Console;
-import cn.hutool.core.thread.ConcurrencyTester;
-import cn.hutool.core.thread.ThreadUtil;
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.http.HttpUtil;
+import cn.hutool.json.JSONUtil;
 import com.demo.entity.User;
 import com.demo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -12,10 +11,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 
 /**
  * @author root
@@ -47,22 +46,31 @@ public class UserTest {
         String read = IoUtil.read(new BufferedReader(new FileReader(file)));
         String[] split = read.split("\n");
         for (int i = 0; i < split.length; i++) {
-            if (i==500) {
+            if (i == 500) {
                 break;
             }
             String body = HttpUtil.get("http://localhost:9100/push/test?tel=" + split[i]);
-            log.info("请求信息: {}",body);
+            log.info("请求信息: {}", body);
         }
 
     }
 
-    public static void main(String[] args)  {
-        ConcurrencyTester tester = ThreadUtil.concurrencyTest(500, () -> {
-            String s = HttpUtil.get("http://localhost:9000/user/list?tel=18377331999");
-            log.info("请求结果: {}",s);
-        });
-
-        Console.log(tester.getInterval());
-        log.info("运行: {}", "结束");
+    public static void main(String[] args) throws FileNotFoundException {
+        ArrayList<User> users = new ArrayList<>();
+        for (int i = 0; i < 2000000; i++) {
+            String tel = RandomUtil.randomNumbers(11);
+            User user = new User();
+            user.setTel(tel);
+            user.setUserName(tel + "大熊");
+            user.setNickName("超强哈市奇");
+            user.setCreateTime(new Date());
+            users.add(user);
+            log.info("列表大小: {}",users.size());
+        }
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("RECORDS", users);
+        String str = JSONUtil.toJsonStr(map);
+        FileOutputStream stream = new FileOutputStream("E:\\sql.json");
+        IoUtil.write(stream, true, str.getBytes());
     }
 }

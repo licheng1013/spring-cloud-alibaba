@@ -4,6 +4,7 @@ import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.ShearCaptcha;
 import cn.hutool.captcha.generator.RandomGenerator;
 import cn.hutool.core.img.ImgUtil;
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.qrcode.QrCodeUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -62,6 +63,21 @@ public class UserController {
         if (tel == null && StrUtil.isNotBlank(user.getTel())) {
             user.insert();
             return JsonResult.okMsg("创建成功");
+        }
+        return JsonResult.fail("创建失败");
+    }
+
+    @PostMapping("add")
+    @PassToken
+    public JsonResult<String> add() {
+        String tel = RandomUtil.randomNumbers(11);
+        User user = userService.getOne(new QueryWrapper<User>().eq("tel", tel));
+        if (user == null) {
+            user = new User();
+            user.setTel(tel);
+            user.setUserName(tel+"大熊");
+            user.setNickName("超强哈市奇");
+            user.insert();
         }
         return JsonResult.fail("创建失败");
     }
