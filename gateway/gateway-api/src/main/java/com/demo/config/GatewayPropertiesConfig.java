@@ -45,7 +45,7 @@ public class GatewayPropertiesConfig extends GatewayProperties {
      *   list: id;xx@uri;lb://alibaba-user@path;Path=/user/**
      *   #list: "" #表示不配置
      */
-    @Value("${user.list}")
+    @Value("${config.list}")
     public void setList(String list) {
         List<RouteDefinition> routeDefinitions = new ArrayList<>();
         if (StringUtils.isBlank(list)) {
