@@ -74,7 +74,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, Order> implements Or
             i -= 1;
 
             ThreadUtil.execute(()->{
-                //修改库存
+                //异步通知修改库存
             });
 
             redisString.set(k, i+"");
