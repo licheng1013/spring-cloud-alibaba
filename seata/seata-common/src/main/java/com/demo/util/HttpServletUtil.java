@@ -24,17 +24,20 @@ public final class HttpServletUtil {
         return getHttpServletRequest().getRequestURI();
     }
 
+
     /**
-     * @return 获取SpringBoot上下文的HttpServletRequest
+     * 获取SpringBoot上下文的HttpServletRequest
+     * @author lc
+     * @date 2021/4/9
      */
     public static HttpServletRequest getHttpServletRequest(){
         return ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
     }
 
     /**
+     * 获取请求参数
      * @author lc
      * @date 2021/4/9
-     * @description 获取请求参数
      */
     public static Map<String,String> getParamMap(){
         return ServletUtil.getParamMap(getHttpServletRequest());
@@ -42,18 +45,18 @@ public final class HttpServletUtil {
 
 
     /**
+     * 获取请求类型GET,POST
      * @author lc
      * @date 2021/4/9
-     * @description 获取请求方法
      */
     public static String getMethod(){
         return getHttpServletRequest().getMethod();
     }
 
     /**
+     * 路径+参数等于唯一key
      * @author lc
      * @date 2021/4/9
-     * @description 路径+参数等于唯一key
      */
     public static String getKey(String str){
         return getPath()+str;
