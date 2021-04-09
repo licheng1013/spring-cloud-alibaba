@@ -10,6 +10,7 @@ import com.demo.util.JsonResult;
 import com.demo.util.RedisString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
@@ -83,5 +84,12 @@ public class UserController implements UserFeign {
         return JsonResult.okData("解码后的:"+string);
     }
 
+    @Value("${server.port}")
+    public String port;
+
+    @GetMapping("port")
+    public JsonResult<String> port(){
+        return JsonResult.okMsg(port);
+    }
 
 }
