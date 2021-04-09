@@ -41,7 +41,7 @@ public class GatewayPropertiesConfig extends GatewayProperties {
 
     /**
      * @param list 动态网关配置 配置模板:
-     * user:
+     * config:
      *   list: id;xx@uri;lb://alibaba-user@path;Path=/user/**
      *   #list: "" #表示不配置
      */
