@@ -15,5 +15,6 @@ public interface OrderFeign {
     @PostMapping(value = "/order/create")
     JsonResult<String> create(Integer userId,Integer goodsId);
 
-
+    @PostMapping(value = "/order/redis/create")
+    JsonResult<String> redisCreate(Integer userId,Integer goodsId);
 }

@@ -46,4 +46,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, Order> implements Or
 //        int i = 1/0;//异常测试
     }
 
+    @Override
+    public void redisCreateOrder(Integer userId, Integer goodsId) {
+
+    }
 }

@@ -27,5 +27,12 @@ public class OrderController implements OrderFeign {
         return JsonResult.okMsg("创建订单成功");
     }
 
+    @Override
+    @PostMapping("redis/create")
+    public JsonResult<String> redisCreate(Integer userId, Integer goodsId) {
+        orderService.redisCreateOrder(userId, goodsId);
+        return JsonResult.okMsg("创建订单成功");
+    }
+
 
 }

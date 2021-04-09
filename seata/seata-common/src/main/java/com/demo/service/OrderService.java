@@ -11,4 +11,5 @@ import com.demo.entity.Order;
 public interface OrderService extends IService<Order> {
     void createOrder(Integer userId, Integer goodsId);
 
+    void redisCreateOrder(Integer userId, Integer goodsId);
 }
