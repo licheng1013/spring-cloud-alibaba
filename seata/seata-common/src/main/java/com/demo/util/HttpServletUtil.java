@@ -1,5 +1,6 @@
 package com.demo.util;
 
+import cn.hutool.extra.servlet.ServletUtil;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -30,7 +31,22 @@ public final class HttpServletUtil {
         return ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
     }
 
-    public static Map<String,Object> getMap(){
-        return null;
+    /**
+     * @author lc
+     * @date 2021/4/9
+     * @description 获取请求参数
+     */
+    public static Map<String,String> getParamMap(){
+        return ServletUtil.getParamMap(getHttpServletRequest());
+    }
+
+
+    /**
+     * @author lc
+     * @date 2021/4/9
+     * @description 获取请求方法
+     */
+    public static String getMethod(){
+        return getHttpServletRequest().getMethod();
     }
 }
