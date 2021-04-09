@@ -53,17 +53,17 @@ seata:
     type: nacos
     nacos:
       serverAddr: 192.168.1.30:8848
-      group: SEATA_GROUP
-      username: ""
-      password: ""
+#      group: SEATA_GROUP
+#      username: ""
+#      password: ""
   registry:
     type: nacos
     nacos:
-      application: seata-server
       server-addr: 192.168.1.30:8848
-      group : "SEATA_GROUP"
-      username: ""
-      password: ""
+#      application: seata-server
+#      group : SEATA_GROUP
+#      username: ""
+#      password: ""
 
 feign:
   okhttp:
