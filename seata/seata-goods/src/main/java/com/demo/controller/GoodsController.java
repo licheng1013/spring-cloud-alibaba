@@ -46,4 +46,10 @@ public class GoodsController implements GoodsFeign {
         return goodsService.updateTotalTcc(null,goodsId, num);
     }
 
+    @Override
+    @GetMapping("find/total")
+    public Integer getTotal(Integer goodsId) {
+        return goodsService.getById(goodsId).getTotal();
+    }
+
 }

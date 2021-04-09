@@ -27,4 +27,8 @@ public interface GoodsFeign {
     /** 修改商品数量 **/
     @PostMapping("/goods/update/total/tcc")
     boolean updateTotalTcc(@RequestParam("goodsId") Serializable goodsId,@RequestParam("num") Integer num);
+
+    /** 获取库存 **/
+    @GetMapping(value = "/goods/find/total")
+    Integer getTotal(@RequestParam("goodsId")Integer goodsId);
 }

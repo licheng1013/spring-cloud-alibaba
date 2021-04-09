@@ -49,4 +49,13 @@ public final class HttpServletUtil {
     public static String getMethod(){
         return getHttpServletRequest().getMethod();
     }
+
+    /**
+     * @author lc
+     * @date 2021/4/9
+     * @description 路径+参数等于唯一key
+     */
+    public static String getKey(String str){
+        return getPath()+str;
+    }
 }
