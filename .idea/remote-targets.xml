@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteTargetsManager">
+    <targets>
+      <target name="root@192.168.1.30:22" type="ssh/sftp">
+        <config>
+          <option name="projectRootOnTarget" value="/root/spring-cloud-alibaba" />
+          <option name="serverName" value="root@192.168.1.30:22 password" />
+        </config>
+        <ContributedStateBase type="JavaLanguageRuntime">
+          <config>
+            <option name="homePath" value="/usr/local/jdk1.8.0_271" />
+            <option name="javaVersionString" value="1.8.0_271" />
+          </config>
+        </ContributedStateBase>
+      </target>
+    </targets>
+  </component>
+</project>
