@@ -20,6 +20,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authenticationInterceptor)
                 .addPathPatterns("/**");
+        //可以配置多个拦截器...从上往下进行匹配
     }
 
 }
