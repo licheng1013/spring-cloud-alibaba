@@ -2,6 +2,7 @@ package com.demo;
 
 import cn.hutool.extra.servlet.ServletUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -17,6 +18,7 @@ import java.util.Map;
  */
 @Slf4j
 @Configuration
+@ConditionalOnProperty(prefix = "spring.auth",name = "enable",havingValue = "true",matchIfMissing = true)
 public class AuthenticationInterceptor implements HandlerInterceptor {
 
     /**

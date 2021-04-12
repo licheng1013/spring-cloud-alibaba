@@ -7,6 +7,8 @@ server:
     threads:
       io: 8
 spring:
+  auth:
+    enable: false
   application:
     name: alibaba-user
   cloud:
