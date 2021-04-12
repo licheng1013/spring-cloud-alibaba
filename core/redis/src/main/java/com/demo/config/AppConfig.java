@@ -19,12 +19,10 @@ public class AppConfig {
      * Type safe representation of application.properties
      */
     @Autowired
-    ClusterConfigurationProperties clusterProperties;
+    private ClusterConfigurationProperties clusterProperties;
 
     @Bean
     public RedisConnectionFactory connectionFactory() {
-
-        return new JedisConnectionFactory(
-                new RedisClusterConfiguration(clusterProperties.getNodes()));
+        return new JedisConnectionFactory(new RedisClusterConfiguration(clusterProperties.getNodes()));
     }
 }
