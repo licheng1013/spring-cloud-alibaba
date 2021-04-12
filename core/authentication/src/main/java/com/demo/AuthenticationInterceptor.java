@@ -15,8 +15,8 @@ import java.util.Map;
  * @date 2020/12/18
  * @description 拦截器
  */
-@Configuration
 @Slf4j
+@Configuration
 public class AuthenticationInterceptor implements HandlerInterceptor {
 
     /**
@@ -44,9 +44,13 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             return true;
         }
         //解密token
-        String token = request.getHeader("Authentication"); //获取请求头里面的token
-        String userId = TokenUtil.getUserId(token);
-        log.info("userId: {}", userId);
+        try {
+            String token = request.getHeader("Authentication"); //获取请求头里面的token
+            String userId = TokenUtil.getUserId(token);
+            log.info("userId: {}", userId);
+        }catch (Exception e){
+            throw new RuntimeException("请登入");
+        }
         return true;
     }
 
