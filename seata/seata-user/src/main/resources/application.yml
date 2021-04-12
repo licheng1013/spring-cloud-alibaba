@@ -25,12 +25,6 @@ spring:
         - 192.168.1.31:7004
         - 192.168.1.31:7005
         - 192.168.1.31:7006
-    jedis:
-      pool:
-        max-active: 100
-        max-idle: 100
-        min-idle: 50
-    database: 1
 
 
 management:
