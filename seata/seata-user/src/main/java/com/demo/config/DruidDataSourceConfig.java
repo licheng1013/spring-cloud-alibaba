@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Primary;
 @Slf4j
 @Setter
 @Getter
-public class DruidDataSourceConfig extends DruidDataSource{
+public class DruidDataSourceConfig extends DruidDataSource {
     @Override
     public void setUrl(String url) {
         log.info("链接地址: {}",url);
