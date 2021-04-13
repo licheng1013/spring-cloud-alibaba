@@ -1,0 +1,10 @@
+config:
+  list:
+    - id: seata-user
+      uri: lb://seata-user
+      predicates:
+        - Path=/user/**
+  #list: "" #表示不配置
+  test:
+    - aa
+    - bb

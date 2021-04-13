@@ -2,13 +2,11 @@ package com.demo.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.gateway.config.GatewayProperties;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +18,7 @@ import java.util.List;
  */
 @Configuration
 @Primary
-@RestController
 @RefreshScope
-@EnableConfigurationProperties(GatewayPropertiesConfig.class)
 @ConfigurationProperties(prefix = "config")
 @Slf4j
 public class GatewayPropertiesConfig extends GatewayProperties {
