@@ -26,6 +26,9 @@ spring:
         - 192.168.1.31:7005
         - 192.168.1.31:7006
 
+logging:
+  level:
+    com.alibaba.nacos.client.config.impl.ClientWorker: WARN #禁用nacos的刷屏
 
 management:
   endpoints:
