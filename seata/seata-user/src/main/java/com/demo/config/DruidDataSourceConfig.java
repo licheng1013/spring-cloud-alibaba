@@ -4,7 +4,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,11 +20,12 @@ import javax.sql.DataSource;
 @Configuration
 @Primary
 @RefreshScope
-@ConfigurationProperties(prefix = "config.db")
+//@ConfigurationProperties(prefix = "config.db")
 @Slf4j
 @Setter
 @Getter
 public class DruidDataSourceConfig  {
+
     private static String url ;//= "jdbc:mysql://192.168.1.5:3306/t_user?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai";
     private static String username ;//= "root";
     private static String password ;//= "root";
@@ -42,14 +43,17 @@ public class DruidDataSourceConfig  {
 //    }
 //
 //    @Override
+    @Value("${config.db.password}")
     public void setPassword(String password) {
         log.info("password: {}",password);
         DruidDataSourceConfig.password = password;
     }
+    @Value("${config.db.username}")
     public void setUsername(String username) {
         log.info("username: {}",username);
         DruidDataSourceConfig.username = username;
     }
+    @Value("${config.db.url}")
     public void setUrl(String url) {
         log.info("url: {}",url);
         DruidDataSourceConfig.url = url;
