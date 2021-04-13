@@ -29,30 +29,19 @@ public class DruidDataSourceConfig  {
     private static String username ;//= "root";
     private static String password ;//= "root";
 
-//    @Override
-//    public void setUrl(String url) {
-//        log.info("链接地址: {}",url);
-//        super.setUrl(url);
-//    }
-//
-//    @Override
-//    public void setUsername(String username) {
-//        log.info("用户名: {}",username);
-//        super.setUsername(username);
-//    }
-//
-//    @Override
+    public void setUrl(String url) {
+        log.info("链接地址: {}",url);
+        DruidDataSourceConfig.url =url;
+    }
+
+    public void setUsername(String username) {
+        log.info("用户名: {}",username);
+        DruidDataSourceConfig.username = username;
+    }
+
     public void setPassword(String password) {
         log.info("password: {}",password);
         DruidDataSourceConfig.password = password;
-    }
-    public void setUsername(String username) {
-        log.info("username: {}",username);
-        DruidDataSourceConfig.username = username;
-    }
-    public void setUrl(String url) {
-        log.info("url: {}",url);
-        DruidDataSourceConfig.username = url;
     }
 
 
