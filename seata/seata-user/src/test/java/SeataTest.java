@@ -14,6 +14,7 @@ public class SeataTest {
     public static void main(String[] args) {
         DateTime t1 = DateUtil.parse("2021-1-10", DatePattern.NORM_DATE_PATTERN);
         Date t2 = new Date();
+        //计算两天相差数....
         long day = DateUtil.betweenDay(t1, t2, false);
         int [] s = {60,90,120,150,180};
         HashMap<String, Boolean> map = new HashMap<>();
