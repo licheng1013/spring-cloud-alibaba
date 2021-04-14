@@ -5,3 +5,11 @@ config:
     url: jdbc:mysql://192.168.1.5:3306/t_order?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
     password: root
+  redis:
+    nodes:
+      - 192.168.1.31:7001
+      - 192.168.1.31:7002
+      - 192.168.1.31:7003
+      - 192.168.1.31:7004
+      - 192.168.1.31:7005
+      - 192.168.1.31:7006

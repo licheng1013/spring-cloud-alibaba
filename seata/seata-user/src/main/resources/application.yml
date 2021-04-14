@@ -11,20 +11,20 @@ spring:
     nacos:
       discovery:
         server-addr: 192.168.1.30:8848 #本次单机
-#  datasource:
+#  datasource: #整合到nacos配置
 #    type: com.alibaba.druid.pool.DruidDataSource
 #    url: jdbc:mysql://192.168.1.5:3306/t_user?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai #保证插入的时间不会少8小时,取出来少8小时
 #    username: root
 #    password: root
-  redis:
-    cluster:
-      nodes:
-        - 192.168.1.31:7001
-        - 192.168.1.31:7002
-        - 192.168.1.31:7003
-        - 192.168.1.31:7004
-        - 192.168.1.31:7005
-        - 192.168.1.31:7006
+#  redis: #整合到nacos配置
+#    cluster:
+#      nodes:
+#        - 192.168.1.31:7001
+#        - 192.168.1.31:7002
+#        - 192.168.1.31:7003
+#        - 192.168.1.31:7004
+#        - 192.168.1.31:7005
+#        - 192.168.1.31:7006
 
 logging:
   level:

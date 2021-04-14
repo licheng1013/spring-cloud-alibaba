@@ -15,21 +15,11 @@ import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 @Configuration
 public class AppConfig {
 
-    /**
-     * Type safe representation of application.properties
-     */
-    @Autowired
-    private ClusterConfigurationProperties clusterProperties;
     @Autowired
     private RedisConfig redisConfig;
 
     @Bean
     public RedisConnectionFactory connectionFactory() {
-        return new JedisConnectionFactory(new RedisClusterConfiguration(clusterProperties.getNodes()));
-    }
-
-    @Bean
-    public RedisConnectionFactory redisConnectionFactory() {
         return new JedisConnectionFactory(new RedisClusterConfiguration(redisConfig.getNodes()));
     }
 }
