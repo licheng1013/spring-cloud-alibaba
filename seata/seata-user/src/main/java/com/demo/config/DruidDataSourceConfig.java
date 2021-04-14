@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 /**
+ * 外部化配置
  * @author root
  * @description TODO
  * @date 2021/4/13 15:40
