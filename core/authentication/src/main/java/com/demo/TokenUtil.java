@@ -9,7 +9,6 @@ import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.sun.istack.internal.NotNull;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -84,7 +83,7 @@ public class TokenUtil {
      * @param type 获取登入类型 {@link EnumToken}
      * @date 2020/12/19
      */
-    public static String getToken(@NotNull Serializable keyId, EnumToken type) {
+    public static String getToken(Serializable keyId, EnumToken type) {
         return createToken(keyId.toString(), type).sign(getAlgorithm());
     }
 
@@ -96,7 +95,7 @@ public class TokenUtil {
      * @param type      获取登入类型 {@link EnumToken}
      * @date 2021/4/17
      */
-    public static String getToken(@NotNull Serializable keyId, DateField dateField, int offset, EnumToken type) {
+    public static String getToken(Serializable keyId, DateField dateField, int offset, EnumToken type) {
         DateTime time = DateUtil.date().offset(dateField, offset);
         Algorithm algorithm = getAlgorithm();
         return createToken(keyId.toString(), type, time).sign(algorithm); //签名
