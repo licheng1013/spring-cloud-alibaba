@@ -12,5 +12,5 @@ public class KeyConfig {
     public static final String USER_KEY = "USER_";
     /** 订单服务redis KEY **/
     public static final String ORDER_KEY = "ORDER_";
-
+    
 }
