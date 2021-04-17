@@ -9,7 +9,7 @@ import lombok.Getter;
  */
 @Getter
 public enum EnumToken {
-    WEB("web"),PC("pc");
+    WEB("web"),APP("app");
     private final String type;
     EnumToken(String type){
         this.type  = type;
