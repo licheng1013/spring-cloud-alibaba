@@ -51,7 +51,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         //解密token
         try {
             String token = request.getHeader("Authentication"); //获取请求头里面的token
-            String userId = TokenUtil.getUserId(token);
+            String userId = TokenUtil.getKeyId(token);
             log.info("userId: {}", userId);
         }catch (Exception e){
             throw new RuntimeException("请登入");
