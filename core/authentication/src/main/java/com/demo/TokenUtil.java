@@ -27,8 +27,6 @@ public class TokenUtil {
 
     /**
      * 生成token
-     * @author lc
-     * @date 2020/12/19
      */
     public static String getToken(String keyId) {
         return createToken(keyId).sign(getAlgorithm());
