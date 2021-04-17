@@ -43,7 +43,7 @@ public class LockAop {
         StringBuilder key = new StringBuilder(lk.prefix());
         for (Object o : args) {//遍历
             if (o != null) {
-                key.append(o.toString()).append(":");
+                key.append(o).append(":");
             }
         }
         log.info("锁key: {}", key);
