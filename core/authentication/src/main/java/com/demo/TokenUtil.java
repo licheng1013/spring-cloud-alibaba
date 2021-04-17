@@ -25,12 +25,7 @@ public class TokenUtil {
     private static final String secretKey = "izVguZPRsBQ5Rqw6dhMvcIwy8_9lQnrO3vpxGwP";
     private static final String issuer = "auth-token";
 
-    /**
-     * 生成token
-     */
-    public static String getToken(String keyId) {
-        return createToken(keyId).sign(getAlgorithm());
-    }
+
 
     private static JWTCreator.Builder createToken(String keyId) {
         return JWT.create().withKeyId(keyId).withIssuer(issuer);
@@ -77,6 +72,12 @@ public class TokenUtil {
         return getDecodedJWT(token).getKeyId();
     }
 
+    /**
+     * 生成token
+     */
+    public static String getToken(Serializable keyId) {
+        return createToken(keyId.toString()).sign(getAlgorithm());
+    }
 
     /**
      * 生成带类型的token
@@ -86,7 +87,6 @@ public class TokenUtil {
     public static String getToken(@NotNull Serializable keyId, EnumToken type) {
         return createToken(keyId.toString(), type).sign(getAlgorithm());
     }
-
 
     /**
      * 可以设置带到期时间和带类型的token
@@ -101,7 +101,6 @@ public class TokenUtil {
         Algorithm algorithm = getAlgorithm();
         return createToken(keyId.toString(), type, time).sign(algorithm); //签名
     }
-
 
     public static void main(String[] args) throws InterruptedException {
         //测试
