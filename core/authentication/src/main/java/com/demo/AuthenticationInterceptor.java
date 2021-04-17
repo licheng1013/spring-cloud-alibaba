@@ -2,6 +2,7 @@ package com.demo;
 
 import cn.hutool.extra.servlet.ServletUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.HandlerMethod;
@@ -9,6 +10,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,6 +23,9 @@ import java.util.Map;
 @ConditionalOnProperty(prefix = "spring.auth",name = "enable",havingValue = "true",matchIfMissing = true)
 public class AuthenticationInterceptor implements HandlerInterceptor {
 
+
+    @Autowired
+    private List<Auth> auths;
 
     /**
      * @author lc
@@ -46,15 +51,15 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         if (handlerMethod.getMethodAnnotation(PassToken.class) != null) {
             return true;
         }
-        //解密token
-        try {
-            String token = request.getHeader("Authentication"); //获取请求头里面的token
-            String userId = TokenUtil.getUserId(token);
-            log.info("userId: {}", userId);
-        }catch (Exception e){
-            throw new RuntimeException("请登入");
+        // 权限判断
+        this.auth(request, response, object);
+        return true;//默认
+    }
+
+    private void auth(HttpServletRequest request, HttpServletResponse response, Object object){
+        for (Auth auth : this.auths) {
+            auth.isAuth(request, response, object);
         }
-        return true;
     }
 
 }

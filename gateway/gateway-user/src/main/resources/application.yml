@@ -8,7 +8,7 @@ server:
       io: 8
 spring:
   auth:
-    enable: false
+    enable: true
   application:
     name: alibaba-user
   cloud:
