@@ -39,6 +39,13 @@ public class TokenUtil {
     }
 
     /**
+     * 获取keyId
+     */
+    public static String getKeyId(String token) {
+        return getDecodedJWT(token).getKeyId();
+    }
+
+    /**
      * 获取token的主题
      */
     public static String getSubject(String token) {
@@ -62,14 +69,6 @@ public class TokenUtil {
         return verifier.verify(token);
     }
 
-
-    /**
-     * 获取keyId
-     * @date 2020/12/19
-     */
-    public static String getKeyId(String token) {
-        return getDecodedJWT(token).getKeyId();
-    }
 
     /**
      * 生成token
