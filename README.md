@@ -50,6 +50,10 @@
 - https://github.com/apache/dubbo-spring-boot-project/tree/master/dubbo-spring-boot-samples/registry-samples/nacos-samples
 - dubbo使用
 
+### Sentinel
+- 限流框架
+- https://sentinelguard.io/zh-cn/docs/quick-start.html
+
 ### 使用常见问题
 - 使用openfeign的接口的启动类上需要加上 @EnableFeignClients 注解
 
