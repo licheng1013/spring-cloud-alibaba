@@ -15,7 +15,7 @@ public class ApiController {
 
     @GetMapping("test")
     public Object test(){
-        int i = 1/0;
+//        int i = 1/0;
         return "Test 1";
     }
 }

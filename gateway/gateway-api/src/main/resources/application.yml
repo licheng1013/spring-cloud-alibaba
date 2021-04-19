@@ -12,6 +12,11 @@ spring:
       discovery:
         server-addr: 192.168.1.30:8848 #本次单机
         enabled: true
+    sentinel:
+      filter:
+        enabled: false
+      transport:
+        dashboard: 192.168.1.31:8080
     gateway:
       globalcors:
         cors-configurations:
@@ -23,11 +28,6 @@ spring:
 #        - id: order-route
 #          uri: lb://alibaba-order
 #          predicates:
-#            - Path=/order/**
-#        - id: user-route
-#          uri: lb://alibaba-user
-#          predicates:
-#            - Path=/user/**
 management:
   endpoints:
     web:
