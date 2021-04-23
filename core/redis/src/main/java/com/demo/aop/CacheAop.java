@@ -43,7 +43,7 @@ public class CacheAop {
         });
         String key = sb.toString();
         String v = redisString.get(key);
-        log.info("key: {}",key);
+//        log.info("缓存key: {}",key);
         if (StrUtil.isBlank(v)) { //为空则调用业务方法
             log.info("进入缓存: key {},",key);
             Cache invoke = AopUtil.invoke(joinPoint, Cache.class); //这里获取的对象应必须存在

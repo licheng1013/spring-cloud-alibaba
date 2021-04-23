@@ -78,13 +78,22 @@ public class RedisString {
     }
 
     /**
+     * 删除当前线程的锁
      * @author lc
      * @date 2021/2/27
-     * @description 删除当前线程的锁
      */
     public void removeLock() {
         remove(LockAop.get()); //线程解锁
         LockAop.remove();
+    }
+
+    /**
+     * 自增操作,确保有值
+     * @author lc
+     * @date 2021/4/23
+     */
+    public Long incr(String k){
+        return stringRedisTemplate.opsForValue().increment(k,1);
     }
 
 }
