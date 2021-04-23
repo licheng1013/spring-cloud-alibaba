@@ -32,8 +32,8 @@ public class ApiTotalAop {
         HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
         String requestURI = request.getRequestURI() + DateUtil.date().toString(DatePattern.NORM_DATETIME_MINUTE_PATTERN);
         Long incr = redisString.incr(requestURI);
-        if (incr >= 20000) {
-            log.info("请求测试: {}", incr);
+        if (incr >= 200000) {
+            log.info("请求测试: 时间 {},数量 {}", requestURI,incr);
         }
     }
 }
