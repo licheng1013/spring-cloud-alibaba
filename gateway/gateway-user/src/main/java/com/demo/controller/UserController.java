@@ -166,6 +166,15 @@ public class UserController {
         return JsonResult.okData(redisString.get("hi"));
     }
 
+    @GetMapping("api")
+    @PassToken
+    @ApiTotal
+    public JsonResult<String> api(){
+        return JsonResult.okData("api");
+    }
+
+
+
     /**
      * 随机验证码
      **/
