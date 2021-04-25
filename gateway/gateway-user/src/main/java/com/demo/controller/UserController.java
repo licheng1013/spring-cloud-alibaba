@@ -79,7 +79,7 @@ public class UserController {
             user.setUserName(tel+"大熊");
             user.setNickName("超强哈市奇");
             user.insert();
-            return JsonResult.fail("创建成功");
+            return JsonResult.okMsg("创建成功");
         }
         return JsonResult.fail("创建失败");
     }
