@@ -3,6 +3,7 @@ package com.demo.controller;
 import cn.hutool.core.text.UnicodeUtil;
 import cn.hutool.core.util.StrUtil;
 import com.demo.annotation.Cache;
+import com.demo.dao.UserDao;
 import com.demo.entity.User;
 import com.demo.feign.UserFeign;
 import com.demo.service.UserService;
@@ -11,6 +12,7 @@ import com.demo.util.RedisString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
@@ -92,4 +94,23 @@ public class UserController implements UserFeign {
         return JsonResult.okMsg(port);
     }
 
+
+    @Autowired
+    private UserDao userDao;
+
+    /**
+     * 自定义注解update语句,需要修改
+     * @author lc
+     * @date 2021/4/26
+     */
+    @GetMapping("test/update/money")
+    @Transactional
+    public JsonResult<Boolean> updateMoney(String userId,Integer money){
+
+        boolean b = userDao.updateByIdSetMoney("1", 10);
+        if (userId == null) {
+            throw new RuntimeException("异常");
+        }
+        return JsonResult.okData(b);
+    }
 }
