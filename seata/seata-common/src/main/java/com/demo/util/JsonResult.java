@@ -3,9 +3,9 @@ package com.demo.util;
 import lombok.Data;
 
 /**
- * @author root
+ * 泛型化
+ * @author lc
  * @date 2020/11/30
- * @description 增加泛型
  */
 @Data
 public class JsonResult<T> {
