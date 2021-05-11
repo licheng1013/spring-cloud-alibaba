@@ -2,6 +2,7 @@ package com.demo.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
+import com.baomidou.mybatisplus.extension.MybatisMapWrapperFactory;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
@@ -29,7 +30,10 @@ public class MybatisPlusConfig {
 
     @Bean
     public ConfigurationCustomizer configurationCustomizer() {
-        return configuration -> configuration.setUseDeprecatedExecutor(false);
+        return configuration -> {
+            configuration.setUseDeprecatedExecutor(false);//分页配置
+            configuration.setObjectWrapperFactory(new MybatisMapWrapperFactory());//map转驼峰插件
+        };
     }
 
 
