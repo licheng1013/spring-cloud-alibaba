@@ -5,37 +5,37 @@
  Source Server Type    : MySQL
  Source Server Version : 80023
  Source Host           : localhost:3306
- Source Schema         : t_order
+ Source Schema         : t_user
 
  Target Server Type    : MySQL
  Target Server Version : 80023
  File Encoding         : 65001
 
- Date: 25/05/2021 09:22:05
+ Date: 25/05/2021 09:22:11
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
-CREATE DATABASE If Not Exists t_order;
-use t_order;
--- ----------------------------
--- Table structure for t_order
--- ----------------------------
-DROP TABLE IF EXISTS `t_order`;
-CREATE TABLE `t_order`  (
-  `order_id` int NOT NULL AUTO_INCREMENT,
-  `money` int NOT NULL COMMENT '订单金额',
-  `user_id` int NOT NULL COMMENT '用户id',
-  `goods_id` int NOT NULL COMMENT '商品id',
-  `amount` int NOT NULL COMMENT '订单数量',
-  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '订单描述',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
-  PRIMARY KEY (`order_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 44 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+CREATE DATABASE If Not Exists t_user;
+use t_user;
 
 -- ----------------------------
--- Records of t_order
+-- Table structure for t_user
 -- ----------------------------
+DROP TABLE IF EXISTS `t_user`;
+CREATE TABLE `t_user`  (
+  `user_id` int NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `money` int NOT NULL COMMENT '金额',
+  `freeze` int NOT NULL DEFAULT 0 COMMENT '冻结金额',
+  `version` int NOT NULL COMMENT '乐观锁',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`user_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of t_user
+-- ----------------------------
+INSERT INTO `t_user` VALUES (1, 1000, 0, 84, '2021-04-09 14:59:28');
 
 -- ----------------------------
 -- Table structure for undo_log
