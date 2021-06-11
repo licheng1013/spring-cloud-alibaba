@@ -10,7 +10,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.1.30:8848 #本次单机
+        server-addr: 192.168.1.7:8848 #本次单机
 
 #  datasource: #整合到nacos配置
 #    type: com.alibaba.druid.pool.DruidDataSource
@@ -62,14 +62,14 @@ seata:
   config:
     type: nacos
     nacos:
-      serverAddr: 192.168.1.30:8848
+      serverAddr: 192.168.1.7:8848
       # group: SEATA_GROUP #默认SEATA_GROUP
       # username: ""
       # password: ""
   registry:
     type: nacos
     nacos:
-      server-addr: 192.168.1.30:8848
+      server-addr: 192.168.1.7:8848
       # application: seata-server
       # group : SEATA_GROUP #默认SEATA_GROUP
       # username: ""
