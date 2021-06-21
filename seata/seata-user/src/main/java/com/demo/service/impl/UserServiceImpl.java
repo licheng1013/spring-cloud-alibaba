@@ -81,6 +81,10 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     public Boolean updateMoneyTcc(BusinessActionContext actionContext, Serializable userId, Integer money) {
         String xid = actionContext.getXid();
         log.info("用户服务 xid: {}",xid );
+        User byId = getById(userId);
+        if (money>byId.getMoney()) {
+            throw new RuntimeException("金额不足!");
+        }
         boolean b = updateUser(userId.toString(), money, 3);
         if(b){ //注解驱动
             redisString.set(KeyConfig.USER_KEY+xid, "1");// 生产由redis实现 //ResultHolder.set(xid, "1");//单机

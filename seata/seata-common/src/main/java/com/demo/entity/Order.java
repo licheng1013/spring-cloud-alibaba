@@ -17,7 +17,6 @@ import java.util.Date;
 @Setter
 @Getter
 @ToString
-@TableName("t_order")
 public class Order extends Model<Order> {
     /**
      * ${column.comment}

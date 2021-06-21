@@ -11,7 +11,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.1.30:8848 #本次单机
+        server-addr: 192.168.1.7:8848 #本次单机
 #  datasource:
 #    type: com.alibaba.druid.pool.DruidDataSource
 #    url: jdbc:mysql://192.168.1.5:3306/t_goods?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai #保证插入的时间不会少8小时,取出来少8小时
@@ -39,9 +39,9 @@ management:
 
 
 seata:
-  application-id: applicationName
+  # application-id: applicationName #默认${spring.application.name}
   tx-service-group: my_test_tx_group
-  excludes-for-auto-proxying: firstClassNameForExclude,secondClassNameForExclude
+  #excludes-for-auto-proxying: firstClassNameForExclude,secondClassNameForExclude
 #  service: #可在nacos配置
 #    #vgroup-mapping:
 #      #my_test_tx_group: default #默认
@@ -50,14 +50,14 @@ seata:
   config:
     type: nacos
     nacos:
-      serverAddr: 192.168.1.30:8848
+      serverAddr: ${spring.cloud.nacos.discovery.server-addr}
 #      group: SEATA_GROUP
 #      username: ""
 #      password: ""
   registry:
     type: nacos
     nacos:
-      server-addr: 192.168.1.30:8848
+      server-addr: ${spring.cloud.nacos.discovery.server-addr}
 #      application: seata-server
 #      group : SEATA_GROUP
 #      username: ""
@@ -75,3 +75,7 @@ feign:
       enabled: true
     response:
       enabled: true
+mybatis-plus:
+  global-config:
+    db-config:
+      table-prefix: t_
