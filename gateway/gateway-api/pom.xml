@@ -23,7 +23,7 @@
         <!--更换web容器为undertow-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-undertow</artifactId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
         <!--alibaba-nacos-->
         <dependency>

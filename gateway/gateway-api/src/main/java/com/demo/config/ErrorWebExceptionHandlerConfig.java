@@ -3,6 +3,7 @@ package com.demo.config;
 import com.demo.util.JsonResult;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.buffer.DataBufferFactory;
@@ -17,6 +18,7 @@ import reactor.core.publisher.Mono;
  * @date 2021/3/16 9:57
  */
 @Configuration
+@Slf4j
 public class ErrorWebExceptionHandlerConfig implements ErrorWebExceptionHandler {
     /**
      * @param exchange 上下文

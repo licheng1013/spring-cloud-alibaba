@@ -8,11 +8,6 @@ spring:
   application:
     name: alibaba-gateway
   cloud:
-    nacos:
-      discovery:
-        server-addr: 192.168.1.30:8848 #本次单机
-        enabled: true
-
     gateway:
       globalcors:
         cors-configurations:
