@@ -11,7 +11,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.1.7:8848 #本次单机
+        server-addr: 192.168.1.66:8848 #本次单机
 #  datasource:
 #    type: com.alibaba.druid.pool.DruidDataSource
 #    url: jdbc:mysql://192.168.1.5:3306/t_order?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai #保证插入的时间不会少8小时,取出来少8小时
