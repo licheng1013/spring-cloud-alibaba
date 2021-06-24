@@ -19,4 +19,10 @@ public class TestController {
         log.info("请求成功!");
         return "test1";
     }
+
+    @GetMapping("err")
+    public Object err(){
+        int i = 1/0;
+        return "err";
+    }
 }
