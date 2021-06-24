@@ -1,0 +1,6 @@
+server:
+  port: 8311
+
+spring:
+  application:
+    name: elk-log-app

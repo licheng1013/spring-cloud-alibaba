@@ -16,6 +16,7 @@
         <module>dubbo</module>
         <module>soul</module>
         <module>rocketmq</module>
+        <module>elk</module>
     </modules>
     <packaging>pom</packaging>
     <dependencyManagement>

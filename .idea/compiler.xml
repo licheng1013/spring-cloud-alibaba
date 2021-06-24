@@ -8,6 +8,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="elk-log" />
         <module name="dubbo-order" />
         <module name="seata-user" />
         <module name="gateway-user" />
@@ -44,6 +45,8 @@
       <module name="dubbo-goods" options="" />
       <module name="dubbo-order" options="" />
       <module name="dubbo-user" options="" />
+      <module name="elk" options="" />
+      <module name="elk-log" options="" />
       <module name="gateway" options="" />
       <module name="gateway-api" options="" />
       <module name="gateway-order" options="" />
