@@ -1,5 +1,6 @@
 package com.demo.controller;
 
+import com.demo.exception.JsonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,13 +17,12 @@ public class TestController {
 
     @GetMapping("1")
     public Object test1(){
-        log.info("请求成功!");
-        return "test1";
+        return JsonResult.okMsg("test1");
     }
 
     @GetMapping("err")
     public Object err(){
         int i = 1/0;
-        return "err";
+        return JsonResult.okMsg("err");
     }
 }
