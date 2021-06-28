@@ -1,23 +1,20 @@
 package com.demo.exception;
 
 import com.demo.util.JsonResult;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * 异常处理,这里需要所有的feign调用返回格式一致!
  * @author lc
  * @date 2020/12/18
  */
-@RestControllerAdvice
-@Slf4j
+//@RestControllerAdvice
+//@Slf4j
 public class GlobalExceptionHandler {
 
   /**
-   * @author lc
+   * 自定义业务异常处理
    * @date 2020/12/18
-   * @description 自定义业务异常处理
    */
     @ExceptionHandler(ServiceException.class)
     public JsonResult<String> doHandleServiceException(ServiceException e){
