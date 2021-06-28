@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * 异常处理
+ * 异常处理,这里需要所有的feign调用返回格式一致!
  * @author lc
  * @date 2020/12/18
  */
