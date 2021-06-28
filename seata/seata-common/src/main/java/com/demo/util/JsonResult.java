@@ -1,5 +1,6 @@
 package com.demo.util;
 
+import com.demo.exception.ServiceException;
 import lombok.Data;
 
 /**
@@ -29,5 +30,20 @@ public class JsonResult<T> {
         jsonResult.setMsg(msg);
         jsonResult.setCode(-1);
         return jsonResult;
+    }
+
+    /**
+     * code = -1 异常
+     * @since 2021/6/28
+     */
+    public static <T>  T getData(JsonResult<T> jsonResult){
+        if (jsonResult.getCode() == -1) {
+            throw new ServiceException(jsonResult.getMsg().toString());
+        }
+        return jsonResult.getData();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getData(JsonResult.fail("异常错误!")));
     }
 }
