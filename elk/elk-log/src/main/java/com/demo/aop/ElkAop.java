@@ -18,6 +18,7 @@ public class ElkAop {
     @Around(value="execution(* com.demo.controller..*.*(..))")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         log.info("请求参数: {}", HttpServletUtil.getParamMap());
+        //如果出现异常那么,请求结果就不会输出到elk-log里面
         Object proceed = joinPoint.proceed();
         log.info("请求结果: {}",proceed);
         return proceed;

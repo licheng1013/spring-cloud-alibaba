@@ -10,6 +10,9 @@
 - docker-compose down -v #清除缓存
 - elastic : changeme #默认账号和密码
 
+### 访问
+- http://192.168.1.7:5601/
+
 ### 配置文件
 - logback-spring.xml
 
