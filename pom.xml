@@ -17,6 +17,7 @@
         <module>soul</module>
         <module>rocketmq</module>
         <module>elk</module>
+        <module>fluent-mybatis</module>
     </modules>
     <packaging>pom</packaging>
     <dependencyManagement>

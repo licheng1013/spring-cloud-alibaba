@@ -10,27 +10,28 @@
         <outputRelativeToContentRoot value="true" />
         <module name="elk-log" />
         <module name="dubbo-order" />
-        <module name="seata-user" />
         <module name="gateway-user" />
-        <module name="soul-api" />
-        <module name="gateway-api" />
-        <module name="push" />
         <module name="redis" />
         <module name="dubbo-goods" />
         <module name="dubbo-common" />
-        <module name="rocketmq-pull" />
-        <module name="soul-user" />
-        <module name="pull" />
-        <module name="tests" />
         <module name="common" />
-        <module name="gateway-order" />
         <module name="seata-goods" />
-        <module name="seata-order" />
-        <module name="seata-common" />
         <module name="seata-test" />
         <module name="rocketmq-push" />
         <module name="dubbo-user" />
         <module name="authentication" />
+        <module name="seata-user" />
+        <module name="fluent-mybatis" />
+        <module name="soul-api" />
+        <module name="gateway-api" />
+        <module name="push" />
+        <module name="rocketmq-pull" />
+        <module name="soul-user" />
+        <module name="pull" />
+        <module name="tests" />
+        <module name="gateway-order" />
+        <module name="seata-order" />
+        <module name="seata-common" />
         <module name="dubbo-api" />
       </profile>
     </annotationProcessing>
@@ -47,6 +48,7 @@
       <module name="dubbo-user" options="" />
       <module name="elk" options="" />
       <module name="elk-log" options="" />
+      <module name="fluent-mybatis" options="" />
       <module name="gateway" options="" />
       <module name="gateway-api" options="" />
       <module name="gateway-order" options="" />
