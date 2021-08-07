@@ -1,7 +1,7 @@
 package com.demo;
 
 import cn.org.atool.fluent.mybatis.model.StdPagedList;
-import com.demo.entity.UserEntity;
+import com.demo.entity.User;
 import com.demo.mapper.UserMapper;
 import com.demo.wrapper.UserQuery;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +27,7 @@ public class FluentAppTest {
     @Test
     public void  TestAdd() throws InterruptedException {
         for (int i = 0; i < 100; i++) {
-            UserEntity userEntity = new UserEntity();
+            User userEntity = new User();
             userEntity.setMoney(20);
             userEntity.setCreateTime(new Date());
             Serializable save = userMapper.save(userEntity);
@@ -39,13 +39,13 @@ public class FluentAppTest {
 
     @Test
     public void TestFluentMybatis(){
-        UserEntity userEntity = new UserEntity();
+        User userEntity = new User();
         userEntity.setMoney(20);
         userEntity.setCreateTime(new Date());
         Serializable save = userMapper.save(userEntity);
         log.info("插入: {}",save);
 
-        UserEntity entity = userMapper.findById(userEntity.getUserId());
+        User entity = userMapper.findById(userEntity.getUserId());
         log.info("查询: {}",entity);
 
         entity.setMoney(50);
@@ -61,7 +61,7 @@ public class FluentAppTest {
         u.where.money().eq("50").end();
         u.limit(1);
 
-        UserEntity one = userMapper.findOne(u);
+        User one = userMapper.findOne(u);
         log.info("查询: {}",one);
     }
 
@@ -70,7 +70,7 @@ public class FluentAppTest {
         u.limit(0,10);
         u.orderBy.createTime().desc();
 
-        StdPagedList<UserEntity> list = userMapper.stdPagedEntity(u);
+        StdPagedList<User> list = userMapper.stdPagedEntity(u);
         log.info("查询: {}",list.getData());
     }
 

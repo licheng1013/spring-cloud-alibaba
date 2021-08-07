@@ -31,6 +31,7 @@ public class EntityGeneratorDemo {
             daoDir = "src/main/java",
             // 设置哪些表要生成Entity文件
             tablePrefix = "t_",
+            entitySuffix = "",
             tables = {@Table(value = {"t_user"})}
     )
     static class Empty { //类名随便取, 只是配置定义的一个载体

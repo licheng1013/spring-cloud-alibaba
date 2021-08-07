@@ -21,7 +21,7 @@ import java.util.Date;
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
 @FluentMybatis(table = "t_user")
-public class UserEntity extends RichEntity {
+public class User extends RichEntity {
   private static final long serialVersionUID = 1L;
 
   /**
@@ -61,6 +61,6 @@ public class UserEntity extends RichEntity {
 
   @Override
   public final Class<? extends IEntity> entityClass() {
-    return UserEntity.class;
+    return User.class;
   }
 }
