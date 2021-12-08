@@ -40,11 +40,12 @@
 - https://spring.io/projects/spring-data-redis
 ### seata
 - 分布式事务(AT完成)
+- 分布式事务(XA完成)
 ### sharding-jdbc
-- 数据库分库分表(未完成)
+- 数据库分库分表(完成)
 ### rabbitmq
-- 消息队列(单机)(未完成)
-- 消息队列(集群)(未完成)
+- 消息队列(单机)(完成)
+- 消息队列(集群)(完成)
 - https://gitee.com/licheng1013/docker-rabbitmq-cluster
 ### dubbo
 - https://github.com/apache/dubbo-spring-boot-project/tree/master/dubbo-spring-boot-samples/registry-samples/nacos-samples
