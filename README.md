@@ -40,7 +40,7 @@
 - https://spring.io/projects/spring-data-redis
 ### seata
 - 分布式事务(AT完成)
-- 分布式事务(XA完成)
+- 分布式事务(TCC完成)
 ### sharding-jdbc
 - 数据库分库分表(完成)
 ### rabbitmq
